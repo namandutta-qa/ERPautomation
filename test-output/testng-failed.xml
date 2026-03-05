@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Default test(failed)">
+    <classes>
+      <class name="com.erp.ChatTest">
+        <methods>
+          <include name="TC_217_SendGroupMessage"/>
+          <include name="TC_211_MessagePersistenceAfterRefresh"/>
+          <include name="TC_210_VerifyTimestamp"/>
+          <include name="endReport"/>
+          <include name="startReport"/>
+          <include name="TC_207_OpenOneToOneChat"/>
+          <include name="TC_208_SendTextMessage"/>
+          <include name="TC_214_DeleteOwnMessage"/>
+          <include name="TC_224_RemoveMember"/>
+          <include name="tearDown"/>
+          <include name="TC_216_CreateGroup"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- com.erp.ChatTest -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->
