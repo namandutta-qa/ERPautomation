@@ -27,7 +27,7 @@ public class SocialMediaCreatePost extends BaseTest {
         loginAsRole("homeowner");
         ExtentManager.getTest().info("Logged in as homeowner");
         ExtentManager.getTest().info("Navigating to Create Post page");
-        goTo("/create-post");
+        driver.get("https://your-yodixa-url.com/create-post");
 
 //        Assert.assertTrue(driver.findElement(By.id("postSubmit")).isDisplayed());
         ExtentManager.getTest().pass("Create Post page loaded successfully");
@@ -41,7 +41,7 @@ public class SocialMediaCreatePost extends BaseTest {
         ExtentManager.getTest().info("TC_081: Start - Valid image upload");
         loginAsRole("homeowner");
         ExtentManager.getTest().info("Navigated to Create Post page");
-        goTo("/create-post");
+        driver.get("https://your-yodixa-url.com/create-post");
 
         ExtentManager.getTest().info("Uploading image: C:\\images\\test.jpg");
         page.uploadImage("C:\\images\\test.jpg");
@@ -57,7 +57,7 @@ public class SocialMediaCreatePost extends BaseTest {
     public void TC_082_invalidFileFormat() {
         ExtentManager.getTest().info("TC_082: Start - Unsupported file format validation");
         loginAsRole("homeowner");
-        goTo("/create-post");
+        driver.get("https://your-yodixa-url.com/create-post");
 
         ExtentManager.getTest().info("Uploading invalid file: C:\\images\\test.pdf");
         page.uploadImage("C:\\images\\test.pdf");
@@ -73,7 +73,7 @@ public class SocialMediaCreatePost extends BaseTest {
         ExtentManager.getTest().info("TC_083: Start - File size validation");
  
         loginAsRole("homeowner");
-        goTo("/create-post");
+        driver.get("https://your-yodixa-url.com/create-post");
 
         ExtentManager.getTest().info("Uploading large image: C:\\images\\largeImage.jpg");
         page.uploadImage("C:\\images\\largeImage.jpg");
@@ -88,7 +88,7 @@ public class SocialMediaCreatePost extends BaseTest {
     public void TC_084_validCaption() {
         ExtentManager.getTest().info("TC_084: Start - Valid caption submission");
         loginAsRole("homeowner");
-        goTo("/create-post");
+        driver.get("https://your-yodixa-url.com/create-post");
 
         ExtentManager.getTest().info("Entering caption");
         page.enterCaption("This is my home renovation post");
@@ -103,7 +103,7 @@ public class SocialMediaCreatePost extends BaseTest {
     public void TC_085_captionLimit() {
         ExtentManager.getTest().info("TC_085: Start - Caption character limit validation");
         loginAsRole("homeowner");
-        goTo("/create-post");
+        driver.get("https://your-yodixa-url.com/create-post");
 
         // Use Java 8-compatible way to build a long string
         StringBuilder sb = new StringBuilder();
@@ -123,7 +123,7 @@ public class SocialMediaCreatePost extends BaseTest {
     public void TC_086_emojiCaption() {
         ExtentManager.getTest().info("TC_086: Start - Emoji support in caption");
         loginAsRole("homeowner");
-        goTo("/create-post");
+        driver.get("https://your-yodixa-url.com/create-post");
 
         ExtentManager.getTest().info("Entering emoji caption");
         page.enterCaption("Great work 😊🔥");
@@ -140,7 +140,7 @@ public class SocialMediaCreatePost extends BaseTest {
     public void TC_087_xssProtection() {
         ExtentManager.getTest().info("TC_087: Start - XSS protection check");
         loginAsRole("homeowner");
-        goTo("/create-post");
+        driver.get("https://your-yodixa-url.com/create-post");
 
         ExtentManager.getTest().info("Entering script tag into caption");
         page.enterCaption("<script>alert('hack')</script>");
@@ -157,7 +157,7 @@ public class SocialMediaCreatePost extends BaseTest {
     public void TC_088_dateSelection() {
         ExtentManager.getTest().info("TC_088: Start - Date selection");
         loginAsRole("homeowner");
-        goTo("/create-post");
+        driver.get("https://your-yodixa-url.com/create-post");
 
         ExtentManager.getTest().info("Selecting date 2025-03-01");
         page.selectDate("2025-03-01");
@@ -172,7 +172,7 @@ public class SocialMediaCreatePost extends BaseTest {
     public void TC_089_dateRestriction() {
         ExtentManager.getTest().info("TC_089: Start - Restricted date validation");
         loginAsRole("homeowner");
-        goTo("/create-post");
+        driver.get("https://your-yodixa-url.com/create-post");
 
         ExtentManager.getTest().info("Selecting restricted date 2035-01-01");
         page.selectDate("2035-01-01");
@@ -189,7 +189,7 @@ public class SocialMediaCreatePost extends BaseTest {
     public void TC_090_validLocation() {
         ExtentManager.getTest().info("TC_090: Start - Valid location entry");
         loginAsRole("homeowner");
-        goTo("/create-post");
+        driver.get("https://your-yodixa-url.com/create-post");
 
         ExtentManager.getTest().info("Entering location: New York");
         page.enterLocation("New York");
@@ -204,7 +204,7 @@ public class SocialMediaCreatePost extends BaseTest {
     public void TC_091_invalidLocation() {
         ExtentManager.getTest().info("TC_091: Start - Invalid location validation");
         loginAsRole("homeowner");
-        goTo("/create-post");
+        driver.get("https://your-yodixa-url.com/create-post");
 
         ExtentManager.getTest().info("Entering invalid location: xyz123@@");
         page.enterLocation("xyz123@@");
@@ -221,7 +221,7 @@ public class SocialMediaCreatePost extends BaseTest {
     public void TC_092_mandatoryValidation() {
         ExtentManager.getTest().info("TC_092: Start - Mandatory fields validation");
         loginAsRole("homeowner");
-        goTo("/create-post");
+        driver.get("https://your-yodixa-url.com/create-post");
 
         ExtentManager.getTest().info("Submitting form without filling fields");
         page.clickSubmit();
@@ -236,7 +236,7 @@ public class SocialMediaCreatePost extends BaseTest {
     public void TC_093_successfulPost() {
         ExtentManager.getTest().info("TC_093: Start - Successful post flow");
         loginAsRole("homeowner");
-        goTo("/create-post");
+        driver.get("https://your-yodixa-url.com/create-post");
 
         ExtentManager.getTest().info("Uploading image and filling post details");
         page.uploadImage("C:\\images\\test.jpg");
@@ -256,7 +256,7 @@ public class SocialMediaCreatePost extends BaseTest {
     public void TC_094_postVisibleInFeed() {
         ExtentManager.getTest().info("TC_094: Start - Verify post is visible in feed");
         loginAsRole("homeowner");
-        goTo("/feed");
+        driver.get("https://your-yodixa-url.com/feed");
         Assert.assertTrue(driver.getPageSource().contains("My renovation update"));
         ExtentManager.getTest().pass("Created post is visible in feed");
     }
@@ -268,7 +268,7 @@ public class SocialMediaCreatePost extends BaseTest {
     public void TC_096_unauthorizedAccess() {
         ExtentManager.getTest().info("TC_096: Start - Unauthorized access to create-post");
         // Attempt to access create-post without login
-        goTo("/create-post");
+        driver.get("https://your-yodixa-url.com/create-post");
         Assert.assertTrue(driver.getCurrentUrl().contains("login"));
         ExtentManager.getTest().pass("Unauthorized user redirected to login page");
     }
@@ -280,7 +280,7 @@ public class SocialMediaCreatePost extends BaseTest {
     public void TC_097_responsiveLayout() {
         ExtentManager.getTest().info("TC_097: Start - Responsive layout check");
         loginAsRole("homeowner");
-        goTo("/create-post");
+        driver.get("https://your-yodixa-url.com/create-post");
         driver.manage().window().setSize(new Dimension(390, 844));
         Assert.assertTrue(driver.findElement(By.id("postSubmit")).isDisplayed());
         ExtentManager.getTest().pass("Post submit button visible on mobile viewport");

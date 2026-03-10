@@ -12,8 +12,8 @@ public class LoginPage {
     }
 
     // Locators
-    By email = By.name("email");
-    By password = By.name("password");
+    By email = By.id("email");
+    By password = By.id("password");
     By loginBtn = By.id("loginBtn");
     By errorMsg = By.id("error");
     By logoutBtn = By.id("logout");

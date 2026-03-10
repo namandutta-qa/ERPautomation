@@ -25,7 +25,7 @@
       <span class="top-banner-title-font">Test results</span>
       <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
       <br/>
-      <span class="top-banner-font-1">1 suite</span>
+      <span class="top-banner-font-1">1 suite, 8 failed tests</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -39,7 +39,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" panel-name="suite-Default_suite" class="navigator-link">
-              <span class="suite-name border-skipped">Default suite</span>
+              <span class="suite-name border-failed">Default suite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -92,46 +92,56 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">6 methods,  6 skipped,  </span>
+                    <span class="method-stats">8 methods, 8 failed,   </span>
                   </li>
                   <li>
-                    <span class="method-list-title skipped">Skipped methods</span>
-                    <span class="show-or-hide-methods skipped">
-                      <a href="#" panel-name="suite-Default_suite" class="hide-methods skipped suite-Default_suite"> (hide)</a> <!-- hide-methods skipped suite-Default_suite -->
-                      <a href="#" panel-name="suite-Default_suite" class="show-methods skipped suite-Default_suite"> (show)</a> <!-- show-methods skipped suite-Default_suite -->
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods failed suite-Default_suite"> (hide)</a> <!-- hide-methods failed suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods failed suite-Default_suite"> (show)</a> <!-- show-methods failed suite-Default_suite -->
                     </span>
-                    <div class="method-list-content skipped suite-Default_suite">
+                    <div class="method-list-content failed suite-Default_suite">
                       <span>
-                        <img src="skipped.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="com.erp.Signup" class="method navigator-link" hash-for-method="TC_011_verifySignupFormLoads">TC_011_verifySignupFormLoads</a> <!-- method navigator-link -->
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="com.erp.ChatTest" class="method navigator-link" hash-for-method="TC_207_OpenOneToOneChat">TC_207_OpenOneToOneChat</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
-                        <img src="skipped.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="com.erp.Signup" class="method navigator-link" hash-for-method="TC_016_to_TC_044_OrganizationDetails">TC_016_to_TC_044_OrganizationDetails</a> <!-- method navigator-link -->
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="com.erp.ChatTest" class="method navigator-link" hash-for-method="TC_208_SendTextMessage">TC_208_SendTextMessage</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
-                        <img src="skipped.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="com.erp.Signup" class="method navigator-link" hash-for-method="TC_046_verifyInvalidEIN">TC_046_verifyInvalidEIN</a> <!-- method navigator-link -->
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="com.erp.ChatTest" class="method navigator-link" hash-for-method="TC_210_VerifyTimestamp">TC_210_VerifyTimestamp</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
-                        <img src="skipped.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="com.erp.Signup" class="method navigator-link" hash-for-method="TC_047_verifyInvalidOwnerEmail">TC_047_verifyInvalidOwnerEmail</a> <!-- method navigator-link -->
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="com.erp.ChatTest" class="method navigator-link" hash-for-method="TC_211_MessagePersistenceAfterRefresh">TC_211_MessagePersistenceAfterRefresh</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
-                        <img src="skipped.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="com.erp.Signup" class="method navigator-link" hash-for-method="TC_048_verifyInvalidPhoneNumber">TC_048_verifyInvalidPhoneNumber</a> <!-- method navigator-link -->
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="com.erp.ChatTest" class="method navigator-link" hash-for-method="TC_214_DeleteOwnMessage">TC_214_DeleteOwnMessage</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
-                        <img src="skipped.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="com.erp.Signup" class="method navigator-link" hash-for-method="TC_049_verifyRequiredFieldsValidation">TC_049_verifyRequiredFieldsValidation</a> <!-- method navigator-link -->
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="com.erp.ChatTest" class="method navigator-link" hash-for-method="TC_216_CreateGroup">TC_216_CreateGroup</a> <!-- method navigator-link -->
                       </span>
                       <br/>
-                    </div> <!-- method-list-content skipped suite-Default_suite -->
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="com.erp.ChatTest" class="method navigator-link" hash-for-method="TC_217_SendGroupMessage">TC_217_SendGroupMessage</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="com.erp.ChatTest" class="method navigator-link" hash-for-method="TC_224_RemoveMember">TC_224_RemoveMember</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-Default_suite -->
                   </li>
                 </ul>
               </div> <!-- suite-section-content -->
@@ -143,49 +153,34 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Default_suite" class="panel Default_suite">
-          <div class="suite-Default_suite-class-skipped">
+          <div class="suite-Default_suite-class-failed">
             <div class="main-panel-header rounded-window-top">
-              <img src="skipped.png"/>
-              <span class="class-name">com.erp.Signup</span>
+              <img src="failed.png"/>
+              <span class="class-name">com.erp.ChatTest</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="TC_011_verifySignupFormLoads">
-                  </a> <!-- TC_011_verifySignupFormLoads -->
-                  <span class="method-name">TC_011_verifySignupFormLoads</span>
-                  <div class="stack-trace">org.openqa.selenium.WebDriverException: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=143.0.7499.192)
+                  <a name="TC_207_OpenOneToOneChat">
+                  </a> <!-- TC_207_OpenOneToOneChat -->
+                  <span class="method-name">TC_207_OpenOneToOneChat</span>
+                  <div class="stack-trace">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.id: messageBtn (tried for 10 second(s) with 500 milliseconds interval)
 Build info: version: &apos;4.39.0&apos;, revision: &apos;126f156aee&apos;
 System info: os.name: &apos;Linux&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.8.0-101-generic&apos;, java.version: &apos;11.0.30&apos;
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [7a2355042cb3fdafe0b5e3cdae8a4bf7, get {url=http://192.168.0.133:3000/signup}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:36957}, goog:processID: 20272, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:36957/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 7a2355042cb3fdafe0b5e3cdae8a4bf7
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
-	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:142)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:561)
-	at org.openqa.selenium.remote.RemoteWebDriver.get(RemoteWebDriver.java:329)
-	at com.erp.base.BaseTest.goTo(BaseTest.java:216)
-	at com.erp.Signup.setupRole(Signup.java:26)
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:33791}, goog:processID: 77059, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:33791/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 184e75bd763149b96489b86ca6f0df50
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at com.erp.utils.WaitUtils.waitForClickability(WaitUtils.java:26)
+	at com.erp.pages.ChatPage.openChat(ChatPage.java:37)
+	at com.erp.ChatTest.TC_207_OpenOneToOneChat(ChatTest.java:18)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
 	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
-	at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
 	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
 	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
 	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
@@ -214,41 +209,26 @@ Session ID: 7a2355042cb3fdafe0b5e3cdae8a4bf7
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="TC_016_to_TC_044_OrganizationDetails">
-                  </a> <!-- TC_016_to_TC_044_OrganizationDetails -->
-                  <span class="method-name">TC_016_to_TC_044_OrganizationDetails</span>
-                  <div class="stack-trace">org.openqa.selenium.WebDriverException: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=143.0.7499.192)
+                  <a name="TC_208_SendTextMessage">
+                  </a> <!-- TC_208_SendTextMessage -->
+                  <span class="method-name">TC_208_SendTextMessage</span>
+                  <div class="stack-trace">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.id: chatInput (tried for 10 second(s) with 500 milliseconds interval)
 Build info: version: &apos;4.39.0&apos;, revision: &apos;126f156aee&apos;
 System info: os.name: &apos;Linux&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.8.0-101-generic&apos;, java.version: &apos;11.0.30&apos;
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [7a2355042cb3fdafe0b5e3cdae8a4bf7, get {url=http://192.168.0.133:3000/signup}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:36957}, goog:processID: 20272, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:36957/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 7a2355042cb3fdafe0b5e3cdae8a4bf7
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
-	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:142)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:561)
-	at org.openqa.selenium.remote.RemoteWebDriver.get(RemoteWebDriver.java:329)
-	at com.erp.base.BaseTest.goTo(BaseTest.java:216)
-	at com.erp.Signup.setupRole(Signup.java:26)
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:40615}, goog:processID: 77256, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:40615/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 0b49bfb7c360a1d905c749d2cbf57131
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at com.erp.utils.WaitUtils.waitForVisibility(WaitUtils.java:22)
+	at com.erp.pages.ChatPage.sendMessage(ChatPage.java:42)
+	at com.erp.ChatTest.TC_208_SendTextMessage(ChatTest.java:33)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
 	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
-	at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
 	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
 	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
 	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
@@ -277,41 +257,21 @@ Session ID: 7a2355042cb3fdafe0b5e3cdae8a4bf7
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="TC_046_verifyInvalidEIN">
-                  </a> <!-- TC_046_verifyInvalidEIN -->
-                  <span class="method-name">TC_046_verifyInvalidEIN</span>
-                  <div class="stack-trace">org.openqa.selenium.WebDriverException: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=143.0.7499.192)
-Build info: version: &apos;4.39.0&apos;, revision: &apos;126f156aee&apos;
-System info: os.name: &apos;Linux&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.8.0-101-generic&apos;, java.version: &apos;11.0.30&apos;
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [7a2355042cb3fdafe0b5e3cdae8a4bf7, get {url=http://192.168.0.133:3000/signup}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:36957}, goog:processID: 20272, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:36957/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 7a2355042cb3fdafe0b5e3cdae8a4bf7
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
-	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:142)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:561)
-	at org.openqa.selenium.remote.RemoteWebDriver.get(RemoteWebDriver.java:329)
-	at com.erp.base.BaseTest.goTo(BaseTest.java:216)
-	at com.erp.Signup.setupRole(Signup.java:26)
+                  <a name="TC_210_VerifyTimestamp">
+                  </a> <!-- TC_210_VerifyTimestamp -->
+                  <span class="method-name">TC_210_VerifyTimestamp</span>
+                  <div class="stack-trace">java.lang.AssertionError: expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1590)
+	at org.testng.Assert.assertTrue(Assert.java:57)
+	at org.testng.Assert.assertTrue(Assert.java:67)
+	at com.erp.ChatTest.TC_210_VerifyTimestamp(ChatTest.java:45)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
 	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
-	at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
 	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
 	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
 	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
@@ -340,41 +300,26 @@ Session ID: 7a2355042cb3fdafe0b5e3cdae8a4bf7
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="TC_047_verifyInvalidOwnerEmail">
-                  </a> <!-- TC_047_verifyInvalidOwnerEmail -->
-                  <span class="method-name">TC_047_verifyInvalidOwnerEmail</span>
-                  <div class="stack-trace">org.openqa.selenium.WebDriverException: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=143.0.7499.192)
+                  <a name="TC_211_MessagePersistenceAfterRefresh">
+                  </a> <!-- TC_211_MessagePersistenceAfterRefresh -->
+                  <span class="method-name">TC_211_MessagePersistenceAfterRefresh</span>
+                  <div class="stack-trace">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.id: chatInput (tried for 10 second(s) with 500 milliseconds interval)
 Build info: version: &apos;4.39.0&apos;, revision: &apos;126f156aee&apos;
 System info: os.name: &apos;Linux&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.8.0-101-generic&apos;, java.version: &apos;11.0.30&apos;
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [7a2355042cb3fdafe0b5e3cdae8a4bf7, get {url=http://192.168.0.133:3000/signup}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:36957}, goog:processID: 20272, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:36957/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 7a2355042cb3fdafe0b5e3cdae8a4bf7
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
-	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:142)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:561)
-	at org.openqa.selenium.remote.RemoteWebDriver.get(RemoteWebDriver.java:329)
-	at com.erp.base.BaseTest.goTo(BaseTest.java:216)
-	at com.erp.Signup.setupRole(Signup.java:26)
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:33935}, goog:processID: 77574, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:33935/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: eb223c0551f25ba94d3afc494e4ae49b
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at com.erp.utils.WaitUtils.waitForVisibility(WaitUtils.java:22)
+	at com.erp.pages.ChatPage.sendMessage(ChatPage.java:42)
+	at com.erp.ChatTest.TC_211_MessagePersistenceAfterRefresh(ChatTest.java:58)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
 	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
-	at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
 	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
 	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
 	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
@@ -403,41 +348,26 @@ Session ID: 7a2355042cb3fdafe0b5e3cdae8a4bf7
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="TC_048_verifyInvalidPhoneNumber">
-                  </a> <!-- TC_048_verifyInvalidPhoneNumber -->
-                  <span class="method-name">TC_048_verifyInvalidPhoneNumber</span>
-                  <div class="stack-trace">org.openqa.selenium.WebDriverException: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=143.0.7499.192)
+                  <a name="TC_214_DeleteOwnMessage">
+                  </a> <!-- TC_214_DeleteOwnMessage -->
+                  <span class="method-name">TC_214_DeleteOwnMessage</span>
+                  <div class="stack-trace">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.cssSelector: .delete-msg (tried for 10 second(s) with 500 milliseconds interval)
 Build info: version: &apos;4.39.0&apos;, revision: &apos;126f156aee&apos;
 System info: os.name: &apos;Linux&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.8.0-101-generic&apos;, java.version: &apos;11.0.30&apos;
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [7a2355042cb3fdafe0b5e3cdae8a4bf7, get {url=http://192.168.0.133:3000/signup}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:36957}, goog:processID: 20272, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:36957/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 7a2355042cb3fdafe0b5e3cdae8a4bf7
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
-	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:142)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:561)
-	at org.openqa.selenium.remote.RemoteWebDriver.get(RemoteWebDriver.java:329)
-	at com.erp.base.BaseTest.goTo(BaseTest.java:216)
-	at com.erp.Signup.setupRole(Signup.java:26)
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:34917}, goog:processID: 77732, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:34917/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 04033471c245fdb0cfea381a9958eaec
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at com.erp.utils.WaitUtils.waitForClickability(WaitUtils.java:26)
+	at com.erp.pages.ChatPage.deleteOwnMessage(ChatPage.java:56)
+	at com.erp.ChatTest.TC_214_DeleteOwnMessage(ChatTest.java:72)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
 	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
-	at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
 	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
 	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
 	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
@@ -466,41 +396,122 @@ Session ID: 7a2355042cb3fdafe0b5e3cdae8a4bf7
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="TC_049_verifyRequiredFieldsValidation">
-                  </a> <!-- TC_049_verifyRequiredFieldsValidation -->
-                  <span class="method-name">TC_049_verifyRequiredFieldsValidation</span>
-                  <div class="stack-trace">org.openqa.selenium.WebDriverException: unknown error: net::ERR_CONNECTION_REFUSED
-  (Session info: chrome=143.0.7499.192)
+                  <a name="TC_216_CreateGroup">
+                  </a> <!-- TC_216_CreateGroup -->
+                  <span class="method-name">TC_216_CreateGroup</span>
+                  <div class="stack-trace">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.id: createGroupBtn (tried for 10 second(s) with 500 milliseconds interval)
 Build info: version: &apos;4.39.0&apos;, revision: &apos;126f156aee&apos;
 System info: os.name: &apos;Linux&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.8.0-101-generic&apos;, java.version: &apos;11.0.30&apos;
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [7a2355042cb3fdafe0b5e3cdae8a4bf7, get {url=http://192.168.0.133:3000/signup}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:36957}, goog:processID: 20272, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:36957/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 7a2355042cb3fdafe0b5e3cdae8a4bf7
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
-	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:142)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:561)
-	at org.openqa.selenium.remote.RemoteWebDriver.get(RemoteWebDriver.java:329)
-	at com.erp.base.BaseTest.goTo(BaseTest.java:216)
-	at com.erp.Signup.setupRole(Signup.java:26)
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:36647}, goog:processID: 77890, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:36647/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 28154c6c2bba8515871e424ae2748e88
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at com.erp.utils.WaitUtils.waitForClickability(WaitUtils.java:26)
+	at com.erp.pages.ChatPage.createGroup(ChatPage.java:66)
+	at com.erp.ChatTest.TC_216_CreateGroup(ChatTest.java:87)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
 	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
-	at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:836)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:601)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at org.testng.TestRunner.privateRun(TestRunner.java:741)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="TC_217_SendGroupMessage">
+                  </a> <!-- TC_217_SendGroupMessage -->
+                  <span class="method-name">TC_217_SendGroupMessage</span>
+                  <div class="stack-trace">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.id: chatInput (tried for 10 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.39.0&apos;, revision: &apos;126f156aee&apos;
+System info: os.name: &apos;Linux&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.8.0-101-generic&apos;, java.version: &apos;11.0.30&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:33813}, goog:processID: 78067, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:33813/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 41989e91ec590cd6023512432934d3ce
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at com.erp.utils.WaitUtils.waitForVisibility(WaitUtils.java:22)
+	at com.erp.pages.ChatPage.sendMessage(ChatPage.java:42)
+	at com.erp.ChatTest.TC_217_SendGroupMessage(ChatTest.java:101)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at org.testng.TestRunner.privateRun(TestRunner.java:741)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="TC_224_RemoveMember">
+                  </a> <!-- TC_224_RemoveMember -->
+                  <span class="method-name">TC_224_RemoveMember</span>
+                  <div class="stack-trace">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.cssSelector: .remove-member (tried for 10 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.39.0&apos;, revision: &apos;126f156aee&apos;
+System info: os.name: &apos;Linux&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.8.0-101-generic&apos;, java.version: &apos;11.0.30&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:41131}, goog:processID: 78225, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:41131/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 9a92478ea940c6114f7388ac49a5e2b1
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at com.erp.utils.WaitUtils.waitForClickability(WaitUtils.java:26)
+	at com.erp.pages.ChatPage.removeMember(ChatPage.java:73)
+	at com.erp.ChatTest.TC_224_RemoveMember(ChatTest.java:113)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
 	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
 	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
 	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
@@ -528,11 +539,11 @@ Session ID: 7a2355042cb3fdafe0b5e3cdae8a4bf7
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-Default_suite-class-skipped -->
+          </div> <!-- suite-Default_suite-class-failed -->
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">/tmp/testng-eclipse-1765034824/testng-customsuite.xml</span>
+            <span class="header-content">/tmp/testng-eclipse--627022964/testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -541,7 +552,7 @@ Session ID: 7a2355042cb3fdafe0b5e3cdae8a4bf7
 &lt;suite name=&quot;Default suite&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
   &lt;test thread-count=&quot;5&quot; name=&quot;Default test&quot; verbose=&quot;2&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;com.erp.Signup&quot;/&gt;
+      &lt;class name=&quot;com.erp.ChatTest&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Default test --&gt;
 &lt;/suite&gt; &lt;!-- Default suite --&gt;
@@ -581,36 +592,44 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(6);
+data.addRows(8);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'TC_049_verifyRequiredFieldsValidation')
-data.setCell(0, 2, 'com.erp.Signup')
-data.setCell(0, 3, 1);
+data.setCell(0, 1, 'TC_224_RemoveMember')
+data.setCell(0, 2, 'com.erp.ChatTest')
+data.setCell(0, 3, 10168);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'TC_048_verifyInvalidPhoneNumber')
-data.setCell(1, 2, 'com.erp.Signup')
-data.setCell(1, 3, 1);
+data.setCell(1, 1, 'TC_214_DeleteOwnMessage')
+data.setCell(1, 2, 'com.erp.ChatTest')
+data.setCell(1, 3, 10148);
 data.setCell(2, 0, 2)
-data.setCell(2, 1, 'TC_016_to_TC_044_OrganizationDetails')
-data.setCell(2, 2, 'com.erp.Signup')
-data.setCell(2, 3, 0);
+data.setCell(2, 1, 'TC_207_OpenOneToOneChat')
+data.setCell(2, 2, 'com.erp.ChatTest')
+data.setCell(2, 3, 10130);
 data.setCell(3, 0, 3)
-data.setCell(3, 1, 'TC_046_verifyInvalidEIN')
-data.setCell(3, 2, 'com.erp.Signup')
-data.setCell(3, 3, 0);
+data.setCell(3, 1, 'TC_208_SendTextMessage')
+data.setCell(3, 2, 'com.erp.ChatTest')
+data.setCell(3, 3, 10051);
 data.setCell(4, 0, 4)
-data.setCell(4, 1, 'TC_047_verifyInvalidOwnerEmail')
-data.setCell(4, 2, 'com.erp.Signup')
-data.setCell(4, 3, 0);
+data.setCell(4, 1, 'TC_216_CreateGroup')
+data.setCell(4, 2, 'com.erp.ChatTest')
+data.setCell(4, 3, 10048);
 data.setCell(5, 0, 5)
-data.setCell(5, 1, 'TC_011_verifySignupFormLoads')
-data.setCell(5, 2, 'com.erp.Signup')
-data.setCell(5, 3, 0);
+data.setCell(5, 1, 'TC_211_MessagePersistenceAfterRefresh')
+data.setCell(5, 2, 'com.erp.ChatTest')
+data.setCell(5, 3, 10042);
+data.setCell(6, 0, 6)
+data.setCell(6, 1, 'TC_217_SendGroupMessage')
+data.setCell(6, 2, 'com.erp.ChatTest')
+data.setCell(6, 3, 10028);
+data.setCell(7, 0, 7)
+data.setCell(7, 1, 'TC_210_VerifyTimestamp')
+data.setCell(7, 2, 'com.erp.ChatTest')
+data.setCell(7, 3, 68);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 2 ms</span>
+              <span class="suite-total-time">Total running time: 1 minutes</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -636,61 +655,127 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">com.erp.Signup</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">com.erp.ChatTest</div> <!-- chronological-class-name -->
               <div class="configuration-suite before">
                 <span class="method-name">startReport</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-suite before -->
               <div class="configuration-method before">
-                <span class="method-name">setup(chrome, public void com.erp.Signup.TC_011_verifySignupFormLoads())</span>
-                <span class="method-start">541 ms</span>
+                <span class="method-name">setup(public void com.erp.ChatTest.TC_207_OpenOneToOneChat())</span>
+                <span class="method-start">1200 ms</span>
               </div> <!-- configuration-method before -->
-              <div class="configuration-method before">
+              <div class="test-method">
                 <img src="failed.png">
                 </img>
-                <span class="method-name">setupRole</span>
-                <span class="method-start">3624 ms</span>
-              </div> <!-- configuration-method before -->
+                <span class="method-name">TC_207_OpenOneToOneChat</span>
+                <span class="method-start">4877 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=TC_207_OpenOneToOneChat status=FAILURE method=ChatTest.TC_207_OpenOneToOneChat()[pr...)</span>
+                <span class="method-start">15293 ms</span>
+              </div> <!-- configuration-method after -->
               <div class="configuration-method before">
-                <span class="method-name">setup</span>
-                <span class="method-start">4094 ms</span>
+                <span class="method-name">setup(public void com.erp.ChatTest.TC_208_SendTextMessage())</span>
+                <span class="method-start">15778 ms</span>
               </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">TC_208_SendTextMessage</span>
+                <span class="method-start">16853 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=TC_208_SendTextMessage status=FAILURE method=ChatTest.TC_208_SendTextMessage()[pri:...)</span>
+                <span class="method-start">27212 ms</span>
+              </div> <!-- configuration-method after -->
               <div class="configuration-method before">
-                <span class="method-name">setupRole</span>
-                <span class="method-start">4099 ms</span>
+                <span class="method-name">setup(public void com.erp.ChatTest.TC_210_VerifyTimestamp())</span>
+                <span class="method-start">27605 ms</span>
               </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">TC_210_VerifyTimestamp</span>
+                <span class="method-start">28627 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=TC_210_VerifyTimestamp status=FAILURE method=ChatTest.TC_210_VerifyTimestamp()[pri:...)</span>
+                <span class="method-start">29030 ms</span>
+              </div> <!-- configuration-method after -->
               <div class="configuration-method before">
-                <span class="method-name">setup</span>
-                <span class="method-start">4110 ms</span>
+                <span class="method-name">setup(public void com.erp.ChatTest.TC_211_MessagePersistenceAfterRefresh())</span>
+                <span class="method-start">29337 ms</span>
               </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">TC_211_MessagePersistenceAfterRefresh</span>
+                <span class="method-start">30388 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=TC_211_MessagePersistenceAfterRefresh status=FAILURE method=ChatTest.TC_211_Message...)</span>
+                <span class="method-start">40735 ms</span>
+              </div> <!-- configuration-method after -->
               <div class="configuration-method before">
-                <span class="method-name">setupRole</span>
-                <span class="method-start">4112 ms</span>
+                <span class="method-name">setup(public void com.erp.ChatTest.TC_214_DeleteOwnMessage())</span>
+                <span class="method-start">41069 ms</span>
               </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">TC_214_DeleteOwnMessage</span>
+                <span class="method-start">42072 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=TC_214_DeleteOwnMessage status=FAILURE method=ChatTest.TC_214_DeleteOwnMessage()[pr...)</span>
+                <span class="method-start">52516 ms</span>
+              </div> <!-- configuration-method after -->
               <div class="configuration-method before">
-                <span class="method-name">setup</span>
-                <span class="method-start">4132 ms</span>
+                <span class="method-name">setup(public void com.erp.ChatTest.TC_216_CreateGroup())</span>
+                <span class="method-start">52890 ms</span>
               </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">TC_216_CreateGroup</span>
+                <span class="method-start">53944 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=TC_216_CreateGroup status=FAILURE method=ChatTest.TC_216_CreateGroup()[pri:6, insta...)</span>
+                <span class="method-start">64297 ms</span>
+              </div> <!-- configuration-method after -->
               <div class="configuration-method before">
-                <span class="method-name">setupRole</span>
-                <span class="method-start">4134 ms</span>
+                <span class="method-name">setup(public void com.erp.ChatTest.TC_217_SendGroupMessage())</span>
+                <span class="method-start">64632 ms</span>
               </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">TC_217_SendGroupMessage</span>
+                <span class="method-start">65669 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=TC_217_SendGroupMessage status=FAILURE method=ChatTest.TC_217_SendGroupMessage()[pr...)</span>
+                <span class="method-start">75950 ms</span>
+              </div> <!-- configuration-method after -->
               <div class="configuration-method before">
-                <span class="method-name">setup</span>
-                <span class="method-start">4149 ms</span>
+                <span class="method-name">setup(public void com.erp.ChatTest.TC_224_RemoveMember())</span>
+                <span class="method-start">76257 ms</span>
               </div> <!-- configuration-method before -->
-              <div class="configuration-method before">
-                <span class="method-name">setupRole</span>
-                <span class="method-start">4151 ms</span>
-              </div> <!-- configuration-method before -->
-              <div class="configuration-method before">
-                <span class="method-name">setup</span>
-                <span class="method-start">4163 ms</span>
-              </div> <!-- configuration-method before -->
-              <div class="configuration-method before">
-                <span class="method-name">setupRole</span>
-                <span class="method-start">4165 ms</span>
-              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">TC_224_RemoveMember</span>
+                <span class="method-start">77353 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown([TestResult name=TC_224_RemoveMember status=FAILURE method=ChatTest.TC_224_RemoveMember()[pri:8, ins...)</span>
+                <span class="method-start">87657 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-suite after">
+                <span class="method-name">endReport</span>
+                <span class="method-start">88019 ms</span>
+              </div> <!-- configuration-suite after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
       </div> <!-- main-panel-root -->

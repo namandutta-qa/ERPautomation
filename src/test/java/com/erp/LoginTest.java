@@ -2,33 +2,18 @@ package com.erp;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import com.erp.base.*;
 import com.erp.pages.LoginPage;
-import com.erp.pages.OrganizationSignupPage;
-import com.erp.pages.RoleSelectionPage;
 
 public class LoginTest extends BaseTest {
-	LoginPage loginPage;
 
-	
-	@BeforeMethod
-
-	public void setupRole() {
-		
-//		rolePage = new RoleSelectionPage(driver);
-		loginPage = new LoginPage(driver);
-		goTo("/signup");
-
-//		rolePage.selectRoleAndContinue(RoleSelectionPage.ORGANIZATION);
-
-	}
-
-	/* ========================= TC-080 Login Page Load ==========================*/
+	/*
+	 * ========================= TC-080 Login Page Load ==========================
+	 */
 	@Test
 	public void TC_080_loginPageLoad() {
-		goTo("/login");
+		driver.get("https://google.com");
 		Assert.assertTrue(driver.findElement(By.id("loginBtn")).isDisplayed());
 	}
 
@@ -98,7 +83,7 @@ public class LoginTest extends BaseTest {
 	 */
 	@Test
 	public void TC_085_dashboardRestriction() {
-		goTo("/dashboard");
+		driver.get("https://your-yodixa-url.com/dashboard");
 		Assert.assertTrue(driver.getCurrentUrl().contains("login"));
 	}
 

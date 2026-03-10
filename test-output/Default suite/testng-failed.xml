@@ -3,21 +3,22 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.erp.Signup">
+      <class name="com.erp.ChatTest">
         <methods>
-          <include name="TC_048_verifyInvalidPhoneNumber"/>
-          <include name="TC_047_verifyInvalidOwnerEmail"/>
-          <include name="TC_046_verifyInvalidEIN"/>
-          <include name="TC_011_verifySignupFormLoads"/>
+          <include name="TC_217_SendGroupMessage"/>
+          <include name="TC_211_MessagePersistenceAfterRefresh"/>
+          <include name="TC_210_VerifyTimestamp"/>
           <include name="endReport"/>
-          <include name="TC_016_to_TC_044_OrganizationDetails"/>
           <include name="startReport"/>
-          <include name="setupRole"/>
-          <include name="TC_049_verifyRequiredFieldsValidation"/>
+          <include name="TC_207_OpenOneToOneChat"/>
+          <include name="TC_208_SendTextMessage"/>
+          <include name="TC_214_DeleteOwnMessage"/>
+          <include name="TC_224_RemoveMember"/>
           <include name="tearDown"/>
+          <include name="TC_216_CreateGroup"/>
           <include name="setup"/>
         </methods>
-      </class> <!-- com.erp.Signup -->
+      </class> <!-- com.erp.ChatTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

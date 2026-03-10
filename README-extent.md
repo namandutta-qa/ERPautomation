@@ -25,4 +25,8 @@ mvn -Dtest=ChatTest test
 
 If you'd like, I can:
 - Add a TestNG XML (`testng.xml`) with included tests and the listener registered there.
+<<<<<<< HEAD
 - Add a small script to open the latest report automatically after test run.
+=======
+- Add a small script to open the latest report automatically after test run.
+>>>>>>> parent of f535409 (Signup module automate)
