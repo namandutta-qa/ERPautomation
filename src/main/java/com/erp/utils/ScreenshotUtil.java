@@ -31,7 +31,29 @@ public class ScreenshotUtil {
             return path;
         } catch (Exception e) {
             // Log the error to stderr so it is visible in build output
-            System.err.println("[ScreenshotUtil] Failed to capture screenshot: " + e.getMessage());
+            System.err.println("[ScreenshotUtil] Failed to capture screenshot by file: " + e.getMessage());
+            e.printStackTrace();
+            try {
+                // Try base64 fallback which works even when file copy fails
+                String base64 = captureScreenshotAsBase64(driver);
+                if (base64 != null) {
+                    System.out.println("[ScreenshotUtil] Captured screenshot as base64 fallback");
+                    return "data:image/png;base64," + base64;
+                }
+            } catch (Exception ex) {
+                System.err.println("[ScreenshotUtil] Base64 fallback also failed: " + ex.getMessage());
+            }
+            return null;
+        }
+    }
+
+    // New helper to return screenshot as Base64 (useful for embedding directly into reports)
+    public static String captureScreenshotAsBase64(WebDriver driver) {
+        try {
+            String base64 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
+            return base64;
+        } catch (Exception e) {
+            System.err.println("[ScreenshotUtil] Failed to capture screenshot as base64: " + e.getMessage());
             e.printStackTrace();
             return null;
         }

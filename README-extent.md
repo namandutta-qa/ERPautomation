@@ -26,3 +26,6 @@ mvn -Dtest=ChatTest test
 If you'd like, I can:
 - Add a TestNG XML (`testng.xml`) with included tests and the listener registered there.
 - Add a small script to open the latest report automatically after test run.
+
+Run test for screenshot run this command 'cd /home/lz-2/IdeaProjects/erp-automation && mvn -Dtest=com.erp.Signup test'
+Github Token- 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
