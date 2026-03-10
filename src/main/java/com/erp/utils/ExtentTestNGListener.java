@@ -4,12 +4,6 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import java.lang.reflect.Field;
-
-import org.openqa.selenium.WebDriver;
-
-import com.aventstack.extentreports.Status;
-
 public class ExtentTestNGListener implements ITestListener {
 
     @Override
@@ -25,7 +19,7 @@ public class ExtentTestNGListener implements ITestListener {
     @Override
     public void onTestStart(ITestResult result) {
         String testName = result.getMethod().getMethodName();
-        // Only create a test if one hasn't been created for this thread yet
+        // Create a test for this thread if not already present
         if (ExtentManager.getTest() == null) {
             ExtentManager.createTest(testName);
         }
@@ -33,42 +27,17 @@ public class ExtentTestNGListener implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        if (ExtentManager.getTest() != null) {
-            ExtentManager.getTest().log(Status.PASS, "Test Passed");
-        }
+        // NO-OP: BaseTest will handle logging and attaching screenshots in @AfterMethod
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-        // Try to capture screenshot path from test's WebDriver (if available)
-        Object testClass = result.getInstance();
-        try {
-            Field driverField = testClass.getClass().getSuperclass().getDeclaredField("driver");
-            driverField.setAccessible(true);
-
-            Object driverObject = driverField.get(testClass);
-            if (driverObject != null && driverObject instanceof WebDriver) {
-                WebDriver driver = (WebDriver) driverObject;
-                String screenshotPath = ScreenshotUtil.captureScreenshot(driver, result.getName());
-                if (ExtentManager.getTest() != null) {
-                    ExtentManager.getTest().fail(result.getThrowable()).addScreenCaptureFromPath(screenshotPath);
-                }
-                return;
-            }
-        } catch (Exception e) {
-            // ignore and log without screenshot
-        }
-
-        if (ExtentManager.getTest() != null) {
-            ExtentManager.getTest().fail(result.getThrowable());
-        }
+        // NO-OP: BaseTest will handle logging and attaching screenshots in @AfterMethod
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        if (ExtentManager.getTest() != null) {
-            ExtentManager.getTest().log(Status.SKIP, "Test Skipped");
-        }
+        // NO-OP: BaseTest or test code can log skips if desired
     }
 
     @Override
