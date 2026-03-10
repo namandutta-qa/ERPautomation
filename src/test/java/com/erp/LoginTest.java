@@ -6,8 +6,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import com.erp.base.*;
 import com.erp.pages.LoginPage;
-import com.erp.pages.OrganizationSignupPage;
-import com.erp.pages.RoleSelectionPage;
 
 public class LoginTest extends BaseTest {
 	LoginPage loginPage;
@@ -19,7 +17,7 @@ public class LoginTest extends BaseTest {
 		
 //		rolePage = new RoleSelectionPage(driver);
 		loginPage = new LoginPage(driver);
-		goTo("/signup");
+		goTo("/login");
 
 //		rolePage.selectRoleAndContinue(RoleSelectionPage.ORGANIZATION);
 
@@ -66,10 +64,7 @@ public class LoginTest extends BaseTest {
 		Assert.assertTrue(page.getErrorMessage().contains("Invalid"));
 	}
 
-	/*
-	 * ========================= TC-083 Unregistered Email
-	 * ==========================
-	 */
+	/* ========================= TC-083 Unregistered Email ========================== */
 	@Test
 	public void TC_083_unregisteredEmail() {
 		LoginPage page = new LoginPage(driver);
@@ -81,9 +76,7 @@ public class LoginTest extends BaseTest {
 		Assert.assertTrue(page.getErrorMessage().contains("not found"));
 	}
 
-	/*
-	 * ========================= TC-084 Mandatory Fields ==========================
-	 */
+	/* ========================= TC-084 Mandatory Fields ==========================*/
 	@Test
 	public void TC_084_mandatoryValidation() {
 		LoginPage page = new LoginPage(driver);
@@ -92,19 +85,14 @@ public class LoginTest extends BaseTest {
 		Assert.assertTrue(driver.getPageSource().contains("required"));
 	}
 
-	/*
-	 * ========================= TC-085 Dashboard Restriction
-	 * ==========================
-	 */
+	/*========================= TC-085 Dashboard Restriction==========================*/
 	@Test
 	public void TC_085_dashboardRestriction() {
 		goTo("/dashboard");
 		Assert.assertTrue(driver.getCurrentUrl().contains("login"));
 	}
 
-	/*
-	 * ========================= TC-086 Logout ==========================
-	 */
+	/*========================= TC-086 Logout ==========================*/
 	@Test
 	public void TC_086_logout() {
 		LoginPage page = new LoginPage(driver);

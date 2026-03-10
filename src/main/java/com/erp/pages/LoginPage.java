@@ -14,8 +14,9 @@ public class LoginPage {
     // Locators
     By email = By.name("email");
     By password = By.name("password");
-    By loginBtn = By.id("loginBtn");
-    By errorMsg = By.id("error");
+    By loginBtn = By.xpath("//button[normalize-space()='Sign in']");
+    By emailerrorMsg = By.xpath("//p[text()='Please enter a valid email address']");
+    By passworderrorMsg = By.xpath("//p[text()='Password is required']");
     By logoutBtn = By.id("logout");
 
     // Actions
@@ -34,7 +35,7 @@ public class LoginPage {
     }
 
     public String getErrorMessage() {
-        return driver.findElement(errorMsg).getText();
+        return driver.findElement(emailerrorMsg).getText();
     }
 
     public void clickLogout() {
