@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WindowType;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -21,6 +22,7 @@ public class Signup extends BaseTest {
 	@BeforeMethod
 
 	public void setupRole() {
+
 		rolePage = new RoleSelectionPage(driver);
 		signupPage = new OrganizationSignupPage(driver);
 		goTo("/signup");
@@ -54,36 +56,41 @@ public class Signup extends BaseTest {
 			signupPage.enterMiddleName("");
 			signupPage.enterLastName("Doe");
 			signupPage.enterEmail(testEmail);
+			signupPage.enterPasswordl("Test@121");
+			signupPage.clickNext();
+
+		});
+		step("Enter current address info", () -> {
 			signupPage.enterPhone("9876543210");
 			signupPage.enterDOB("01/01/1990");
 			signupPage.selectgender("Female");
 			signupPage.selectbirthcountry("United States");
-			signupPage.enterPasswordl("Test@121");
+			signupPage.CurrentAddress("New York Street");
+			signupPage.CurrentpostalCode("10001");
+			signupPage.CurrentCity("Los Angeles");
+            signupPage.selectCurrentCountryDropdown("United States");
+			signupPage.CurrentState("ABC");
+			signupPage.clickNext();
 		});
-//		step("Enter current address info", () -> {
-//			signupPage.CurrentAddress("New York Street");
-//			signupPage.CurrentpostalCode("10001");
-//			signupPage.CurrentCity("Los Angeles");
-//            signupPage.selectCurrentCountryDropdown("United States");
-//			signupPage.CurrentState("ABC");
-//			signupPage.clickNext();
-//		});
 
-//        step("Upload GovtID document", () -> {
-//            signupPage.SelectGovtID("/home/lz-2/Downloads/Joy of cleaning/Amazon Order PDF Test File.pdf");
-//        });
-//
-//        step("Upload Article document", () -> {
-//            signupPage.SelectAOI("/home/lz-2/Downloads/Joy of cleaning/Amazon Order PDF Test File.pdf");
-//        });
-//        step("Upload GovtID document", () -> {
-//            signupPage.SelectIOD("/home/lz-2/Downloads/Joy of cleaning/Amazon Order PDF Test File.pdf");
-//        });
-//        
-//        step("Proceed to review page", () -> {
-//            signupPage.clickNext();
-//        });
- 
+        step("Upload GovtID document", () -> {
+            signupPage.SelectGovtID("/home/lz-2/Downloads/Joy of cleaning/Amazon Order PDF Test File.pdf");
+        });
+        
+        step("Capture Selfie Verification", () -> {
+            signupPage.captureSelfie();   // example method
+        });
+
+        step("Upload Article document", () -> {
+            signupPage.SelectAOI("/home/lz-2/Downloads/Joy of cleaning/Amazon Order PDF Test File.pdf");
+        });
+        step("Upload GovtID document", () -> {
+            signupPage.SelectIOD("/home/lz-2/Downloads/Joy of cleaning/Amazon Order PDF Test File.pdf");
+        });
+        
+        step("Proceed to review page", () -> {
+            signupPage.clickNext();
+        });
 
         step("Accept consent", () -> {
             signupPage.acceptTerms();

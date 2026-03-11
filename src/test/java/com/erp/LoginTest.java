@@ -24,44 +24,35 @@ public class LoginTest extends BaseTest {
 	}
 
 	/* ========================= TC-080 Login Page Load ==========================*/
+	
 	@Test
 	public void TC_080_loginPageLoad() {
 		goTo("/login");
-		Assert.assertTrue(driver.findElement(By.id("loginBtn")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//button[normalize-space()='Sign in']")).isDisplayed());
 	}
 
-	/*
-	 * ========================= TC-081 Valid Login ==========================
-	 */
+	/* ========================= TC-081 Valid Login ==========================*/
 	@Test
 	public void TC_081_validLogin() {
-		LoginPage page = new LoginPage(driver);
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} // Wait for page to load
-		System.out.println("Current URL before login: " + driver.getCurrentUrl());
-		page.enterEmail("test@mailinator.com");
-		page.enterPassword("Password123");
-		page.clickLogin();
 
+		System.out.println("Current URL before login: " + driver.getCurrentUrl());
+		
+		loginPage.enterEmail("test@mailinator.com");
+		loginPage.enterPassword("Password123");
+		loginPage.clickLogin();
+ 
 		Assert.assertTrue(driver.getCurrentUrl().contains("dashboard"));
 	}
 
-	/*
-	 * ========================= TC-082 Invalid Password ==========================
-	 */
+	/* ========================= TC-082 Invalid Password ==========================*/
 	@Test
 	public void TC_082_invalidPassword() {
-		LoginPage page = new LoginPage(driver);
 
-		page.enterEmail("test@mailinator.com");
-		page.enterPassword("WrongPass");
-		page.clickLogin();
+		loginPage.enterEmail("test@mailinator.com");
+		loginPage.enterPassword("WrongPass");
+		loginPage.clickLogin();
 
-		Assert.assertTrue(page.getErrorMessage().contains("Invalid"));
+		Assert.assertTrue(loginPage.getErrorMessage().contains("Invalid"));
 	}
 
 	/* ========================= TC-083 Unregistered Email ========================== */

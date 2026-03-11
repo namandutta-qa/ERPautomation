@@ -1,0 +1,15 @@
+<suite name="AutomationSuite" parallel="tests" thread-count="2">
+
+    <test name="LoginTest">
+        <classes>
+            <class name="com.erp.LoginTest"/>
+        </classes>
+    </test>
+
+    <test name="SignupTest">
+        <classes>
+            <class name="com.erp.Signup"/>
+        </classes>
+    </test>
+
+</suite>

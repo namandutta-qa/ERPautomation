@@ -73,6 +73,12 @@ public class BaseTest {
         firefoxOptions.addArguments("--disable-dev-shm-usage");
         edgeOptions.addArguments("--no-sandbox");
         edgeOptions.addArguments("--disable-dev-shm-usage");
+        chromeOptions.addArguments("--use-fake-ui-for-media-stream");
+        chromeOptions.addArguments("--use-fake-device-for-media-stream");
+        chromeOptions.addArguments("--use-file-for-fake-video-capture=/path/selfie.y4m");
+        chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--disable-gpu");
+        chromeOptions.addArguments("--remote-allow-origins=*");
 
         switch (br) {
             case "firefox":

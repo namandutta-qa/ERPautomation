@@ -1,44 +1,55 @@
 package com.erp.pages;
 
+import com.erp.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class LoginPage {
 
-    WebDriver driver;
+	WebDriver driver;
+	WaitUtils waitUtils;
 
-    public LoginPage(WebDriver driver) {
-        this.driver = driver;
-    }
+	public LoginPage(WebDriver driver) {
+		this.driver = driver;
+		this.waitUtils = new WaitUtils(driver);
+	}
 
-    // Locators
-    By email = By.name("email");
-    By password = By.name("password");
-    By loginBtn = By.xpath("//button[normalize-space()='Sign in']");
-    By emailerrorMsg = By.xpath("//p[text()='Please enter a valid email address']");
-    By passworderrorMsg = By.xpath("//p[text()='Password is required']");
-    By logoutBtn = By.id("logout");
+	// Locators
+	By email = By.xpath("//input[@id='_R_ainebn9esndlb_-form-item']");
+	By password = By.xpath("//input[@id='_R_einebn9esndlb_-form-item']");
+	By loginBtn = By.xpath("//button[normalize-space()='Sign in']");
+	By emailerrorMsg = By.xpath("//p[@id='_R_ainebn9esndlb_-form-item-message']");
+	By passworderrorMsg = By.xpath("//p[@id='_R_einebn9esndlb_-form-item-message']");
+	By logoutBtn = By.id("logout");
 
-    // Actions
-    public void enterEmail(String userEmail) {
-        driver.findElement(email).clear();
-        driver.findElement(email).sendKeys(userEmail);
-    }
+	// Actions
+	public void enterEmail(String userEmail) {
+		WebElement emailField = waitUtils.waitForVisibility(email);
+		emailField.sendKeys(userEmail);
+	}
 
-    public void enterPassword(String userPassword) {
-        driver.findElement(password).clear();
-        driver.findElement(password).sendKeys(userPassword);
-    }
+	public void enterPassword(String userPassword) {
 
-    public void clickLogin() {
-        driver.findElement(loginBtn).click();
-    }
+		WebElement passField = waitUtils.waitForVisibility(password);
+		passField.click();
+		passField.sendKeys(userPassword);
 
-    public String getErrorMessage() {
-        return driver.findElement(emailerrorMsg).getText();
-    }
+	}
 
-    public void clickLogout() {
-        driver.findElement(logoutBtn).click();
-    }
+	public void clickLogin() {
+		driver.findElement(loginBtn).click();
+	}
+
+	public String getErrorMessage() {
+		return driver.findElement(emailerrorMsg).getText();
+	}
+
+	public String getPasswordErrorMessage() {
+		return driver.findElement(passworderrorMsg).getText();
+	}
+
+	public void clickLogout() {
+		driver.findElement(logoutBtn).click();
+	}
 }

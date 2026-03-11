@@ -5,6 +5,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 public class OrganizationSignupPage extends BasePage {
@@ -52,6 +53,9 @@ public class OrganizationSignupPage extends BasePage {
 			"//h3[text()='Articles of Incorporation']/ancestor::div[contains(@class,'glass-card')]//input[@type='file']");
 	private By IOD = By.xpath(
 			"//h3[text()='Insurance Documentation']/ancestor::div[contains(@class,'glass-card')]//input[@type='file']");
+	private By startCameraBtn = By.xpath("//button[contains(text(),'Start') or contains(text(),'Capture')]");
+	private By captureBtn = By.xpath("//button[contains(text(),'Capture') or contains(text(),'Take photo')]");
+	private By confirmBtn = By.xpath("//button[contains(text(),'Confirm') or contains(text(),'Continue')]");
 
 	// Navigation
 	private By nextBtn = By.xpath("//button[normalize-space()='Create account']");
@@ -222,5 +226,16 @@ public class OrganizationSignupPage extends BasePage {
 	    List<WebElement> errors = driver.findElements(requiredErrors);
 
 	    return errors.size() > 0;
+	}
+	public void captureSelfie() {
+
+
+	    driver.switchTo().frame(driver.findElement(By.cssSelector("iframe")));
+
+	    wait.until(ExpectedConditions.elementToBeClickable(startCameraBtn)).click();
+	    wait.until(ExpectedConditions.elementToBeClickable(captureBtn)).click();
+	    wait.until(ExpectedConditions.elementToBeClickable(confirmBtn)).click();
+
+	    driver.switchTo().defaultContent();
 	}
 }
