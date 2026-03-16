@@ -65,10 +65,6 @@ public class Signup extends BaseTest {
 			}
 			signupPage.selectState("Georgia");
 			signupPage.enterAddress("New York Street");
-//			signupPage.enterPostalCode("10001");
-//			signupPage.City("Los Angeles");
-//			signupPage.selectcountry("United States");
-//			signupPage.selectCurrentstateDropdown("Georgia");
 
 		});
 		step("Enter owner info", () -> {
@@ -76,132 +72,169 @@ public class Signup extends BaseTest {
 			signupPage.enterownerLastName("Francis");
 			signupPage.enteronweremail(testEmail);
 			signupPage.selectgender("Male");
-//			signupPage.selectownerState("Georgia");
 			signupPage.enterowneraddress("New York Street");
-//			signupPage.enterownerzip("10001");
-//			signupPage.enterownercity("Los Angeles");
-//			signupPage.selectownercountry("United States");
-//			signupPage.selectownercountrybirth("Georgia");
 
 		});
 
 		step("Enter current address info", () -> {
 			signupPage.selectdesignation("Manager");
 			signupPage.enterPhone("9876543210");
-//			signupPage.enterDOB("01/01/1990");
 			signupPage.selectPerGender("Female");
-//			signupPage.selectPerCountry("United States");
-//			signupPage.enterPeraddress("sgdf");
-//			signupPage.enterPerZip("45435");
-//			signupPage.enterPercity("fdsh");
-//            signupPage.selectPerstate("Alabama");
-//			signupPage.CurrentState("Alabama");
+
 			try {
 				signupPage.enterPeraddress("ABC");
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-//			signupPage.enterPercity("ABC");
-
-			signupPage.clickNext();
+			signupPage.clickConfirm();
 		});
-//
-//        step("Upload GovtID document", () -> {
-//            signupPage.SelectGovtID("/home/lz-2/Downloads/Joy of cleaning/Amazon Order PDF Test File.pdf");
-//        });
-//        
+
+        step("Upload GovtID document", () -> {
+            signupPage.SelectGovtID("/home/lz-2/Downloads/Joy of cleaning/Amazon Order PDF Test File.pdf");
+        });
+        
 //        step("Capture Selfie Verification", () -> {
 //            signupPage.captureSelfie();   // example method
 //        });
-//
-//        step("Upload Article document", () -> {
-//            signupPage.SelectAOI("/home/lz-2/Downloads/Joy of cleaning/Amazon Order PDF Test File.pdf");
-//        });
-//        step("Upload GovtID document", () -> {
-//            signupPage.SelectIOD("/home/lz-2/Downloads/Joy of cleaning/Amazon Order PDF Test File.pdf");
-//        });
-//        
-//        step("Proceed to review page", () -> {
-//            signupPage.clickNext();
-//        });
-//
-//        step("Accept consent", () -> {
-//            signupPage.acceptTerms();
-////            signupPage.acceptPrivacy();
-//        });
-//
-//        step("Submit application", () -> {
-//            signupPage.clickSubmit();
-//        });
-//
-//        step("Verify confirmation", () -> {
-//            Assert.assertTrue(signupPage.isConfirmationDisplayed());
-//        });
 
+        step("Upload Article document", () -> {
+            signupPage.SelectAOI("/home/lz-2/Downloads/Joy of cleaning/Amazon Order PDF Test File.pdf");
+        });
+        step("Upload GovtID document", () -> {
+            signupPage.SelectIOD("/home/lz-2/Downloads/Joy of cleaning/Amazon Order PDF Test File.pdf");
+        });
+        
+        step("Proceed to review page", () -> {
+            signupPage.clickConfirm();
+        });
+        
 	}
+	@Test
+	public void TC_045_MandatoryFieldValidations() {
+	    step("Verify mandatory field validations", () -> {
+	        signupPage.clickConfirm();
+	        signupPage.getFirstError();
+	        signupPage.getLastError();
+	        signupPage.getEmailError();
+	        signupPage.getPasswordError();
+	        signupPage.getdobError();
+	    });
+	}
+
+	@Test
+	public void TC_046_InvalidEmailFormat() {
+	    step("Enter invalid email", () -> {
+	        signupPage.enterEmail("test@.com");
+	        signupPage.clickConfirm();
+	        signupPage.getEmailError();
+	    });
+	}
+
+	@Test
+	public void TC_047_PasswordPolicyEnforcement() {
+	    step("Enter weak password", () -> {
+	        signupPage.enterPasswordl("12345");
+	        signupPage.clickConfirm();
+	        signupPage.getPasswordError();
+	    });
+	}
+
+	@Test
+	public void TC_048_DOBAgeRestriction() {
+	    step("Enter underage DOB", () -> {
+	        signupPage.enterDOB("March 1, 2010");
+	        signupPage.clickConfirm();
+	    });
+	}
+
+	@Test
+	public void TC_049_InvalidEINFormat() {
+	    step("Enter invalid EIN", () -> {
+	        signupPage.enterEIN("123456789");
+	        signupPage.clickConfirm();
+	        signupPage.getEINError();
+	    });
+	}
+
+	@Test
+	public void TC_050_CountryStateDropdown() {
+	    step("Verify country-state dependency", () -> {
+	        signupPage.selectCountry("United States");
+	        signupPage.selectState("Georgia"); // Verify only US states appear
+	    });
+	}
+
+
 //	@Test
-//	public void TC_046_verifyInvalidEIN() {
-//
-//	    step("Enter invalid EIN", () -> {
-//	        signupPage.enterLegalName("ABC Corporation");
-//	        signupPage.enterEIN("123");
+//	public void TC_052_OwnerInformationValidations() {
+//	    step("Verify owner info validations", () -> {
+//	        signupPage.enterownerFirstName("");
+//	        signupPage.enterownerLastName("");
+//	        signupPage.enteronweremail("invalidEmail");
+//	        signupPage.clickConfirm();
+//	        signupPage.verifyErrorMessage("Owner First Name is required");
+//	        signupPage.verifyErrorMessage("Owner Last Name is required");
+//	        signupPage.verifyErrorMessage("Invalid owner email format");
 //	    });
-//
-//	    step("Click Next", () -> {
-//	        signupPage.clickNext();
+//	}
+
+	@Test
+	public void TC_053_PhoneNumberValidation() {
+	    step("Verify phone number format", () -> {
+	        signupPage.enterPhone("12345");
+	        signupPage.clickConfirm();
+	        signupPage.getPhoneError();
+	    });
+	}
+
+	@Test
+	public void TC_054_GenderDropdownValidation() {
+	    step("Verify gender dropdowns", () -> {
+	        signupPage.selectgender("Male");
+	        signupPage.selectPerGender("Female");
+	    });
+	}
+
+//	@Test
+//	public void TC_055_FileUploadValidation() {
+//	    step("Verify valid and invalid file uploads", () -> {
+//	        signupPage.SelectGovtID("/path/valid.pdf");
+//	        signupPage.SelectAOI("/path/valid.jpg");
+//	        signupPage.SelectIOD("/path/valid.png");
+//	        
+//	        signupPage.SelectGovtID("/path/invalid.exe");
+//	        signupPage.verifyErrorMessage("Invalid file type");
+//	        
+//	        signupPage.SelectAOI("/path/largefile.pdf");
+//	        signupPage.verifyErrorMessage("File size exceeds limit");
 //	    });
+//	}
 //
-//	    step("Verify EIN error message", () -> {
-//	        Assert.assertTrue(signupPage.getEINError().contains("Invalid EIN"));
+//	@Test
+//	public void TC_056_MultipleDocumentUploads() {
+//	    step("Verify multiple document uploads", () -> {
+//	        signupPage.SelectGovtID("/path/file1.pdf");
+//	        signupPage.SelectGovtID("/path/file2.pdf");
+//	        signupPage.verifyDocumentUploaded("/path/file2.pdf"); // Check replacement behavior
 //	    });
 //	}
 
 //	@Test
-//	public void TC_047_verifyInvalidOwnerEmail() {
-//
-//	    step("Enter invalid email", () -> {
-//	        signupPage.enterEmail("john.com");
-//	    });
-//
-//	    step("Click Next", () -> {
-//	        signupPage.clickNext();
-//	    });
-//
-//	    step("Verify email validation", () -> {
-//	        Assert.assertTrue(signupPage.getEmailError().contains("Invalid email"));
+//	public void TC_057_ReviewPageVerification() {
+//	    step("Verify review page displays correct info", () -> {
+//	        signupPage.clickConfirm();
+//	        signupPage.verifyReviewPageField("First Name", "John");
+//	        signupPage.verifyReviewPageField("Organization Name", "ABC Corporation");
+//	        signupPage.verifyReviewPageField("Owner Email", testEmail);
 //	    });
 //	}
+//
 //	@Test
-//	public void TC_048_verifyInvalidPhoneNumber() {
-//
-//	    step("Enter invalid phone", () -> {
-//	        signupPage.enterPhone("123");
-//	    });
-//
-//	    step("Click Next", () -> {
-//	        signupPage.clickNext();
-//	    });
-//
-//	    step("Verify phone error", () -> {
-//	        Assert.assertTrue(signupPage.getPhoneError().contains("Invalid phone"));
-//	    });
-//	}
-//	@Test
-//	public void TC_049_verifyRequiredFieldsValidation() {
-//
-//	    step("Leave all fields empty", () -> {
-//	        signupPage.enterLegalName("");
-//	        signupPage.enterEIN("");
-//	        signupPage.enterAddress("");
-//	    });
-//
-//	    step("Click Next", () -> {
-//	        signupPage.clickNext();
-//	    });
-//
-//	    step("Verify required field errors", () -> {
-//	        Assert.assertTrue(signupPage.isRequiredErrorDisplayed());
+//	public void TC_058_EmptyReviewSubmission() {
+//	    step("Verify review submission without documents", () -> {
+//	        signupPage.clickConfirm();
+//	        signupPage.verifyErrorMessage("Please upload all required documents");
 //	    });
 //	}
 

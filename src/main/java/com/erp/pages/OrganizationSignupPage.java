@@ -37,19 +37,24 @@ public class OrganizationSignupPage extends BasePage {
 	private By state = By.name("businessState");
 	// Personal details
 	private By firstName = By.name("firstname");
+	private By firstnameError = By.xpath("//p[text()='Last name must be at least 2 characters']");
+	private By lastnameError = By.xpath("//p[text()='First name must be at least 2 characters']");
 	private By middleName = By.xpath("//input[@id='_r_2_-form-item']");
 	private By lastName = By.name("lastname");
 	public By email = By.xpath("//input[@placeholder='you@example.com']");
 	private By password = By.xpath("//input[@placeholder='••••••••']");
 	private By username = By.xpath("//input[@placeholder='Enter first & last name above to generate']");
 	private By emailError = By.xpath("//p[text()='Please enter a valid email address']");
+	private By passwordError = By.xpath("//p[text()='Password must be at least 8 characters']");
 	private By phone = By.name("personal_phone");
 	private By phoneError = By.xpath("//p[text()='Please enter a valid phone number']");
 	private By dob = By.xpath("//button[@name='dob']");
+	private By DOBError = By.xpath("//p[text()='Date of birth is required']");
+
 	public By Country = By.xpath("(//select)[4]");
 	public By birthcountryDropdown = By.xpath("//button[@id='_r_n_-form-item']");
-	private By designation = By.xpath("(//select)[10]");
-	private By Gender = By.xpath("(//select)[11]");
+	private By designation = By.xpath("(//select)[5]");
+	private By Gender = By.xpath("(//select)[6]");
 //	private By PerCountry = By.xpath("(//select)[13]");
 	private By Peraddress = By.xpath("//input[@placeholder='Search your address...']");
 	private By PeraddressCountry = By.xpath("(//select)[12]");
@@ -61,7 +66,7 @@ public class OrganizationSignupPage extends BasePage {
 	private By ownerfirstName = By.name("owner_firstname");
 	private By ownerlastName = By.name("owner_lastname");
 	private By owneremail = By.name("owner_email");
-	private By gender = By.xpath("(//select)[6]");
+	private By gender = By.xpath("(//select)[4]");
 	private By ownercountrybirth = By.xpath("(//select)[7]");
 	private By owneraddress = By.xpath("//input[@placeholder='Search owner address...']");
 	private By ownercountry = By.xpath("(//select)[7]");
@@ -102,7 +107,19 @@ public class OrganizationSignupPage extends BasePage {
 	public String getEmailError() {
 		return driver.findElement(emailError).getText();
 	}
+	public String getFirstError() {
+		return driver.findElement(firstnameError).getText();
+	}
+	public String getLastError() {
+		return driver.findElement(lastnameError).getText();
+	}
+	public String getPasswordError() {
+		return driver.findElement(passwordError).getText();
+	}
 
+	public String getdobError() {
+		return driver.findElement(DOBError).getText();
+	}
 	public String getlegalnameError() {
 		return driver.findElement(legalnameError).getText();
 	}
@@ -198,6 +215,8 @@ public class OrganizationSignupPage extends BasePage {
 	public void enterPeraddress(String value) throws InterruptedException {
 //		type(Peraddress, value);
 	    WebElement element = driver.findElement(Peraddress);
+	    element.clear();
+
 	    element.sendKeys(value);
 	    Thread.sleep(2000);
 	    element.sendKeys(Keys.ARROW_DOWN);
@@ -227,6 +246,8 @@ public class OrganizationSignupPage extends BasePage {
 	public void enterowneraddress(String value) {
 		type(owneraddress, value);
 	    WebElement element = driver.findElement(owneraddress);
+	    element.clear();
+
 	    element.sendKeys(value);
 	    try {
 			Thread.sleep(2000);

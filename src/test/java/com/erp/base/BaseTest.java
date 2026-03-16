@@ -41,7 +41,7 @@ public class BaseTest {
     public void startReport() {
         extent = ExtentManager.getInstance();
         // initialize baseUrl from system property or default
-        baseUrl = System.getProperty("baseUrl", "http://192.168.0.129:3000");
+        baseUrl = System.getProperty("baseUrl", "https://yodixa.lusites.xyz");
     }
 
     // Setup browser before each test
