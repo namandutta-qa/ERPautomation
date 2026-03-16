@@ -1,52 +1,79 @@
 package com.erp.pages;
 
+import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class OrganizationSignupPage extends BasePage {
 
 	public OrganizationSignupPage(WebDriver driver) {
 		super(driver);
+		PageFactory.initElements(driver, this);
+
 	}
 
 	// Organization details
-	private By legalName = By.xpath("//input[@name='organizationName']");
+	private By legalName = By.xpath("//input[@placeholder='Acme Corp']");
 	private By legalnameError = By.xpath("//p[text()='EIN must be in format XX-XXXXXXX']");
-	private By ein = By.xpath("//input[@name='ein']");
+	private By ein = By.xpath("//input[@name='ein_tax_id']");
 	private By einError = By.xpath("//p[text()='EIN must be in format XX-XXXXXXX']");
-	private By address = By.name("businessStreet");
+	private By address = By.xpath("//input[@placeholder='Search business address...']");
 	private By addressError = By.xpath("//p[text()='EIN must be in format XX-XXXXXXX']");
-	private By postalCode = By.name("businessPostalCode");
+	private By postalCode = By.name("business_address_zip");
 	private By postalcodeError = By.xpath("//p[text()='EIN must be in format XX-XXXXXXX']");
+	public By selectIndustry = By.xpath("(//select)[1]");
 	public By countryDropdown = By.xpath("(//select)[2]");
-	public By stateDropdown = By.xpath("(//select)[1]");
-	private By city = By.name("businessCity");
+	public By stateDropdown = By.xpath("(//select)[3]");
+	private By city = By.name("business_address_city");
 	private By state = By.name("businessState");
-	// Owner details
+	// Personal details
 	private By firstName = By.name("firstname");
-	private By middleName = By.name("middlename");
+	private By middleName = By.xpath("//input[@id='_r_2_-form-item']");
 	private By lastName = By.name("lastname");
-	private By email = By.name("email");
-	private By password = By.name("password");
-
+	public By email = By.xpath("//input[@placeholder='you@example.com']");
+	private By password = By.xpath("//input[@placeholder='••••••••']");
+	private By username = By.xpath("//input[@placeholder='Enter first & last name above to generate']");
 	private By emailError = By.xpath("//p[text()='Please enter a valid email address']");
-	private By phone = By.name("phone");
+	private By phone = By.name("personal_phone");
 	private By phoneError = By.xpath("//p[text()='Please enter a valid phone number']");
-	private By dob = By.name("dateOfBirth");
-	public By gender = By.xpath("(//select)[3]");
+	private By dob = By.xpath("//button[@name='dob']");
+	public By Country = By.xpath("(//select)[4]");
 	public By birthcountryDropdown = By.xpath("//button[@id='_r_n_-form-item']");
-    // Current Address
+	private By designation = By.xpath("(//select)[10]");
+	private By Gender = By.xpath("(//select)[11]");
+//	private By PerCountry = By.xpath("(//select)[13]");
+	private By Peraddress = By.xpath("//input[@placeholder='Search your address...']");
+	private By PeraddressCountry = By.xpath("(//select)[12]");
+	private By Perstate = By.xpath("(//select)[13]");
+	private By PerCity = By.name("city");
+	private By PerZip = By.name("zip");
+
+	// Owner details
+	private By ownerfirstName = By.name("owner_firstname");
+	private By ownerlastName = By.name("owner_lastname");
+	private By owneremail = By.name("owner_email");
+	private By gender = By.xpath("(//select)[6]");
+	private By ownercountrybirth = By.xpath("(//select)[7]");
+	private By owneraddress = By.xpath("//input[@placeholder='Search owner address...']");
+	private By ownercountry = By.xpath("(//select)[7]");
+	private By ownerstate = By.xpath("(//select)[8]");
+	private By ownercity = By.name("owner_city");
+	private By ownerpostalcode = By.name("owner_zip");
+	// Current Address
 	private By Currentaddress = By.name("street");
 	private By CurrentpostalCode = By.name("postalCode");
-	public By CurrentcountryDropdown = By.xpath("(//select)[5]");
+	public By CurrentStateDropdown = By.xpath("//input[@placeholder='Search business address...']");
 	private By Currentcity = By.name("city");
 	private By Currentstate = By.name("state");
-
 	// Document upload
 	private By GovtID = By.xpath("//input[@type='file' and @accept='.jpg,.jpeg,.png,.pdf'][1]");
 	private By AOI = By.xpath(
@@ -57,12 +84,13 @@ public class OrganizationSignupPage extends BasePage {
 	private By captureBtn = By.xpath("//button[contains(text(),'Capture') or contains(text(),'Take photo')]");
 	private By confirmBtn = By.xpath("//button[contains(text(),'Confirm') or contains(text(),'Continue')]");
 
-	// Navigation
+	// Navigationcd /home/lz-2/IdeaProjects/erp-automation && mvn
+	// -Dtest=com.erp.Signup test
 	private By nextBtn = By.xpath("//button[normalize-space()='Create account']");
 
 	// Review
-	private By terms = By.xpath("//button[@id='_r_p_-form-item']");
-	private By privacy = By.xpath("//button[@id='privacy']");
+	private By terms = By.xpath("//button[@role='checkbox']");
+	private By privacy = By.xpath("//button[@id='_r_9_-form-item']");
 	private By submitBtn = By.xpath("//button[normalize-space()='Submit for Verification']");
 	private By confirmation = By.id("confirmationMsg");
 	private By requiredErrors = By.xpath("//p[text()='Required']");
@@ -96,7 +124,6 @@ public class OrganizationSignupPage extends BasePage {
 		WebElement dropdown = driver.findElement(locator);
 		Select select = new Select(dropdown);
 		select.selectByVisibleText(value);
-
 	}
 
 	public void enterLegalName(String value) {
@@ -107,6 +134,7 @@ public class OrganizationSignupPage extends BasePage {
 		type(ein, value);
 	}
 
+	// *[@id="_r_4_-form-item"]
 	public void CurrentAddress(String value) {
 		type(Currentaddress, value);
 	}
@@ -131,13 +159,130 @@ public class OrganizationSignupPage extends BasePage {
 		type(state, value);
 	}
 
-	public void selectCurrentCountryDropdown(String value) {
+	public void selectdesignation(String value) {
 
-		selectDropdown(CurrentcountryDropdown, value);
+		selectDropdown(designation, value);
+	}
+
+	public void selectPerGender(String value) {
+
+		selectDropdown(Gender, value);
+
+	}
+
+//	public void selectPerCountry(String value) {
+//
+//		selectDropdown(PerCountry, value);
+//	}
+
+	public void selectPerAddresscountry(String value) {
+
+		selectDropdown(PeraddressCountry, value);
+	}
+
+	public void selectPerstate(String value) {
+
+		selectDropdown(Perstate, value);
+		
+
+	}
+
+	public void selectCurrentstateDropdown(String value) {
+
+		selectDropdown(CurrentStateDropdown, value);
+
+		
+
+	}
+
+	public void enterPeraddress(String value) throws InterruptedException {
+//		type(Peraddress, value);
+	    WebElement element = driver.findElement(Peraddress);
+	    element.sendKeys(value);
+	    Thread.sleep(2000);
+	    element.sendKeys(Keys.ARROW_DOWN);
+	    element.sendKeys(Keys.ENTER);
+	}
+
+	public void enterPercity(String value) {
+		type(PerCity, value);
+	}
+
+	public void enterPerZip(String value) {
+		type(PerZip, value);
+	}
+
+	public void enterownerFirstName(String value) {
+		type(ownerfirstName, value);
+	}
+
+	public void enterownerLastName(String value) {
+		type(ownerlastName, value);
+	}
+
+	public void enteronweremail(String value) {
+		type(owneremail, value);
+	}
+
+	public void enterowneraddress(String value) {
+		type(owneraddress, value);
+	    WebElement element = driver.findElement(owneraddress);
+	    element.sendKeys(value);
+	    try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    element.sendKeys(Keys.ARROW_DOWN);
+	    element.sendKeys(Keys.ENTER);
+	}
+
+	public void enterownercity(String value) {
+		type(ownercity, value);
+	}
+
+	public void enterownerzip(String value) {
+		type(ownerpostalcode, value);
+	}
+
+	public void selectgender(String value) {
+		
+		selectDropdown(gender, value);
+
+	}
+
+	public void selectownercountry(String value) {
+
+		selectDropdown(ownercountry, value);
+	}
+
+	public void selectownerState(String value) {
+
+		selectDropdown(ownerstate, value);
+	}
+
+	public void selectownercountrybirth(String value) {
+
+		selectDropdown(ownercountrybirth, value);
+
+		
 	}
 
 	public void enterAddress(String value) {
 		type(address, value);
+	    WebElement element = driver.findElement(address);
+	    element.clear();
+	    element.sendKeys(value);
+	    try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    element.sendKeys(Keys.ARROW_DOWN);
+	    element.sendKeys(Keys.ENTER);
+		
 	}
 
 	public void enterPostalCode(String value) {
@@ -154,8 +299,33 @@ public class OrganizationSignupPage extends BasePage {
 		selectDropdown(stateDropdown, value);
 	}
 
+	public void selectIndustryDropdown(String value) {
+
+		selectDropdown(selectIndustry, value);
+	}
+
 	public void enterFirstName(String value) {
 		type(firstName, value);
+	}
+
+	@FindBy(name = "username")
+	WebElement usernameField;
+
+	public String waitForAutoUsername() {
+
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+		wait.until(ExpectedConditions.attributeToBeNotEmpty(usernameField, "value"));
+
+		return usernameField.getAttribute("value");
+	}
+
+	public void clickUsernameField() {
+		click(username);
+	}
+
+	public void enterusername(String value) {
+		type(username, value);
 	}
 
 	public void enterMiddleName(String value) {
@@ -167,22 +337,52 @@ public class OrganizationSignupPage extends BasePage {
 	}
 
 	public void enterEmail(String value) {
+
 		type(email, value);
 	}
+
+	public String getEmail() {
+		return driver.findElement(email).getAttribute("value");
+	}
+
 	public void enterPasswordl(String value) {
 		type(password, value);
 	}
+
 	public void enterPhone(String value) {
 		type(phone, value);
 	}
 
 	public void enterDOB(String value) {
-		type(dob, value);
+
+		String[] parts = value.split(" ");
+
+		String month = parts[0];
+		String day = parts[1].replace(",", "");
+		String year = parts[2];
+
+		click(dob);
+
+		// Select month
+		driver.findElement(By.xpath("//button[contains(text(),'" + month + "')]")).click();
+		driver.findElement(By.xpath("//button[text()='" + month + "']")).click();
+
+		// Select year
+		driver.findElement(By.xpath("//button[contains(text(),'" + year + "')]")).click();
+		driver.findElement(By.xpath("//button[text()='" + year + "']")).click();
+
+		// Wait until calendar is clickable
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+		WebElement dayElement = wait.until(
+				ExpectedConditions.elementToBeClickable(By.xpath("//button[@name='day' and text()='" + day + "']")));
+
+		dayElement.click();
 	}
 
-	public void selectgender(String value) {
+	public void selectcountry(String value) {
 
-		selectDropdown(gender, value);
+		selectDropdown(Country, value);
 	}
 
 	public void selectbirthcountry(String value) {
@@ -206,6 +406,11 @@ public class OrganizationSignupPage extends BasePage {
 		click(nextBtn);
 	}
 
+	public void clickConfirm() {
+		click(confirmBtn);
+		System.out.println("Confirm button clicked");
+	}
+
 	public void acceptTerms() {
 		click(terms);
 	}
@@ -221,21 +426,22 @@ public class OrganizationSignupPage extends BasePage {
 	public boolean isConfirmationDisplayed() {
 		return isDisplayed(confirmation);
 	}
+
 	public boolean isRequiredErrorDisplayed() {
 
-	    List<WebElement> errors = driver.findElements(requiredErrors);
+		List<WebElement> errors = driver.findElements(requiredErrors);
 
-	    return errors.size() > 0;
+		return errors.size() > 0;
 	}
+
 	public void captureSelfie() {
 
+		driver.switchTo().frame(driver.findElement(By.cssSelector("iframe")));
 
-	    driver.switchTo().frame(driver.findElement(By.cssSelector("iframe")));
+		wait.until(ExpectedConditions.elementToBeClickable(startCameraBtn)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(captureBtn)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(confirmBtn)).click();
 
-	    wait.until(ExpectedConditions.elementToBeClickable(startCameraBtn)).click();
-	    wait.until(ExpectedConditions.elementToBeClickable(captureBtn)).click();
-	    wait.until(ExpectedConditions.elementToBeClickable(confirmBtn)).click();
-
-	    driver.switchTo().defaultContent();
+		driver.switchTo().defaultContent();
 	}
 }

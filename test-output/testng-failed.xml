@@ -1,41 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite thread-count="2" parallel="tests" name="Failed suite [AutomationSuite]">
-  <test thread-count="2" parallel="tests" name="LoginTest(failed)">
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.erp.LoginTest">
+      <class name="com.erp.Gendervalues">
         <methods>
-          <include name="TC_081_validLogin"/>
-          <include name="TC_086_logout"/>
-          <include name="TC_083_unregisteredEmail"/>
-          <include name="endReport"/>
-          <include name="TC_084_mandatoryValidation"/>
-          <include name="startReport"/>
-          <include name="TC_085_dashboardRestriction"/>
           <include name="setupRole"/>
-          <include name="TC_082_invalidPassword"/>
-          <include name="TC_080_loginPageLoad"/>
+          <include name="endReport"/>
+          <include name="startReport"/>
+          <include name="printGenderDropdownValues"/>
           <include name="tearDown"/>
           <include name="setup"/>
         </methods>
-      </class> <!-- com.erp.LoginTest -->
+      </class> <!-- com.erp.Gendervalues -->
     </classes>
-  </test> <!-- LoginTest(failed) -->
-  <test thread-count="2" parallel="tests" name="SignupTest(failed)">
-    <classes>
-      <class name="com.erp.Signup">
-        <methods>
-          <include name="TC_048_verifyInvalidPhoneNumber"/>
-          <include name="TC_047_verifyInvalidOwnerEmail"/>
-          <include name="endReport"/>
-          <include name="TC_016_to_TC_044_OrganizationDetails"/>
-          <include name="startReport"/>
-          <include name="setupRole"/>
-          <include name="TC_049_verifyRequiredFieldsValidation"/>
-          <include name="tearDown"/>
-          <include name="setup"/>
-        </methods>
-      </class> <!-- com.erp.Signup -->
-    </classes>
-  </test> <!-- SignupTest(failed) -->
-</suite> <!-- Failed suite [AutomationSuite] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

@@ -14,7 +14,7 @@ import com.erp.base.BaseTest;
 public class Gendervalues extends BaseTest {
 
     // Locator for gender dropdown
-    private By gender = By.xpath("(//select)[3]");
+    private By gender = By.xpath("(//select)[5]");
 
     @BeforeMethod
     public void setupRole() {

@@ -41,7 +41,7 @@ public class BaseTest {
     public void startReport() {
         extent = ExtentManager.getInstance();
         // initialize baseUrl from system property or default
-        baseUrl = System.getProperty("baseUrl", "http://192.168.0.133:3000");
+        baseUrl = System.getProperty("baseUrl", "http://192.168.0.129:3000");
     }
 
     // Setup browser before each test
@@ -78,6 +78,8 @@ public class BaseTest {
         chromeOptions.addArguments("--use-file-for-fake-video-capture=/path/selfie.y4m");
         chromeOptions.addArguments("--no-sandbox");
         chromeOptions.addArguments("--disable-gpu");
+        chromeOptions.addArguments("--disable-autofill");
+        chromeOptions.addArguments("--disable-password-manager");
         chromeOptions.addArguments("--remote-allow-origins=*");
 
         switch (br) {
@@ -195,7 +197,7 @@ public class BaseTest {
         }
 
         if (driver != null) {
-            driver.quit();
+//            driver.quit();
         }
 
         // remove thread-local test

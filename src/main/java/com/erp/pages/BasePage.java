@@ -4,6 +4,7 @@ import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -43,8 +44,18 @@ public class BasePage {
 
     protected void type(By locator, String text) {
         WebElement el = waitForVisible(locator);
-        el.clear();
+        el.click();
+        el.sendKeys(Keys.CONTROL + "a");
+        el.sendKeys(Keys.DELETE);// select all existing text);
         el.sendKeys(text);
+    }
+    public void clickdropdown(By locator, String text) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+
+        element.click();
     }
 
     protected void selectByVisibleText(By locator, String visibleText) {
