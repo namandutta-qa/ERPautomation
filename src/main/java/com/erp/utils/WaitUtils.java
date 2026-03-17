@@ -1,6 +1,7 @@
 package com.erp.utils;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,25 +11,30 @@ import java.time.Duration;
 
 public class WaitUtils {
 
-    private WebDriverWait wait;
+	private WebDriverWait wait;
 
-    public WaitUtils(WebDriver driver) {
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    }
+	public WaitUtils(WebDriver driver) {
+		this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	}
 
-    public WebElement waitForVisibility(By locator) {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-    }
+	public WebElement waitForVisibility(By locator) {
+		return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+	}
 
-    public WebElement waitForClickability(By locator) {
-        return wait.until(ExpectedConditions.elementToBeClickable(locator));
-    }
+	public WebElement waitForClickability(By locator) {
+		return wait.until(ExpectedConditions.elementToBeClickable(locator));
+	}
 
-    public boolean waitForTextToBePresent(WebElement element, String text) {
-        return wait.until(ExpectedConditions.textToBePresentInElement(element, text));
-    }
+	public boolean waitForTextToBePresent(WebElement element, String text) {
+		return wait.until(ExpectedConditions.textToBePresentInElement(element, text));
+	}
 
-    public boolean waitForUrlContains(String text) {
-        return wait.until(ExpectedConditions.urlContains(text));
-    }
+	public boolean waitForUrlContains(String text) {
+		return wait.until(ExpectedConditions.urlContains(text));
+	}
+
+	public boolean waitForPageLoad() {
+		return wait.until(
+				driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
+	}
 }

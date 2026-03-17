@@ -12,6 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 public class OrganizationSignupPage extends BasePage {
 
@@ -50,7 +51,9 @@ public class OrganizationSignupPage extends BasePage {
 	private By phoneError = By.xpath("//p[text()='Please enter a valid phone number']");
 	private By dob = By.xpath("//button[@name='dob']");
 	private By DOBError = By.xpath("//p[text()='Date of birth is required']");
-
+	private By TermsLink = By.xpath("//a[normalize-space()='Terms of Service']");
+	private By PrivacyLink = By.xpath("//a[normalize-space()='Privacy Policy']");
+	
 	public By Country = By.xpath("(//select)[4]");
 	public By birthcountryDropdown = By.xpath("//button[@id='_r_n_-form-item']");
 	private By designation = By.xpath("(//select)[5]");
@@ -67,7 +70,8 @@ public class OrganizationSignupPage extends BasePage {
 	private By ownerlastName = By.name("owner_lastname");
 	private By owneremail = By.name("owner_email");
 	private By gender = By.xpath("(//select)[4]");
-	private By ownercountrybirth = By.xpath("(//select)[7]");
+	private By ownercountrybirth = By
+			.xpath("(//cd /home/lz-2/IdeaProjects/erp-automation && mvn -Dtest=com.erp.Signup testselect)[7]");
 	private By owneraddress = By.xpath("//input[@placeholder='Search owner address...']");
 	private By ownercountry = By.xpath("(//select)[7]");
 	private By ownerstate = By.xpath("(//select)[8]");
@@ -99,20 +103,52 @@ public class OrganizationSignupPage extends BasePage {
 	private By submitBtn = By.xpath("//button[normalize-space()='Submit for Verification']");
 	private By confirmation = By.id("confirmationMsg");
 	private By requiredErrors = By.xpath("//p[text()='Required']");
+	private By uploadedFileName = By.xpath("//p[contains(text(),'.pdf')]");
+
+	public String getEmailDuplicateError() {
+		By toast = By.xpath("//section[@aria-label='Notifications alt+T']//*[@role='alert']");
+
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(toast));
+
+		wait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(element, "")));
+
+		String message = element.getText();
+		System.out.println("Toast Message: " + message);
+
+		return message;
+	}
+
+	public By reviewFieldValue(String label) {
+		return By.xpath("//p[normalize-space()='" + label + "']/following-sibling::p[contains(@class,'font-medium')]");
+	}
+
+	public String getReviewFieldValue(String label) {
+		return waitForVisible(reviewFieldValue(label)).getText().trim();
+	}
+
+	public void verifyReviewPageField(String label, String expectedValue) {
+		String actualValue = getReviewFieldValue(label);
+
+		Assert.assertEquals(actualValue, expectedValue, "Mismatch for field: " + label);
+	}
 
 	public String getEINError() {
-		return driver.findElement(einError).getText();
+		return waitForVisible(einError).getText();
 	}
 
 	public String getEmailError() {
 		return driver.findElement(emailError).getText();
 	}
+
 	public String getFirstError() {
 		return driver.findElement(firstnameError).getText();
 	}
+
 	public String getLastError() {
-		return driver.findElement(lastnameError).getText();
+		return waitForVisible(lastnameError).getText();
 	}
+
 	public String getPasswordError() {
 		return driver.findElement(passwordError).getText();
 	}
@@ -120,6 +156,7 @@ public class OrganizationSignupPage extends BasePage {
 	public String getdobError() {
 		return driver.findElement(DOBError).getText();
 	}
+
 	public String getlegalnameError() {
 		return driver.findElement(legalnameError).getText();
 	}
@@ -133,7 +170,19 @@ public class OrganizationSignupPage extends BasePage {
 	}
 
 	public String getPhoneError() {
-		return driver.findElement(phoneError).getText();
+		return waitForVisible(phoneError).getText();
+	}
+
+	public By nameValue(String name) {
+		return By.xpath("//p[@class='font-medium' and contains(text(),'" + name + "')]");
+	}
+
+	public boolean isNameDisplayed(String expectedName) {
+		try {
+			return waitForVisible(nameValue(expectedName)).isDisplayed();
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	public void selectDropdown(By locator, String value) {
@@ -200,7 +249,6 @@ public class OrganizationSignupPage extends BasePage {
 	public void selectPerstate(String value) {
 
 		selectDropdown(Perstate, value);
-		
 
 	}
 
@@ -208,19 +256,17 @@ public class OrganizationSignupPage extends BasePage {
 
 		selectDropdown(CurrentStateDropdown, value);
 
-		
-
 	}
 
 	public void enterPeraddress(String value) throws InterruptedException {
 //		type(Peraddress, value);
-	    WebElement element = driver.findElement(Peraddress);
-	    element.clear();
+		WebElement element = driver.findElement(Peraddress);
+		element.clear();
 
-	    element.sendKeys(value);
-	    Thread.sleep(2000);
-	    element.sendKeys(Keys.ARROW_DOWN);
-	    element.sendKeys(Keys.ENTER);
+		element.sendKeys(value);
+		Thread.sleep(2000);
+		element.sendKeys(Keys.ARROW_DOWN);
+		element.sendKeys(Keys.ENTER);
 	}
 
 	public void enterPercity(String value) {
@@ -245,18 +291,18 @@ public class OrganizationSignupPage extends BasePage {
 
 	public void enterowneraddress(String value) {
 		type(owneraddress, value);
-	    WebElement element = driver.findElement(owneraddress);
-	    element.clear();
+		WebElement element = driver.findElement(owneraddress);
+		element.clear();
 
-	    element.sendKeys(value);
-	    try {
+		element.sendKeys(value);
+		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    element.sendKeys(Keys.ARROW_DOWN);
-	    element.sendKeys(Keys.ENTER);
+		element.sendKeys(Keys.ARROW_DOWN);
+		element.sendKeys(Keys.ENTER);
 	}
 
 	public void enterownercity(String value) {
@@ -268,7 +314,7 @@ public class OrganizationSignupPage extends BasePage {
 	}
 
 	public void selectgender(String value) {
-		
+
 		selectDropdown(gender, value);
 
 	}
@@ -287,23 +333,22 @@ public class OrganizationSignupPage extends BasePage {
 
 		selectDropdown(ownercountrybirth, value);
 
-		
 	}
 
 	public void enterAddress(String value) {
 		type(address, value);
-	    WebElement element = driver.findElement(address);
-	    element.clear();
-	    element.sendKeys(value);
-	    try {
+		WebElement element = driver.findElement(address);
+		element.clear();
+		element.sendKeys(value);
+		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    element.sendKeys(Keys.ARROW_DOWN);
-	    element.sendKeys(Keys.ENTER);
-		
+		element.sendKeys(Keys.ARROW_DOWN);
+		element.sendKeys(Keys.ENTER);
+
 	}
 
 	public void enterPostalCode(String value) {
@@ -426,10 +471,31 @@ public class OrganizationSignupPage extends BasePage {
 	public void clickNext() {
 		click(nextBtn);
 	}
+	public void clickTermsLink() {
+		click(TermsLink);
+	}
+	public void clickPrivacyLink() {
+		click(PrivacyLink);
+	}
+
+	public boolean isFileUploaded() {
+		try {
+			return waitForVisible(uploadedFileName).isDisplayed();
+		} catch (Exception e) {
+			return false;
+		}
+	}
 
 	public void clickConfirm() {
 		click(confirmBtn);
 		System.out.println("Confirm button clicked");
+	}
+
+	public boolean isSubmitButtonDisabled() {
+		click(confirmBtn);
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebElement button = wait.until(ExpectedConditions.visibilityOfElementLocated(submitBtn));
+		return !button.isEnabled();
 	}
 
 	public void acceptTerms() {
