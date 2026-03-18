@@ -49,8 +49,8 @@ public class BaseTest {
 	public void startReport() {
 		extent = ExtentManager.getInstance();
 		// initialize baseUrl from system property or default
-//		baseUrl = System.getProperty("baseUrl", "https://yodixa.lusites.xyz");
 		baseUrl = System.getProperty("baseUrl", "https://yodixa.lusites.xyz");
+//		baseUrl = System.getProperty("baseUrl", "http://192.168.0.130:3000");
 
 	}
 
@@ -286,7 +286,7 @@ public class BaseTest {
 		switch (role.toLowerCase()) {
 
 		case "homeowner":
-			login("tom@yopmail.com", "Test@121");
+			login("jonsnow31@yopmail.com", "12345678");
 			break;
 
 		case "contractor":

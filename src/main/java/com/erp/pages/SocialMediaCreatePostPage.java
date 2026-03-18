@@ -26,7 +26,13 @@ public class SocialMediaCreatePostPage extends BasePage {
 	By locationField = By.xpath("//body//div//button[6]");
 	By submitBtn = By.xpath("(//button[normalize-space()='Post'])[2]");
 	By errorMsg = By.id("error");
+	By emoji = By.xpath("//button[@title='Emoji' and @aria-label='Insert emoji']");
 	By fileInput = By.xpath("//input[@type='file']");
+	// Emoji picker container (generic – adjust after inspect)
+	By emojiPicker = By.xpath("//div[contains(@class,'emoji')]");
+
+	// Specific emoji (dynamic)
+	private String emojiOptionXpath = "//span[@data-unified='1f60a']";
 
 	// Actions
 	public void openCreatePostPage() {
@@ -46,27 +52,24 @@ public class SocialMediaCreatePostPage extends BasePage {
 		upload1.sendKeys(path);
 
 	}
+
 	public void enterCaption(String text) {
-	    WebElement caption = waitForVisible(captionField);
+		WebElement caption = waitForVisible(captionField);
 
-	    JavascriptExecutor js = (JavascriptExecutor) driver;
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 
-	    js.executeScript(
-	        "const element = arguments[0];" +
-	        "const value = arguments[1];" +
+		js.executeScript("const element = arguments[0];" + "const value = arguments[1];" +
 
-	        // 🔥 Use native setter (THIS IS THE KEY FIX)
-	        "const nativeInputValueSetter = Object.getOwnPropertyDescriptor(" +
-	        "window.HTMLTextAreaElement.prototype, 'value').set;" +
-	        "nativeInputValueSetter.call(element, value);" +
+		// 🔥 Use native setter (THIS IS THE KEY FIX)
+				"const nativeInputValueSetter = Object.getOwnPropertyDescriptor("
+				+ "window.HTMLTextAreaElement.prototype, 'value').set;" + "nativeInputValueSetter.call(element, value);"
+				+
 
-	        // Trigger React events
-	        "element.dispatchEvent(new Event('input', { bubbles: true }));",
-	        caption, text
-	    );
+				// Trigger React events
+				"element.dispatchEvent(new Event('input', { bubbles: true }));", caption, text);
 	}
 
-		public void selectDate(String date) {
+	public void selectDate(String date) {
 		waitForVisible(dateField);
 		WebElement dateInput = driver.findElement(dateField);
 		dateInput.clear();
@@ -76,6 +79,49 @@ public class SocialMediaCreatePostPage extends BasePage {
 	public void enterLocation(String location) {
 		driver.findElement(locationField).clear();
 		waitForVisible(locationField).sendKeys(location);
+	}
+
+	public boolean isEmojiPickerVisible() {
+		return waitForVisible(emojiPicker).isDisplayed();
+	}
+
+	public void clickemoji() {
+		waitForClickability(emoji).click();
+	}
+
+	public void scrollEmojiContainer() {
+		WebElement container = driver.findElement(By.xpath("//div[contains(@class,'epr-body')]"));
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		js.executeScript("arguments[0].scrollTop = arguments[0].scrollHeight", container);
+	}
+
+	public void selectEmoji(String emojiName, String code) {
+
+	    isEmojiPickerVisible();
+
+	    // Step 1: Search emoji
+	    WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(
+	        By.xpath("//input[@placeholder='Search']")   // adjust if needed
+	    ));
+
+	    searchBox.clear();
+	    searchBox.sendKeys(emojiName); // e.g. "smile"
+
+	    // Step 2: Wait for result
+	    By emojiLocator = By.xpath("//span[@data-unified='" + code + "']");
+
+	    WebElement emoji = wait.until(ExpectedConditions.visibilityOfElementLocated(emojiLocator));
+
+	    // Step 3: Click using JS
+	    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", emoji);
+	}
+
+	public void addEmojiToCaption(String emoji) {
+		clickemoji(); // open picker
+		waitForVisible(emojiPicker); // ensure picker loaded
+		selectEmoji("",emoji); // select emoji
 	}
 
 	public void clickSubmit() {

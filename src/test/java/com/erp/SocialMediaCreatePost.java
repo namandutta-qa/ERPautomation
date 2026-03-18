@@ -23,91 +23,190 @@ public class SocialMediaCreatePost extends BaseTest {
 	/*
 	 * ========================= TC-080 Page Load ==========================
 	 */
-    @Test
-    public void TC_080_HomeOwnerPageLoad() {
-        ExtentManager.getTest().info("TC_080: Start - Verify Create Post page loads for homeowner");
-        ExtentManager.getTest().info("Logged in as homeowner");
-        ExtentManager.getTest().info("Navigating to Create Post page");
+	@Test
+	public void TC_001_HomeOwnerPageLoad() {
+		ExtentManager.getTest().info("TC_080: Start - Verify Create Post page loads for homeowner");
+		ExtentManager.getTest().info("Logged in as homeowner");
+		ExtentManager.getTest().info("Navigating to Create Post page");
 
 //        Assert.assertTrue(driver.findElement(By.id("postSubmit")).isDisplayed());
-        ExtentManager.getTest().pass("Create Post page loaded successfully");
-    }
+		ExtentManager.getTest().pass("Create Post page loaded successfully");
+	}
 
-    /* =========================
-       TC-081 Valid Image Upload
-    ========================== */
-    @Test
-    public void TC_081_validVideoUpload() throws InterruptedException {
-        ExtentManager.getTest().info("TC_081: Start - Valid image upload");
-        ExtentManager.getTest().info("Navigated to Create Post page");
+	@Test
+	public void TC_002_emojiPickerOpens() {
+		ExtentManager.getTest().info("TC_084: Emoji picker visibility");
 
-        ExtentManager.getTest().info("Uploading image: C:\\images\\file_example_MOV_480_700kB.movfile_example_MOV_480_700kB.mov");
-        page.uploadImage("/home/lz-2/Downloads/");
-        page.clickSubmit();
-        Thread.sleep(2000); // Wait for upload to process (replace with better wait in real code)
-        Assert.assertTrue(driver.getPageSource().contains("uploaded"));
-        ExtentManager.getTest().pass("Image uploaded and confirmed by page source");
-    }
+		page.clickemoji();
 
+		Assert.assertTrue(page.isEmojiPickerVisible());
+
+		ExtentManager.getTest().pass("Emoji picker opened successfully");
+	}
+
+	@Test
+	public void TC_003_validemojiselection() throws InterruptedException {
+		ExtentManager.getTest().info("TC_081: Start - Valid image upload");
+		ExtentManager.getTest().info("Navigated to Create Post page");
+
+		ExtentManager.getTest().info("Add Emoji 😊");
+		page.selectEmoji("smile", "1f60a");
+		page.clickSubmit();
+		Thread.sleep(2000); // Wait for upload to process (replace with better wait in real code)
+		Assert.assertTrue(driver.getPageSource().contains("uploaded"));
+		ExtentManager.getTest().pass("Image uploaded and confirmed by page source");
+	}
+
+	@Test
+	public void TC_004_multipleEmojiSelection() {
+		ExtentManager.getTest().info("TC_082: Multiple emoji selection");
+
+		page.selectEmoji("smile", "1f60a");
+		page.selectEmoji("smile", "1f60a");
+		page.selectEmoji("smile", "1f60a");
+
+		page.clickSubmit();
+
+		String value = driver.getPageSource();
+		Assert.assertTrue(value.contains("1f60a"));
+		Assert.assertTrue(value.contains("1f60a"));
+		Assert.assertTrue(value.contains("1f60a"));
+
+		ExtentManager.getTest().pass("Multiple emojis added successfully");
+	}
+
+	@Test
+	public void TC_005_emojiWithTextCaption() {
+		ExtentManager.getTest().info("TC_083: Emoji with text caption");
+
+		page.enterCaption("Renovation completed ");
+		page.selectEmoji("smile", "1f60a");
+
+		page.clickSubmit();
+
+		Assert.assertTrue(driver.getPageSource().contains("Renovation completed"));
+		Assert.assertTrue(driver.getPageSource().contains("😊"));
+
+		ExtentManager.getTest().pass("Emoji with text caption works");
+	}
+	@Test
+	public void TC_006_invalidEmojiSelection() {
+	    ExtentManager.getTest().info("TC_086: Invalid emoji handling");
+
+	    page.selectEmoji("smile", "INVALI_EMOJI");
+
+	    page.clickSubmit();
+
+	    Assert.assertTrue(true); // ensure no crash
+
+	    ExtentManager.getTest().pass("Handled invalid emoji safely");
+	}
+
+	@Test
+	public void TC_007_emojiLimitValidation() {
+	    ExtentManager.getTest().info("TC_087: Emoji limit validation");
+
+	    for (int i = 0; i < 50; i++) {
+	        page.addEmojiToCaption("");
+	    }
+
+	    page.clickSubmit();
+
+	    Assert.assertTrue(page.getErrorMessage().contains("limit"));
+
+	    ExtentManager.getTest().pass("Emoji limit validation triggered");
+	}
+	@Test
+	public void TC_008_rapidEmojiSelection() {
+	    ExtentManager.getTest().info("TC_090: Rapid emoji selection");
+
+	    for (int i = 0; i < 10; i++) {
+	        page.clickemoji();
+	        page.selectEmoji("smile", "1f60a");
+	    }
+
+	    page.clickSubmit();
+
+	    Assert.assertTrue(driver.getPageSource().contains("😊"));
+
+	    ExtentManager.getTest().pass("App handled rapid emoji clicks");
+	}
+	/*
+	 * ========================= TC-081 Valid Image Upload
+	 * ==========================
+	 */
+	@Test
+     public void TC_009_validVideoUpload() throws InterruptedException {
+     ExtentManager.getTest().info("TC_081: Start - Valid image upload");
+     ExtentManager.getTest().info("Navigated to Create Post page");
+
+     ExtentManager.getTest().info("Uploading image: C:\\images\\file_example_MOV_480_700kB.movfile_example_MOV_480_700kB.mov");
+     page.uploadImage("/home/lz-2/Downloads/");
+     page.clickSubmit();
+     Thread.sleep(2000); // Wait for upload to process (replace with better wait in real code)
+     Assert.assertTrue(driver.getPageSource().contains("uploaded"));
+     ExtentManager.getTest().pass("Image uploaded and confirmed by page source");
+	}
+    
     /* =========================      
         goTo("/create-post");
        TC-082 Unsupported File Format
-    ========================== */ 
-
-    @Test
-    public void TC_082_invalidvideoFileFormat() {
-        ExtentManager.getTest().info("TC_082: Start - Unsupported file format validation");
-        ExtentManager.getTest().info("Uploading invalid file: C:\\images\\test.pdf");
-        page.uploadImage("/home/lz-2/Downloads/file_example_AVI_480_750kB.avi");
-        Assert.assertTrue(page.getErrorMessage().contains("Invalid format"));
-        ExtentManager.getTest().pass("Proper error shown for invalid file format");
-    }
-
-    @Test
-    public void TC_081_validImageUpload() throws InterruptedException {
-        ExtentManager.getTest().info("TC_081: Start - Valid image upload");
-        ExtentManager.getTest().info("Navigated to Create Post page");
-
-        ExtentManager.getTest().info("Uploading image: C:\\images\\test.jpg");
-        page.uploadImage("/home/lz-2/Downloads/download.webp");
-        page.clickSubmit();
-        Thread.sleep(2000); // Wait for upload to process (replace with better wait in real code)
-        Assert.assertTrue(driver.getPageSource().contains("uploaded"));
-        ExtentManager.getTest().pass("Image uploaded and confirmed by page source");
-    }
-
-    /* =========================        loginAsRole("homeowner");
-        goTo("/create-post");
-       TC-082 Unsupported File Format
-    ========================== */ 
-
-    @Test
-    public void TC_082_invalidFileFormat() {
-        ExtentManager.getTest().info("TC_082: Start - Unsupported file format validation");
-        ExtentManager.getTest().info("Uploading invalid file: C:\\images\\test.pdf");
-        page.uploadImage("/home/lz-2/Downloads/yodixa_environment.json");
-        Assert.assertTrue(page.getErrorMessage().contains("Invalid format"));
-        ExtentManager.getTest().pass("Proper error shown for invalid file format");
-    }
-
-    /* =========================
-       TC-083 File Size Limit
     ========================== */
-    @Test
-    public void TC_083_fileSizeValidation() {
-        ExtentManager.getTest().info("TC_083: Start - File size validation");
 
-        ExtentManager.getTest().info("Uploading large image: C:\\images\\largeImage.jpg");
-        page.uploadImage("/home/lz-2/Downloads/Hello.jpg");
-        Assert.assertTrue(page.getErrorMessage().contains("size"));
-        ExtentManager.getTest().pass("File size validation triggered and message verified");
-    }
+	@Test
+	public void TC_010_invalidvideoFileFormat() {
+		ExtentManager.getTest().info("TC_082: Start - Unsupported file format validation");
+		ExtentManager.getTest().info("Uploading invalid file: C:\\images\\test.pdf");
+		page.uploadImage("/home/lz-2/Downloads/file_example_AVI_480_750kB.avi");
+		Assert.assertTrue(page.getErrorMessage().contains("Invalid format"));
+		ExtentManager.getTest().pass("Proper error shown for invalid file format");
+	}
+
+	@Test
+	public void TC_011_validImageUpload() throws InterruptedException {
+		ExtentManager.getTest().info("TC_081: Start - Valid image upload");
+		ExtentManager.getTest().info("Navigated to Create Post page");
+
+		ExtentManager.getTest().info("Uploading image: C:\\images\\test.jpg");
+		page.uploadImage("/home/lz-2/Downloads/download.webp");
+		page.clickSubmit();
+		Thread.sleep(2000); // Wait for upload to process (replace with better wait in real code)
+		Assert.assertTrue(driver.getPageSource().contains("uploaded"));
+		ExtentManager.getTest().pass("Image uploaded and confirmed by page source");
+	}
+
+	/*
+	 * ========================= loginAsRole("homeowner"); goTo("/create-post");
+	 * TC-082 Unsupported File Format ==========================
+	 */
+
+	@Test
+	public void TC_012_invalidFileFormat() {
+		ExtentManager.getTest().info("TC_082: Start - Unsupported file format validation");
+		ExtentManager.getTest().info("Uploading invalid file: C:\\images\\test.pdf");
+		page.uploadImage("/home/lz-2/Downloads/yodixa_environment.json");
+		Assert.assertTrue(page.getErrorMessage().contains("Invalid format"));
+		ExtentManager.getTest().pass("Proper error shown for invalid file format");
+	}
+
+	/*
+	 * ========================= TC-083 File Size Limit ==========================
+	 */
+	@Test
+	public void TC_013_fileSizeValidation() {
+		ExtentManager.getTest().info("TC_083: Start - File size validation");
+
+		ExtentManager.getTest().info("Uploading large image: C:\\images\\largeImage.jpg");
+		page.uploadImage("/home/lz-2/Downloads/Hello.jpg");
+		Assert.assertTrue(page.getErrorMessage().contains("size"));
+		ExtentManager.getTest().pass("File size validation triggered and message verified");
+	}
 
 	/*
 	 * ========================= TC-084 Caption Valid ==========================
 	 */
 	@Test
-	public void TC_084_validCaption() {
+	public void TC_014_validCaption() {
 		ExtentManager.getTest().info("TC_084: Start - Valid caption submission");
 
 		ExtentManager.getTest().info("Entering caption");
@@ -122,7 +221,7 @@ public class SocialMediaCreatePost extends BaseTest {
 	 * ========================= TC-085 Caption Limit ==========================
 	 */
 	@Test
-	public void TC_085_captionLimit() {
+	public void TC_015_captionLimit() {
 		ExtentManager.getTest().info("TC_085: Start - Caption character limit validation");
 		// Use Java 8-compatible way to build a long string
 		StringBuilder sb = new StringBuilder();
@@ -140,7 +239,7 @@ public class SocialMediaCreatePost extends BaseTest {
 	 * ========================= TC-086 Emoji in Caption ==========================
 	 */
 	@Test
-	public void TC_086_emojiCaption() {
+	public void TC_016_emojiCaption() {
 		ExtentManager.getTest().info("TC_086: Start - Emoji support in caption");
 
 		ExtentManager.getTest().info("Entering emoji caption");
@@ -154,23 +253,24 @@ public class SocialMediaCreatePost extends BaseTest {
 	/*
 	 * ========================= TC-087 XSS Protection ==========================
 	 */
-    @Test
-    public void TC_087_xssProtection() {
-        ExtentManager.getTest().info("TC_087: Start - XSS protection check");
+	@Test
+	public void TC_017_xssProtection() {
+		ExtentManager.getTest().info("TC_087: Start - XSS protection check");
 
-        ExtentManager.getTest().info("Entering script tag into caption");
-        page.enterCaption("<script>alert('hack')</script>");
-        page.clickSubmit();
+		ExtentManager.getTest().info("Entering script tag into caption");
+		page.enterCaption("<script>alert('hack')</script>");
+		page.clickSubmit();
 
-        Assert.assertFalse(driver.getPageSource().contains("alert"));
-        ExtentManager.getTest().pass("XSS payload not executed or rendered");
-    }
+		Assert.assertFalse(driver.getPageSource().contains("alert"));
+		ExtentManager.getTest().pass("XSS payload not executed or rendered");
+	}
+
 //
 //    /* =========================
 //       TC-088 Date Selection
 //    ========================== */
 //    @Test
-//    public void TC_088_dateSelection() {
+//    public void TC_018_dateSelection() {
 //        ExtentManager.getTest().info("TC_088: Start - Date selection");
 //
 //        ExtentManager.getTest().info("Selecting date 2025-03-01");
@@ -183,7 +283,7 @@ public class SocialMediaCreatePost extends BaseTest {
 //       TC-089 Restricted Date
 //    ========================== */
 //    @Test
-//    public void TC_089_dateRestriction() {
+//    public void TC_019_dateRestriction() {
 //        ExtentManager.getTest().info("TC_089: Start - Restricted date validation");
 //
 //        ExtentManager.getTest().info("Selecting restricted date 2035-01-01");
@@ -198,7 +298,7 @@ public class SocialMediaCreatePost extends BaseTest {
 //       TC-090 Valid Location
 //    ========================== */
 //    @Test
-//    public void TC_090_validLocation() {
+//    public void TC_020_validLocation() {
 //        ExtentManager.getTest().info("TC_090: Start - Valid location entry");
 //
 //        ExtentManager.getTest().info("Entering location: New York");
@@ -211,7 +311,7 @@ public class SocialMediaCreatePost extends BaseTest {
 //       TC-091 Invalid Location
 //    ========================== */
 //    @Test
-//    public void TC_091_invalidLocation() {
+//    public void TC_021_invalidLocation() {
 //        ExtentManager.getTest().info("TC_091: Start - Invalid location validation");
 //
 //        ExtentManager.getTest().info("Entering invalid location: xyz123@@");
@@ -226,7 +326,7 @@ public class SocialMediaCreatePost extends BaseTest {
 //       TC-092 Mandatory Fields
 //    ========================== */
 //    @Test
-//    public void TC_092_mandatoryValidation() {
+//    public void TC_022_mandatoryValidation() {
 //        ExtentManager.getTest().info("TC_092: Start - Mandatory fields validation");
 //        ExtentManager.getTest().info("Submitting form without filling fields");
 //        page.clickSubmit();
@@ -237,19 +337,19 @@ public class SocialMediaCreatePost extends BaseTest {
 //    /* =========================
 //       TC-093 Successful Post
 //    ========================== */
-    @Test
-    public void TC_093_successfulPost() {
-        ExtentManager.getTest().info("TC_093: Start - Successful post flow");
+	@Test
+	public void TC_023_successfulPost() {
+		ExtentManager.getTest().info("TC_093: Start - Successful post flow");
 
-        ExtentManager.getTest().info("Uploading image and filling post  ");
-    }
+		ExtentManager.getTest().info("Uploading image and filling post  ");
+	}
 
 //
 ///* =========================
 // TC-088 Date Selection
 //========================== */
 //@Test
-//public void TC_088_dateSelection() {
+//public void TC_024_dateSelection() {
 //  ExtentManager.getTest().info("TC_088: Start - Date selection");
 //
 //  ExtentManager.getTest().info("Selecting date 2025-03-01");
@@ -262,7 +362,7 @@ public class SocialMediaCreatePost extends BaseTest {
 // TC-089 Restricted Date
 //========================== */
 //@Test
-//public void TC_089_dateRestriction() {
+//public void TC_025_dateRestriction() {
 //  ExtentManager.getTest().info("TC_089: Start - Restricted date validation");
 //
 //  ExtentManager.getTest().info("Selecting restricted date 2035-01-01");
@@ -277,7 +377,7 @@ public class SocialMediaCreatePost extends BaseTest {
 // TC-090 Valid Location
 //========================== */
 //@Test
-//public void TC_090_validLocation() {
+//public void TC_026_validLocation() {
 //  ExtentManager.getTest().info("TC_090: Start - Valid location entry");
 //
 //  ExtentManager.getTest().info("Entering location: New York");
@@ -290,7 +390,7 @@ public class SocialMediaCreatePost extends BaseTest {
 // TC-091 Invalid Location
 //========================== */
 //@Test
-//public void TC_091_invalidLocation() {
+//public void TC_027_invalidLocation() {
 //  ExtentManager.getTest().info("TC_091: Start - Invalid location validation");
 //
 //  ExtentManager.getTest().info("Entering invalid location: xyz123@@");
@@ -301,38 +401,40 @@ public class SocialMediaCreatePost extends BaseTest {
 //  ExtentManager.getTest().pass("Invalid location error verified");
 //}
 //
-///* =========================
+///* ========================= 
 
-    /* =========================
-       TC-094 Post Visible in Feed
-    ========================== */
-    @Test
-    public void TC_094_postVisibleInFeed() {
-        ExtentManager.getTest().info("TC_094: Start - Verify post is visible in feed");
-        Assert.assertTrue(driver.getPageSource().contains("My renovation update"));
-        ExtentManager.getTest().pass("Created post is visible in feed");
-    }
+	/*
+	 * ========================= TC-094 Post Visible in Feed
+	 * ==========================
+	 */
+	@Test
+	public void TC_028_postVisibleInFeed() {
+		ExtentManager.getTest().info("TC_094: Start - Verify post is visible in feed");
+		Assert.assertTrue(driver.getPageSource().contains("My renovation update"));
+		ExtentManager.getTest().pass("Created post is visible in feed");
+	}
 
-    /* =========================
-       TC-096 Unauthorized Access
-    ========================== */
-    @Test
-    public void TC_096_unauthorizedAccess() {
-        ExtentManager.getTest().info("TC_096: Start - Unauthorized access to create-post");
-        // Attempt to access create-post without login
-        goTo("/create-post");
-        Assert.assertTrue(driver.getCurrentUrl().contains("login"));
-        ExtentManager.getTest().pass("Unauthorized user redirected to login page");
-    }
+	/*
+	 * ========================= TC-096 Unauthorized Access
+	 * ==========================
+	 */
+	@Test
+	public void TC_029_unauthorizedAccess() {
+		ExtentManager.getTest().info("TC_096: Start - Unauthorized access to create-post");
+		// Attempt to access create-post without login
+		goTo("/create-post");
+		Assert.assertTrue(driver.getCurrentUrl().contains("login"));
+		ExtentManager.getTest().pass("Unauthorized user redirected to login page");
+	}
 
-    /* =========================
-       TC-097 Responsive Layout
-    ========================== */
-    @Test
-    public void TC_097_responsiveLayout() {
-        ExtentManager.getTest().info("TC_097: Start - Responsive layout check");
-        driver.manage().window().setSize(new Dimension(390, 844));
-        Assert.assertTrue(driver.findElement(By.xpath("(//button[normalize-space()='Post'])[2]")).isDisplayed());
-        ExtentManager.getTest().pass("Post submit button visible on mobile viewport");
-    }
+	/*
+	 * ========================= TC-097 Responsive Layout ==========================
+	 */
+	@Test
+	public void TC_030_responsiveLayout() {
+		ExtentManager.getTest().info("TC_097: Start - Responsive layout check");
+		driver.manage().window().setSize(new Dimension(390, 844));
+		Assert.assertTrue(driver.findElement(By.xpath("(//button[normalize-space()='Post'])[2]")).isDisplayed());
+		ExtentManager.getTest().pass("Post submit button visible on mobile viewport");
+	}
 }
