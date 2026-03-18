@@ -14,11 +14,15 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import com.erp.utils.WaitUtils;
+
 public class OrganizationSignupPage extends BasePage {
+	private WaitUtils waitUtils;
 
 	public OrganizationSignupPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+	    this.waitUtils = new WaitUtils(driver); // Create WaitUtils instance
 
 	}
 
@@ -27,7 +31,7 @@ public class OrganizationSignupPage extends BasePage {
 	private By legalnameError = By.xpath("//p[text()='EIN must be in format XX-XXXXXXX']");
 	private By ein = By.xpath("//input[@name='ein_tax_id']");
 	private By einError = By.xpath("//p[text()='EIN must be in format XX-XXXXXXX']");
-	private By address = By.xpath("//input[@placeholder='Search business address...']");
+	private By address = By.xpath("//input[@placeholder='Enter proper starting address details'][1]");
 	private By addressError = By.xpath("//p[text()='EIN must be in format XX-XXXXXXX']");
 	private By postalCode = By.name("business_address_zip");
 	private By postalcodeError = By.xpath("//p[text()='EIN must be in format XX-XXXXXXX']");
@@ -47,19 +51,20 @@ public class OrganizationSignupPage extends BasePage {
 	private By username = By.xpath("//input[@placeholder='Enter first & last name above to generate']");
 	private By emailError = By.xpath("//p[text()='Please enter a valid email address']");
 	private By passwordError = By.xpath("//p[text()='Password must be at least 8 characters']");
-	private By phone = By.name("personal_phone");
+	private By phone = By.xpath("//input[@placeholder='Phone number']");
 	private By phoneError = By.xpath("//p[text()='Please enter a valid phone number']");
 	private By dob = By.xpath("//button[@name='dob']");
+	private By ownerdob = By.xpath("//button[@name='owner_dob']");
 	private By DOBError = By.xpath("//p[text()='Date of birth is required']");
 	private By TermsLink = By.xpath("//a[normalize-space()='Terms of Service']");
 	private By PrivacyLink = By.xpath("//a[normalize-space()='Privacy Policy']");
-	
+
 	public By Country = By.xpath("(//select)[4]");
 	public By birthcountryDropdown = By.xpath("//button[@id='_r_n_-form-item']");
 	private By designation = By.xpath("(//select)[5]");
 	private By Gender = By.xpath("(//select)[6]");
 //	private By PerCountry = By.xpath("(//select)[13]");
-	private By Peraddress = By.xpath("//input[@placeholder='Search your address...']");
+	private By Peraddress = By.xpath("(//input[@placeholder='Enter proper starting address details'])[3]");
 	private By PeraddressCountry = By.xpath("(//select)[12]");
 	private By Perstate = By.xpath("(//select)[13]");
 	private By PerCity = By.name("city");
@@ -72,7 +77,7 @@ public class OrganizationSignupPage extends BasePage {
 	private By gender = By.xpath("(//select)[4]");
 	private By ownercountrybirth = By
 			.xpath("(//cd /home/lz-2/IdeaProjects/erp-automation && mvn -Dtest=com.erp.Signup testselect)[7]");
-	private By owneraddress = By.xpath("//input[@placeholder='Search owner address...']");
+	private By owneraddress = By.xpath("(//input[@placeholder='Enter proper starting address details'])[2]");
 	private By ownercountry = By.xpath("(//select)[7]");
 	private By ownerstate = By.xpath("(//select)[8]");
 	private By ownercity = By.name("owner_city");
@@ -84,7 +89,7 @@ public class OrganizationSignupPage extends BasePage {
 	private By Currentcity = By.name("city");
 	private By Currentstate = By.name("state");
 	// Document upload
-	private By GovtID = By.xpath("//input[@type='file' and @accept='.jpg,.jpeg,.png,.pdf'][1]");
+	private By GovtID = By.xpath("//input[@type='file' and @aria-label='Upload Government ID']");
 	private By AOI = By.xpath(
 			"//h3[text()='Articles of Incorporation']/ancestor::div[contains(@class,'glass-card')]//input[@type='file']");
 	private By IOD = By.xpath(
@@ -445,6 +450,32 @@ public class OrganizationSignupPage extends BasePage {
 
 		dayElement.click();
 	}
+	public void ownerenterDOB(String value) {
+
+		String[] parts = value.split(" ");
+
+		String month = parts[0];
+		String day = parts[1].replace(",", "");
+		String year = parts[2];
+
+		click(ownerdob);
+
+		// Select month
+		driver.findElement(By.xpath("//button[contains(text(),'" + month + "')]")).click();
+		driver.findElement(By.xpath("//button[text()='" + month + "']")).click();
+
+		// Select year
+		driver.findElement(By.xpath("//button[contains(text(),'" + year + "')]")).click();
+		driver.findElement(By.xpath("//button[text()='" + year + "']")).click();
+
+		// Wait until calendar is clickable
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+		WebElement dayElement = wait.until(
+				ExpectedConditions.elementToBeClickable(By.xpath("//button[@name='day' and text()='" + day + "']")));
+
+		dayElement.click();
+	}
 
 	public void selectcountry(String value) {
 
@@ -456,10 +487,15 @@ public class OrganizationSignupPage extends BasePage {
 		selectDropdown(birthcountryDropdown, value);
 	}
 
-	public void SelectGovtID(String path) {
-		driver.findElement(GovtID).sendKeys(path);
-	}
+	public boolean SelectGovtID(String path) {
+		// Wait until the GovtID upload element is visible
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebElement uploadElement = wait.until(ExpectedConditions.presenceOfElementLocated(GovtID));
 
+		// Send the file path once visible
+		uploadElement.sendKeys(path);
+		return true; 
+	}
 	public void SelectAOI(String path1) {
 		driver.findElement(AOI).sendKeys(path1);
 	}
@@ -471,9 +507,11 @@ public class OrganizationSignupPage extends BasePage {
 	public void clickNext() {
 		click(nextBtn);
 	}
+
 	public void clickTermsLink() {
 		click(TermsLink);
 	}
+
 	public void clickPrivacyLink() {
 		click(PrivacyLink);
 	}
@@ -487,8 +525,8 @@ public class OrganizationSignupPage extends BasePage {
 	}
 
 	public void clickConfirm() {
-		click(confirmBtn);
-		System.out.println("Confirm button clicked");
+	    WebElement btn = waitUtils.waitForClickability(confirmBtn); // confirmBtnLocator = By locator of button
+	    btn.click();
 	}
 
 	public boolean isSubmitButtonDisabled() {

@@ -1,14 +1,18 @@
 package com.erp.base;
 
 import java.lang.reflect.Method;
+import java.time.Duration;
 import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.testng.ITestResult;
@@ -19,6 +23,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.erp.utils.ExtentManager;
 import com.erp.utils.ScreenshotUtil;
+import com.erp.utils.WaitUtils;
 import com.erp.utils.ExtentTestNGListener;
 
 // WebDriverManager import
@@ -44,7 +49,9 @@ public class BaseTest {
 	public void startReport() {
 		extent = ExtentManager.getInstance();
 		// initialize baseUrl from system property or default
+//		baseUrl = System.getProperty("baseUrl", "https://yodixa.lusites.xyz");
 		baseUrl = System.getProperty("baseUrl", "https://yodixa.lusites.xyz");
+
 	}
 
 	protected void captureParentWindow() {
@@ -265,17 +272,21 @@ public class BaseTest {
 	// Login methods
 	public void login(String email, String password) {
 		goTo("/login");
-		driver.findElement(By.id("email")).sendKeys(email);
-		driver.findElement(By.id("password")).sendKeys(password);
-		driver.findElement(By.id("loginBtn")).click();
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+		WebElement emailField = wait.until(
+		    ExpectedConditions.visibilityOfElementLocated(By.name("email"))
+		);
+		emailField.sendKeys(email);		driver.findElement(By.name("password")).sendKeys(password);
+		driver.findElement(By.xpath("//button[normalize-space()='Sign in']")).click();
 	}
 
-	public void loginAsRole(String role) {
+	public void loginAsRole(String role) throws InterruptedException {
 
 		switch (role.toLowerCase()) {
 
 		case "homeowner":
-			login("homeowner@mailinator.com", "Password123");
+			login("tom@yopmail.com", "Test@121");
 			break;
 
 		case "contractor":
@@ -289,6 +300,7 @@ public class BaseTest {
 		default:
 			throw new IllegalArgumentException("Invalid role: " + role);
 		}
+		Thread.sleep(2000);
 	}
 
 	/**
@@ -391,4 +403,5 @@ public class BaseTest {
 		String prefix = "user" + System.currentTimeMillis();
 		return prefix + "@mailinator.com";
 	}
+	
 }

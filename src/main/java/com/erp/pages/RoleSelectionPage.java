@@ -14,7 +14,7 @@ public class RoleSelectionPage extends BasePage {
 
 
     // Role locators
-    private By individualRole = By.id("role-individual");
+    private By individualRole = By.xpath("//button[.//h3[normalize-space()='Individual']]");
     private By organizationRole = By.xpath("//button[.//h3[normalize-space()='Organization']]");
 
     // Continue button
