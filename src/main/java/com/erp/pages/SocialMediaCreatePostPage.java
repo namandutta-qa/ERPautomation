@@ -1,5 +1,7 @@
 package com.erp.pages;
 
+import java.io.File;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -28,6 +30,8 @@ public class SocialMediaCreatePostPage extends BasePage {
 	By errorMsg = By.id("error");
 	By emoji = By.xpath("//button[@title='Emoji' and @aria-label='Insert emoji']");
 	By fileInput = By.xpath("//input[@type='file']");
+	By pdf = By.xpath("//button[@title='Add document (xlsx, txt, pdf)']");
+
 	// Emoji picker container (generic – adjust after inspect)
 	By emojiPicker = By.xpath("//div[contains(@class,'emoji')]");
 
@@ -51,6 +55,29 @@ public class SocialMediaCreatePostPage extends BasePage {
 		WebElement upload1 = wait.until(ExpectedConditions.presenceOfElementLocated(videoUploadBtn));
 		upload1.sendKeys(path);
 
+	}
+
+	public void uploadPdf(String path) {
+
+		WebElement fileInputElement = wait
+				.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@type='file'])[3]")));
+
+		String fullPath;
+
+		// 🔥 Fix: Handle both absolute & relative paths
+		File file = new File(path);
+
+		if (file.isAbsolute()) {
+			fullPath = path;
+		} else {
+			fullPath = System.getProperty("user.dir") + path;
+		}
+
+		if (!new File(fullPath).exists()) {
+			throw new RuntimeException("❌ File not found at path: " + fullPath);
+		}
+
+		fileInputElement.sendKeys(fullPath);
 	}
 
 	public void enterCaption(String text) {
@@ -99,29 +126,47 @@ public class SocialMediaCreatePostPage extends BasePage {
 
 	public void selectEmoji(String emojiName, String code) {
 
-	    isEmojiPickerVisible();
+		// 🔥 Ensure picker is open
+		try {
+			if (!driver.findElement(emojiPicker).isDisplayed()) {
+				clickemoji();
+			}
+		} catch (Exception e) {
+			clickemoji();
+		}
 
-	    // Step 1: Search emoji
-	    WebElement searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(
-	        By.xpath("//input[@placeholder='Search']")   // adjust if needed
-	    ));
+		WebElement searchBox = wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath("//input[@aria-label='Type to search for an emoji']")));
 
-	    searchBox.clear();
-	    searchBox.sendKeys(emojiName); // e.g. "smile"
+		searchBox.clear();
+		searchBox.sendKeys(emojiName);
 
-	    // Step 2: Wait for result
-	    By emojiLocator = By.xpath("//span[@data-unified='" + code + "']");
+		By emojiLocator = By.xpath("//span[@data-unified='" + code + "']");
 
-	    WebElement emoji = wait.until(ExpectedConditions.visibilityOfElementLocated(emojiLocator));
+		WebElement emoji = wait.until(ExpectedConditions.visibilityOfElementLocated(emojiLocator));
 
-	    // Step 3: Click using JS
-	    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", emoji);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", emoji);
+	}
+
+	public void waitForEmojiToBeAdded() {
+		wait.until(driver -> driver.findElement(By.xpath("//textarea")).getAttribute("value").length() > 0);
+	}
+
+	public boolean trySelectEmoji(String code) {
+		try {
+			By emojiLocator = By.xpath("//span[@data-unified='" + code + "']");
+			WebElement emoji = wait.until(ExpectedConditions.visibilityOfElementLocated(emojiLocator));
+			emoji.click();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	public void addEmojiToCaption(String emoji) {
 		clickemoji(); // open picker
 		waitForVisible(emojiPicker); // ensure picker loaded
-		selectEmoji("",emoji); // select emoji
+		selectEmoji("", emoji); // select emoji
 	}
 
 	public void clickSubmit() {

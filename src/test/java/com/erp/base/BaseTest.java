@@ -2,13 +2,21 @@ package com.erp.base;
 
 import java.lang.reflect.Method;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
-
+import java.util.concurrent.atomic.AtomicBoolean;
+import org.openqa.selenium.devtools.v143.network.Network;
+import org.openqa.selenium.devtools.v143.network.model.Response;
 import org.openqa.selenium.By;
+import java.util.Optional;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -43,6 +51,10 @@ public class BaseTest {
 	// Controlled via system property -DattachStepScreenshots=true|false (defaults
 	// to true)
 	protected boolean attachStepScreenshots = Boolean.parseBoolean(System.getProperty("attachStepScreenshots", "true"));
+	protected DevTools devTools;
+	protected AtomicBoolean apiCalled;
+	protected List<String> failedApis;
+	protected List<String> apiLogs; // Store all API logs for potential reporting
 
 	// Initialize report once
 	@BeforeSuite
@@ -73,74 +85,115 @@ public class BaseTest {
 		driver.switchTo().window(parentWindow);
 	}
 
-	// Setup browser before each test
 	@Parameters({ "browser" })
 	@BeforeMethod
-	public void setup(@Optional("chrome") String browser, Method method) {
+	public void setup(@org.testng.annotations.Optional("chrome") String browser, Method method) {
 
-		// Normalize
-		String br = (browser == null) ? "chrome" : browser.toLowerCase();
+	    String br = (browser == null) ? "chrome" : browser.toLowerCase();
 
-		ChromeOptions chromeOptions = new ChromeOptions();
-		FirefoxOptions firefoxOptions = new FirefoxOptions();
-		EdgeOptions edgeOptions = new EdgeOptions();
+	    ChromeOptions chromeOptions = new ChromeOptions();
+	    FirefoxOptions firefoxOptions = new FirefoxOptions();
+	    EdgeOptions edgeOptions = new EdgeOptions();
 
-		// allow toggling headless mode with -Dheadless=true
-		boolean headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
-		if (headless) {
-			chromeOptions.addArguments("--headless=new");
-			// Firefox uses headless argument
-			firefoxOptions.addArguments("-headless");
-			// Edge can use the same flag as chrome
-			edgeOptions.addArguments("--headless=new");
-		}
+	    boolean headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
+	    if (headless) {
+	        chromeOptions.addArguments("--headless=new");
+	        firefoxOptions.addArguments("-headless");
+	        edgeOptions.addArguments("--headless=new");
+	    }
 
-		// common options
-		chromeOptions.addArguments("--no-sandbox");
-		chromeOptions.addArguments("--disable-dev-shm-usage");
-		firefoxOptions.addArguments("--no-sandbox");
-		firefoxOptions.addArguments("--disable-dev-shm-usage");
-		edgeOptions.addArguments("--no-sandbox");
-		edgeOptions.addArguments("--disable-dev-shm-usage");
-		chromeOptions.addArguments("--use-fake-ui-for-media-stream");
-		chromeOptions.addArguments("--use-fake-device-for-media-stream");
-		chromeOptions.addArguments("--use-file-for-fake-video-capture=/path/selfie.y4m");
-		chromeOptions.addArguments("--no-sandbox");
-		chromeOptions.addArguments("--disable-gpu");
-		chromeOptions.addArguments("--disable-autofill");
-		chromeOptions.addArguments("--disable-password-manager");
-		chromeOptions.addArguments("--remote-allow-origins=*");
+	    chromeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu");
+	    chromeOptions.addArguments("--disable-autofill", "--disable-password-manager");
+	    chromeOptions.addArguments("--remote-allow-origins=*");
+	    chromeOptions.addArguments("--use-fake-ui-for-media-stream");
+	    chromeOptions.addArguments("--use-fake-device-for-media-stream");
 
-		switch (br) {
-		case "firefox":
-			WebDriverManager.firefoxdriver().setup();
-			driver = new FirefoxDriver(firefoxOptions);
-			break;
+	    firefoxOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");
+	    edgeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");
 
-		case "edge":
-			WebDriverManager.edgedriver().setup();
-			driver = new EdgeDriver(edgeOptions);
-			break;
+	    switch (br) {
+	        case "firefox":
+	            WebDriverManager.firefoxdriver().setup();
+	            driver = new FirefoxDriver(firefoxOptions);
+	            break;
 
-		case "chrome":
-		default:
-			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver(chromeOptions);
-			break;
-		}
+	        case "edge":
+	            WebDriverManager.edgedriver().setup();
+	            driver = new EdgeDriver(edgeOptions);
+	            break;
 
-		try {
-			driver.manage().window().maximize();
-		} catch (Exception ignore) {
-			// Some headless drivers may not support maximize; ignore
-		}
+	        case "chrome":
+	        default:
+	            WebDriverManager.chromedriver().setup();
+	            driver = new ChromeDriver(chromeOptions);
+	            break;
+	    }
 
-		// Ensure ExtentTest exists for this thread before any @BeforeMethod logging
-		if (ExtentManager.getTest() == null) {
-			ExtentManager.createTest(method.getName());
-		}
+	    try {
+	        driver.manage().window().maximize();
+	    } catch (Exception ignore) {}
 
-	}
+	    // Extent Report
+	    if (ExtentManager.getTest() == null) {
+	        ExtentManager.createTest(method.getName());
+	    }
+
+	    // 🔥 DevTools Setup
+	    if (driver instanceof ChromeDriver) {
+
+	        devTools = ((ChromeDriver) driver).getDevTools();
+	        devTools.createSession();
+
+	        devTools.send(Network.enable(
+	                Optional.empty(),
+	                Optional.empty(),
+	                Optional.empty(),
+	                Optional.empty(),
+	                Optional.empty()
+	        ));
+
+	        // Reset tracking
+	        apiCalled = new AtomicBoolean(false);
+	        failedApis = new ArrayList<>();
+
+	        // Store all API logs dynamically
+	        List<String> apiLogs = new ArrayList<>();
+
+	        devTools.addListener(Network.responseReceived(), response -> {
+
+	            String url = response.getResponse().getUrl();
+	            int status = response.getResponse().getStatus();
+
+	            try {
+	                Network.GetResponseBodyResponse body =
+	                        devTools.send(Network.getResponseBody(response.getRequestId()));
+
+	                String responseBody = body.getBody();
+
+	                String log = url + " | " + status + " | " + responseBody;
+
+	                apiLogs.add(log);
+
+	                System.out.println("➡️ " + url);
+	                System.out.println("⬅️ Status: " + status);
+	                System.out.println("📦 Body: " + responseBody);
+
+	                apiCalled.set(true);
+
+	                // Capture failures dynamically
+	                if (status >= 400) {
+	                    failedApis.add(log);
+	                }
+
+	            } catch (Exception e) {
+	                System.out.println("⚠️ Failed to read response body: " + url);
+	            }
+	        });
+
+	        // Optional: expose logs globally
+	        this.apiLogs = apiLogs;
+	    }
+	}			
 
 	// Handle result after each test
 	@AfterMethod
@@ -274,10 +327,9 @@ public class BaseTest {
 		goTo("/login");
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-		WebElement emailField = wait.until(
-		    ExpectedConditions.visibilityOfElementLocated(By.name("email"))
-		);
-		emailField.sendKeys(email);		driver.findElement(By.name("password")).sendKeys(password);
+		WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("email")));
+		emailField.sendKeys(email);
+		driver.findElement(By.name("password")).sendKeys(password);
 		driver.findElement(By.xpath("//button[normalize-space()='Sign in']")).click();
 	}
 
@@ -403,5 +455,16 @@ public class BaseTest {
 		String prefix = "user" + System.currentTimeMillis();
 		return prefix + "@mailinator.com";
 	}
-	
+
+	public void validateApis() {
+
+		if (!failedApis.isEmpty()) {
+			throw new AssertionError("❌ API Failures: " + failedApis);
+		}
+
+		if (!apiCalled.get()) {
+			throw new AssertionError("❌ No API was triggered!");
+		}
+	}
+
 }

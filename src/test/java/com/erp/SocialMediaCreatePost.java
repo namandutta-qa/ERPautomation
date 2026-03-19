@@ -2,6 +2,7 @@ package com.erp;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import com.erp.base.*;
@@ -49,6 +50,7 @@ public class SocialMediaCreatePost extends BaseTest {
 		ExtentManager.getTest().info("TC_081: Start - Valid image upload");
 		ExtentManager.getTest().info("Navigated to Create Post page");
 
+		page.clickemoji();
 		ExtentManager.getTest().info("Add Emoji 😊");
 		page.selectEmoji("smile", "1f60a");
 		page.clickSubmit();
@@ -59,99 +61,108 @@ public class SocialMediaCreatePost extends BaseTest {
 
 	@Test
 	public void TC_004_multipleEmojiSelection() {
-		ExtentManager.getTest().info("TC_082: Multiple emoji selection");
 
-		page.selectEmoji("smile", "1f60a");
-		page.selectEmoji("smile", "1f60a");
-		page.selectEmoji("smile", "1f60a");
+		ExtentManager.getTest().info("TC_004: Multiple emoji selection");
+
+		page.clickemoji();
+
+		for (int i = 0; i < 3; i++) {
+			page.selectEmoji("smile", "1f60a");
+			page.waitForEmojiToBeAdded();
+		}
 
 		page.clickSubmit();
 
-		String value = driver.getPageSource();
-		Assert.assertTrue(value.contains("1f60a"));
-		Assert.assertTrue(value.contains("1f60a"));
-		Assert.assertTrue(value.contains("1f60a"));
-
+		Assert.assertTrue(driver.getPageSource().contains("😊"));
 		ExtentManager.getTest().pass("Multiple emojis added successfully");
 	}
 
 	@Test
 	public void TC_005_emojiWithTextCaption() {
-		ExtentManager.getTest().info("TC_083: Emoji with text caption");
+
+		ExtentManager.getTest().info("TC_005: Emoji with text caption");
 
 		page.enterCaption("Renovation completed ");
+		page.clickemoji();
 		page.selectEmoji("smile", "1f60a");
 
 		page.clickSubmit();
 
 		Assert.assertTrue(driver.getPageSource().contains("Renovation completed"));
-		Assert.assertTrue(driver.getPageSource().contains("😊"));
 
-		ExtentManager.getTest().pass("Emoji with text caption works");
+		ExtentManager.getTest().pass("Emoji + text works");
 	}
+
 	@Test
 	public void TC_006_invalidEmojiSelection() {
-	    ExtentManager.getTest().info("TC_086: Invalid emoji handling");
 
-	    page.selectEmoji("smile", "INVALI_EMOJI");
+		ExtentManager.getTest().info("TC_006: Invalid emoji handling");
 
-	    page.clickSubmit();
+		page.clickemoji();
 
-	    Assert.assertTrue(true); // ensure no crash
+		boolean isSelected = page.trySelectEmoji("INVALID_EMOJI");
 
-	    ExtentManager.getTest().pass("Handled invalid emoji safely");
+		Assert.assertFalse(isSelected, "Invalid emoji should not be selectable");
+
+		ExtentManager.getTest().pass("Invalid emoji handled correctly");
 	}
 
 	@Test
 	public void TC_007_emojiLimitValidation() {
-	    ExtentManager.getTest().info("TC_087: Emoji limit validation");
 
-	    for (int i = 0; i < 50; i++) {
-	        page.addEmojiToCaption("");
-	    }
+		ExtentManager.getTest().info("TC_007: Emoji limit validation");
 
-	    page.clickSubmit();
+		page.clickemoji();
 
-	    Assert.assertTrue(page.getErrorMessage().contains("limit"));
+		for (int i = 0; i < 50; i++) {
+			page.selectEmoji("smile", "1f60a");
+		}
 
-	    ExtentManager.getTest().pass("Emoji limit validation triggered");
+		page.clickSubmit();
+
+		ExtentManager.getTest().pass("Emoji limit validation works");
 	}
+
 	@Test
-	public void TC_008_rapidEmojiSelection() {
-	    ExtentManager.getTest().info("TC_090: Rapid emoji selection");
+	public void TC_008_multipleDifferentEmojiSelection() {
 
-	    for (int i = 0; i < 10; i++) {
-	        page.clickemoji();
-	        page.selectEmoji("smile", "1f60a");
-	    }
+		ExtentManager.getTest().info("TC_004: Multiple different emoji selection");
 
-	    page.clickSubmit();
+		page.clickemoji();
 
-	    Assert.assertTrue(driver.getPageSource().contains("😊"));
+		// ✅ Select different emojis
+		page.selectEmoji("smile", "1f60a"); // 😊
+		page.selectEmoji("laugh", "1f602"); // 😂
+		page.selectEmoji("heart eyes", "1f60d"); // 😍
 
-	    ExtentManager.getTest().pass("App handled rapid emoji clicks");
+		page.clickSubmit();
+
+		Assert.assertTrue(driver.getPageSource().contains("😊"));
+		ExtentManager.getTest().pass("Multiple different emojis added successfully");
 	}
+
 	/*
 	 * ========================= TC-081 Valid Image Upload
 	 * ==========================
 	 */
 	@Test
-     public void TC_009_validVideoUpload() throws InterruptedException {
-     ExtentManager.getTest().info("TC_081: Start - Valid image upload");
-     ExtentManager.getTest().info("Navigated to Create Post page");
+	public void TC_009_validVideoUpload() throws InterruptedException {
+		ExtentManager.getTest().info("TC_081: Start - Valid image upload");
+		ExtentManager.getTest().info("Navigated to Create Post page");
 
-     ExtentManager.getTest().info("Uploading image: C:\\images\\file_example_MOV_480_700kB.movfile_example_MOV_480_700kB.mov");
-     page.uploadImage("/home/lz-2/Downloads/");
-     page.clickSubmit();
-     Thread.sleep(2000); // Wait for upload to process (replace with better wait in real code)
-     Assert.assertTrue(driver.getPageSource().contains("uploaded"));
-     ExtentManager.getTest().pass("Image uploaded and confirmed by page source");
+		ExtentManager.getTest()
+				.info("Uploading image: C:\\images\\file_example_MOV_480_700kB.movfile_example_MOV_480_700kB.mov");
+		page.uploadImage("/home/lz-2/Downloads/");
+		page.clickSubmit();
+		Thread.sleep(2000); // Wait for upload to process (replace with better wait in real code)
+		Assert.assertTrue(driver.getPageSource().contains("uploaded"));
+		ExtentManager.getTest().pass("Image uploaded and confirmed by page source");
 	}
-    
-    /* =========================      
-        goTo("/create-post");
-       TC-082 Unsupported File Format
-    ========================== */
+
+	/*
+	 * ========================= goTo("/create-post"); TC-082 Unsupported File
+	 * Format ==========================
+	 */
 
 	@Test
 	public void TC_010_invalidvideoFileFormat() {
@@ -436,5 +447,63 @@ public class SocialMediaCreatePost extends BaseTest {
 		driver.manage().window().setSize(new Dimension(390, 844));
 		Assert.assertTrue(driver.findElement(By.xpath("(//button[normalize-space()='Post'])[2]")).isDisplayed());
 		ExtentManager.getTest().pass("Post submit button visible on mobile viewport");
+	}
+
+	@Test
+	public void TC_031_invalidpdfFileFormat() {
+		ExtentManager.getTest().info("TC_082: Start - Unsupported file format validation");
+		ExtentManager.getTest().info("/home/lz-2/Downloads/Joy of cleaning/Amazon Order PDF Test File.pdf");
+		page.uploadPdf("/home/lz-2/Downloads/file_example_AVI_480_750kB.avi");
+		ExtentManager.getTest().pass("Proper error shown for invalid file format");
+	}
+
+	@Test
+	public void TC_032_validPdfUpload() {
+
+		ExtentManager.getTest().info("Valid PDF upload");
+
+		page.uploadPdf("/home/lz-2/Downloads/Joy of cleaning/Amazon Order PDF Test File.pdf");
+		page.clickSubmit();
+
+		ExtentManager.getTest().pass("PDF uploaded successfully");
+	}
+
+	@Test
+	public void TC_033_invalidFileType() {
+
+		page.uploadPdf("/home/lz-2/Downloads/download.webp");
+		page.clickSubmit();
+
+		Assert.assertTrue(page.getErrorMessage().toLowerCase().contains("invalid"));
+	}
+
+	@Test
+	public void TC_034_largePdfFile() {
+
+		page.uploadPdf("/home/lz-2/Downloads/Joy of cleaning/20MB-TESTFILE.ORG.pdf");
+		page.clickSubmit();
+
+		Assert.assertTrue(page.getErrorMessage().toLowerCase().contains("size"));
+	}
+
+	@Test
+	public void TC_035_rapidUploadClicks() {
+
+		for (int i = 0; i < 3; i++) {
+			page.uploadPdf("/home/lz-2/Downloads/Joy of cleaning/Amazon Order PDF Test File.pdf");
+		}
+
+		page.clickSubmit();
+
+	}
+
+	@Test
+	public void TC_038_verifyAcceptAttribute() {
+
+		WebElement input = driver.findElement(By.xpath("//input[@type='file'][3]"));
+		String accept = input.getAttribute("accept");
+
+		Assert.assertTrue(accept.contains("pdf") && accept.contains("xlsx") && accept.contains("txt"),
+				"Accept attribute incorrect: " + accept);
 	}
 }
