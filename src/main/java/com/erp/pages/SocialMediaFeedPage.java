@@ -35,7 +35,7 @@ public class SocialMediaFeedPage extends BasePage {
 
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", el);
 
-		// Get count BEFORE
+		// Get count BEFORE 
 		String before = driver.findElements(likeCount).get(0).getText();
 		System.out.println("Before Like Count: " + before);
 
@@ -47,7 +47,7 @@ public class SocialMediaFeedPage extends BasePage {
 		boolean changed = wait.until(driver -> {
 			try {
 				String after = driver.findElements(likeCount).get(0).getText();
-				System.out.println("After Like Count: " + after);
+				System.out.println("After Like Count " + after);
 				return !after.equals(before);
 			} catch (Exception e) {
 				return false;
