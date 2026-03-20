@@ -285,7 +285,7 @@ public class BaseTest {
 		}
 
 		if (driver != null) {
-//			driver.quit();
+			driver.quit();
 		}
 
 		// remove thread-local test

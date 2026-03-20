@@ -26,7 +26,7 @@ public class Signup extends BaseTest {
 
 		rolePage = new RoleSelectionPage(driver);
 		signupPage = new OrganizationSignupPage(driver);
-		goTo("/app/onboarding");
+		goTo("/onboarding");
 
 		rolePage.selectRoleAndContinue(RoleSelectionPage.ORGANIZATION);
 

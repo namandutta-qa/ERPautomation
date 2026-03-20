@@ -23,7 +23,7 @@ public class IndividualSignUpPage extends BasePage {
 	private By firstName = By.name("firstname");
 	private By firstnameError = By.xpath("//p[text()='Last name must be at least 2 characters']");
 	private By lastnameError = By.xpath("//p[text()='First name must be at least 2 characters']");
-	private By middleName = By.xpath("//input[@id='_r_2_-form-item']");
+	private By middleName = By.name("middlename");
 	private By lastName = By.name("lastname");
 	private By email = By.xpath("//input[@placeholder='you@example.com']");
 	private By password = By.xpath("//input[@placeholder='••••••••']");
@@ -34,8 +34,8 @@ public class IndividualSignUpPage extends BasePage {
 	private By phoneError = By.xpath("//p[text()='Please enter a valid phone number']");
 	private By dob = By.xpath("//button[@name='dob']");
 	private By DOBError = By.xpath("//p[text()='Date of birth is required']");
-	private By terms = By.xpath("//button[@role='checkbox']");
-	private By privacy = By.xpath("//button[@id='_r_9_-form-item']");
+	private By terms = By.xpath("(//button[@role='checkbox'])[1]");
+	private By privacy = By.xpath("(//button[@role='checkbox'])[2]");
 	private By TermsLink = By.xpath("//a[normalize-space()='Terms of Service']");
 	private By PrivacyLink = By.xpath("//a[normalize-space()='Privacy Policy']");
 	private By Gender = By.xpath("(//select)[1]");
