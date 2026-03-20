@@ -1,15 +1,33 @@
 package com.erp;
 
+import java.lang.reflect.Method;
+
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.erp.base.BaseTest;
+import com.erp.pages.AffiliatePage;
 import com.erp.pages.ChatPage;
 import com.erp.utils.ExtentManager;
 
 public class ChatTest extends BaseTest {
 
-    @Test(priority = 1)
+		ChatPage chat;
+
+		@BeforeMethod
+
+		public void setupRole(Method method) throws InterruptedException {
+			chat = new ChatPage(driver);
+
+		    if (!method.getName().equals("TC_007_verifyUnauthorizedAccess")) {
+		        loginAsRole("homeowner");
+		        goTo("/messages");
+		    }
+
+		}
+
+    @Test
     public void TC_207_OpenOneToOneChat() {
 
         ExtentManager.getTest().info("TC_207: Open one-to-one chat");
@@ -22,7 +40,7 @@ public class ChatTest extends BaseTest {
         ExtentManager.getTest().pass("Chat window opened and visible");
     }
 
-    @Test(priority = 2)
+    @Test
     public void TC_208_SendTextMessage() {
 
         ExtentManager.getTest().info("TC_208: Send text message");
@@ -36,7 +54,7 @@ public class ChatTest extends BaseTest {
         ExtentManager.getTest().pass("Message sent and displayed in chat");
     }
 
-    @Test(priority = 3)
+    @Test
     public void TC_210_VerifyTimestamp() {
 
         ExtentManager.getTest().info("TC_210: Verify message timestamp");
@@ -47,7 +65,7 @@ public class ChatTest extends BaseTest {
         ExtentManager.getTest().pass("Timestamp is displayed for messages");
     }
 
-    @Test(priority = 4)
+    @Test
     public void TC_211_MessagePersistenceAfterRefresh() {
 
         ExtentManager.getTest().info("TC_211: Message persistence after refresh");
@@ -63,7 +81,7 @@ public class ChatTest extends BaseTest {
         ExtentManager.getTest().pass("Message persisted after page refresh");
     }
 
-    @Test(priority = 5)
+    @Test
     public void TC_214_DeleteOwnMessage() {
 
         ExtentManager.getTest().info("TC_214: Delete own message");
@@ -76,7 +94,7 @@ public class ChatTest extends BaseTest {
 
     // ================= GROUP TESTS =================
 
-    @Test(priority = 6)
+    @Test
     public void TC_216_CreateGroup() {
 
         ExtentManager.getTest().info("TC_216: Create group and verify");
@@ -90,7 +108,7 @@ public class ChatTest extends BaseTest {
         ExtentManager.getTest().pass("Group created and verified");
     }
 
-    @Test(priority = 7)
+    @Test
     public void TC_217_SendGroupMessage() {
 
         ExtentManager.getTest().info("TC_217: Send group message");
@@ -104,7 +122,7 @@ public class ChatTest extends BaseTest {
         ExtentManager.getTest().pass("Group message sent and displayed");
     }
 
-    @Test(priority = 8)
+    @Test
     public void TC_224_RemoveMember() {
 
         ExtentManager.getTest().info("TC_224: Remove member from group");

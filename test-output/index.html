@@ -103,7 +103,7 @@
                     <div class="method-list-content skipped suite-Default_suite">
                       <span>
                         <img src="skipped.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="com.erp.Gendervalues" class="method navigator-link" hash-for-method="printGenderDropdownValues">printGenderDropdownValues</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="com.erp.AffiliateTest" class="method navigator-link" hash-for-method="TC_011_verifySignupFormLoads">TC_011_verifySignupFormLoads</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content skipped suite-Default_suite -->
@@ -121,23 +121,23 @@
           <div class="suite-Default_suite-class-skipped">
             <div class="main-panel-header rounded-window-top">
               <img src="skipped.png"/>
-              <span class="class-name">com.erp.Gendervalues</span>
+              <span class="class-name">com.erp.AffiliateTest</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="printGenderDropdownValues">
-                  </a> <!-- printGenderDropdownValues -->
-                  <span class="method-name">printGenderDropdownValues</span>
-                  <div class="stack-trace">org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//button[.//h3[normalize-space()=&apos;Organization&apos;]]&quot;}
+                  <a name="TC_011_verifySignupFormLoads">
+                  </a> <!-- TC_011_verifySignupFormLoads -->
+                  <span class="method-name">TC_011_verifySignupFormLoads</span>
+                  <div class="stack-trace">org.openqa.selenium.NoSuchSessionException: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
   (Session info: chrome=143.0.7499.192)
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
 Build info: version: &apos;4.39.0&apos;, revision: &apos;126f156aee&apos;
-System info: os.name: &apos;Linux&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.8.0-101-generic&apos;, java.version: &apos;11.0.30&apos;
+System info: os.name: &apos;Linux&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.8.0-106-generic&apos;, java.version: &apos;11.0.30&apos;
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [ae037dadfb75efc4cb5680a8cd288fa1, findElement {value=//button[.//h3[normalize-space()=&apos;Organization&apos;]], using=xpath}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:38607}, goog:processID: 37548, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:38607/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: ae037dadfb75efc4cb5680a8cd288fa1
+Command: [f44976cd8f53cf46e74203892b5fa1c8, findElement {value=email, using=name}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:35757}, goog:processID: 34142, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:35757/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: f44976cd8f53cf46e74203892b5fa1c8
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -153,7 +153,12 @@ Session ID: ae037dadfb75efc4cb5680a8cd288fa1
 	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
 	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:384)
 	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:378)
-	at com.erp.Gendervalues.setupRole(Gendervalues.java:24)
+	at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:198)
+	at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:194)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:203)
+	at com.erp.base.BaseTest.login(BaseTest.java:328)
+	at com.erp.base.BaseTest.loginAsRole(BaseTest.java:339)
+	at com.erp.AffiliateTest.setupRole(AffiliateTest.java:18)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -195,7 +200,7 @@ Session ID: ae037dadfb75efc4cb5680a8cd288fa1
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">/tmp/testng-eclipse-206321262/testng-customsuite.xml</span>
+            <span class="header-content">/tmp/testng-eclipse-2023914521/testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -204,7 +209,7 @@ Session ID: ae037dadfb75efc4cb5680a8cd288fa1
 &lt;suite name=&quot;Default suite&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
   &lt;test thread-count=&quot;5&quot; name=&quot;Default test&quot; verbose=&quot;2&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;com.erp.Gendervalues&quot;/&gt;
+      &lt;class name=&quot;com.erp.AffiliateTest&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Default test --&gt;
 &lt;/suite&gt; &lt;!-- Default suite --&gt;
@@ -246,8 +251,8 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'printGenderDropdownValues')
-data.setCell(0, 2, 'com.erp.Gendervalues')
+data.setCell(0, 1, 'TC_011_verifySignupFormLoads')
+data.setCell(0, 2, 'com.erp.AffiliateTest')
 data.setCell(0, 3, 0);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
@@ -279,20 +284,20 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">com.erp.Gendervalues</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">com.erp.AffiliateTest</div> <!-- chronological-class-name -->
               <div class="configuration-suite before">
                 <span class="method-name">startReport</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-suite before -->
               <div class="configuration-method before">
-                <span class="method-name">setup(chrome, public void com.erp.Gendervalues.printGenderDropdownValues())</span>
-                <span class="method-start">567 ms</span>
+                <span class="method-name">setup(chrome, public void com.erp.AffiliateTest.TC_011_verifySignupFormLoads())</span>
+                <span class="method-start">619 ms</span>
               </div> <!-- configuration-method before -->
               <div class="configuration-method before">
                 <img src="failed.png">
                 </img>
                 <span class="method-name">setupRole</span>
-                <span class="method-start">3548 ms</span>
+                <span class="method-start">3406 ms</span>
               </div> <!-- configuration-method before -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

@@ -1,6 +1,7 @@
 package com.erp.pages;
 
 import java.time.Duration;
+import java.util.function.Function;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -28,6 +29,10 @@ public class BasePage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
+ // Custom condition wait
+    public void waitForCondition(Function<WebDriver, Boolean> condition) {
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(condition);
+    }
     protected WebElement waitForVisible(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }

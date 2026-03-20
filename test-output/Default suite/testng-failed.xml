@@ -3,16 +3,16 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.erp.Gendervalues">
+      <class name="com.erp.AffiliateTest">
         <methods>
-          <include name="setupRole"/>
+          <include name="TC_011_verifySignupFormLoads"/>
           <include name="endReport"/>
           <include name="startReport"/>
-          <include name="printGenderDropdownValues"/>
           <include name="tearDown"/>
+          <include name="setupRole"/>
           <include name="setup"/>
         </methods>
-      </class> <!-- com.erp.Gendervalues -->
+      </class> <!-- com.erp.AffiliateTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

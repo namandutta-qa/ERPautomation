@@ -12,7 +12,7 @@ public class FollowTest extends BaseTest {
     @Test
     public void verifyFollowButtonVisible() {
 
-        loginAsRole("homeowner");
+         
         driver.get("https://your-yodixa-url.com/profile/testuser");
 
         FollowPage followPage = new FollowPage(driver);
@@ -26,7 +26,7 @@ public class FollowTest extends BaseTest {
     @Test
     public void verifyUserCanFollow() {
 
-        loginAsRole("homeowner");
+         
         driver.get("https://your-yodixa-url.com/profile/testuser");
 
         FollowPage followPage = new FollowPage(driver);
@@ -48,7 +48,7 @@ public class FollowTest extends BaseTest {
     @Test
     public void verifyUserCanUnfollow() {
 
-        loginAsRole("homeowner");
+         
         driver.get("https://your-yodixa-url.com/profile/testuser");
 
         FollowPage followPage = new FollowPage(driver);
@@ -71,7 +71,7 @@ public class FollowTest extends BaseTest {
     @Test
     public void verifyFollowPersistsAfterRefresh() {
 
-        loginAsRole("homeowner");
+         
         driver.get("https://your-yodixa-url.com/profile/testuser");
 
         FollowPage followPage = new FollowPage(driver);
@@ -88,7 +88,7 @@ public class FollowTest extends BaseTest {
     @Test
     public void verifyUserCannotFollowSelf() {
 
-        loginAsRole("homeowner");
+         
         driver.get("https://your-yodixa-url.com/profile/homeowner");
 
         FollowPage followPage = new FollowPage(driver);

@@ -2,6 +2,7 @@ package com.erp;
 
 import com.erp.base.*;
 
+import java.io.IOException;
 import java.util.Random;
 
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -21,20 +22,20 @@ public class Signup extends BaseTest {
 	@BeforeMethod
 
 	public void setupRole() {
-		testEmail = randomemailgenerator();
+		testEmail = generateRandomEmail();
 
 		rolePage = new RoleSelectionPage(driver);
 		signupPage = new OrganizationSignupPage(driver);
-		goTo("/onboarding");
+		goTo("/app/onboarding");
 
 		rolePage.selectRoleAndContinue(RoleSelectionPage.ORGANIZATION);
 
 	}
 
-//	@Test
-//	public void TC_011_verifySignupFormLoads() {
-//		Assert.assertFalse(driver.getPageSource().contains("Individual Signup"));
-//	}
+	@Test
+	public void TC_011_verifySignupFormLoads() {
+		Assert.assertFalse(driver.getPageSource().contains("Individual Signup"));
+	}
 
 	@Test
 	public void TC_016_to_TC_044_Valid_Data_EndtoEndflow() {
@@ -107,9 +108,14 @@ public class Signup extends BaseTest {
 			signupPage.SelectGovtID("/home/lz-2/Downloads/Joy of cleaning/Amazon Order PDF Test File.pdf");
 		});
 
-//        step("Capture Selfie Verification", () -> {
-//            signupPage.captureSelfie();   // example method
-//        });
+		step("Capture Selfie Verification", () -> {
+			try {
+				signupPage.captureSelfie();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} // example method
+		});
 
 		step("Upload Article document", () -> {
 			signupPage.SelectAOI("/home/lz-2/Downloads/Joy of cleaning/Amazon Order PDF Test File.pdf");
@@ -117,6 +123,11 @@ public class Signup extends BaseTest {
 		step("Upload GovtID document", () -> {
 			signupPage.SelectIOD("/home/lz-2/Downloads/Joy of cleaning/Amazon Order PDF Test File.pdf");
 		});
+
+//		step("Verify Biometric", () -> {
+//			signupPage.captureSelfie();
+//			Assert.assertFalse(signupPage.isFileUploaded(), "Large file should not be uploaded");
+//		});
 
 		step("Proceed to review page", () -> {
 			signupPage.clickConfirm();
@@ -393,10 +404,14 @@ public class Signup extends BaseTest {
 			step("Upload GovtID document", () -> {
 				signupPage.SelectGovtID("/home/lz-2/Downloads/Joy of cleaning/Amazon Order PDF Test File.pdf");
 			});
-
-//	        step("Capture Selfie Verification", () -> {
-//	            signupPage.captureSelfie();   // example method
-//	        });
+			step("Capture Selfie Verification", () -> {
+				try {
+					signupPage.captureSelfie();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} // example method
+			});
 
 			step("Upload Article document", () -> {
 				signupPage.SelectAOI("/home/lz-2/Downloads/Joy of cleaning/Amazon Order PDF Test File.pdf");

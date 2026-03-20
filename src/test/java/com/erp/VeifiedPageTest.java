@@ -12,7 +12,6 @@ public class VeifiedPageTest extends BaseTest {
     @Test
     public void verifyVerifiedTabAccessible() {
 
-        loginAsRole("homeowner");
         VerifiedPage page = new VerifiedPage(driver);
 
         page.openVerifiedTab();
@@ -24,7 +23,6 @@ public class VeifiedPageTest extends BaseTest {
     @Test
     public void verifyVerifiedBadgeVisible() {
 
-        loginAsRole("homeowner");
         VerifiedPage page = new VerifiedPage(driver);
 
         page.openVerifiedTab();
@@ -36,7 +34,6 @@ public class VeifiedPageTest extends BaseTest {
     @Test
     public void verifyLikeCommentRepostBookmarkInVerifiedTab() {
 
-        loginAsRole("homeowner");
         VerifiedPage page = new VerifiedPage(driver);
 
         page.openVerifiedTab();

@@ -8,10 +8,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Function;
+
 import org.openqa.selenium.devtools.v143.network.Network;
 import org.openqa.selenium.devtools.v143.network.model.Response;
 import org.openqa.selenium.By;
 import java.util.Optional;
+import java.util.Random;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -61,7 +65,7 @@ public class BaseTest {
 	public void startReport() {
 		extent = ExtentManager.getInstance();
 		// initialize baseUrl from system property or default
-		baseUrl = System.getProperty("baseUrl", "https://yodixa.lusites.xyz");
+		baseUrl = System.getProperty("baseUrl", "https://yodixa.lusites.xyz/app");
 //		baseUrl = System.getProperty("baseUrl", "http://192.168.0.130:3000");
 
 	}
@@ -89,111 +93,107 @@ public class BaseTest {
 	@BeforeMethod
 	public void setup(@org.testng.annotations.Optional("chrome") String browser, Method method) {
 
-	    String br = (browser == null) ? "chrome" : browser.toLowerCase();
+		String br = (browser == null) ? "chrome" : browser.toLowerCase();
 
-	    ChromeOptions chromeOptions = new ChromeOptions();
-	    FirefoxOptions firefoxOptions = new FirefoxOptions();
-	    EdgeOptions edgeOptions = new EdgeOptions();
+		ChromeOptions chromeOptions = new ChromeOptions();
+		FirefoxOptions firefoxOptions = new FirefoxOptions();
+		EdgeOptions edgeOptions = new EdgeOptions();
 
-	    boolean headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
-	    if (headless) {
-	        chromeOptions.addArguments("--headless=new");
-	        firefoxOptions.addArguments("-headless");
-	        edgeOptions.addArguments("--headless=new");
-	    }
+		boolean headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
+		if (headless) {
+//			chromeOptions.addArguments("--headless=new");
+//			firefoxOptions.addArguments("-headless");
+//			edgeOptions.addArguments("--headless=new");
+		}
 
-	    chromeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu");
-	    chromeOptions.addArguments("--disable-autofill", "--disable-password-manager");
-	    chromeOptions.addArguments("--remote-allow-origins=*");
-	    chromeOptions.addArguments("--use-fake-ui-for-media-stream");
-	    chromeOptions.addArguments("--use-fake-device-for-media-stream");
+//		chromeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu");
+		chromeOptions.addArguments("--disable-autofill", "--disable-password-manager");
+		chromeOptions.addArguments("--remote-allow-origins=*");
+//		chromeOptions.addArguments("--use-fake-ui-for-media-stream");
+//		chromeOptions.addArguments("--use-fake-device-for-media-stream");
 
-	    firefoxOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");
-	    edgeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");
+		firefoxOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");
+		edgeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");
 
-	    switch (br) {
-	        case "firefox":
-	            WebDriverManager.firefoxdriver().setup();
-	            driver = new FirefoxDriver(firefoxOptions);
-	            break;
+		switch (br) {
+		case "firefox":
+			WebDriverManager.firefoxdriver().setup();
+			driver = new FirefoxDriver(firefoxOptions);
+			break;
 
-	        case "edge":
-	            WebDriverManager.edgedriver().setup();
-	            driver = new EdgeDriver(edgeOptions);
-	            break;
+		case "edge":
+			WebDriverManager.edgedriver().setup();
+			driver = new EdgeDriver(edgeOptions);
+			break;
 
-	        case "chrome":
-	        default:
-	            WebDriverManager.chromedriver().setup();
-	            driver = new ChromeDriver(chromeOptions);
-	            break;
-	    }
+		case "chrome":
+		default:
+			WebDriverManager.chromedriver().setup();
+			driver = new ChromeDriver(chromeOptions);
+			break;
+		}
 
-	    try {
-	        driver.manage().window().maximize();
-	    } catch (Exception ignore) {}
+		try {
+			driver.manage().window().maximize();
+		} catch (Exception ignore) {
+		}
 
-	    // Extent Report
-	    if (ExtentManager.getTest() == null) {
-	        ExtentManager.createTest(method.getName());
-	    }
+		// Extent Report
+		if (ExtentManager.getTest() == null) {
+			ExtentManager.createTest(method.getName());
+		}
 
-	    // 🔥 DevTools Setup
-	    if (driver instanceof ChromeDriver) {
+		// 🔥 DevTools Setup
+		if (driver instanceof ChromeDriver) {
 
-	        devTools = ((ChromeDriver) driver).getDevTools();
-	        devTools.createSession();
+			devTools = ((ChromeDriver) driver).getDevTools();
+			devTools.createSession();
 
-	        devTools.send(Network.enable(
-	                Optional.empty(),
-	                Optional.empty(),
-	                Optional.empty(),
-	                Optional.empty(),
-	                Optional.empty()
-	        ));
+			devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(),
+					Optional.empty()));
 
-	        // Reset tracking
-	        apiCalled = new AtomicBoolean(false);
-	        failedApis = new ArrayList<>();
+			// Reset tracking
+			apiCalled = new AtomicBoolean(false);
+			failedApis = new ArrayList<>();
 
-	        // Store all API logs dynamically
-	        List<String> apiLogs = new ArrayList<>();
+			// Store all API logs dynamically
+			List<String> apiLogs = new ArrayList<>();
 
-	        devTools.addListener(Network.responseReceived(), response -> {
+			devTools.addListener(Network.responseReceived(), response -> {
 
-	            String url = response.getResponse().getUrl();
-	            int status = response.getResponse().getStatus();
+				String url = response.getResponse().getUrl();
+				int status = response.getResponse().getStatus();
 
-	            try {
-	                Network.GetResponseBodyResponse body =
-	                        devTools.send(Network.getResponseBody(response.getRequestId()));
+				try {
+					Network.GetResponseBodyResponse body = devTools
+							.send(Network.getResponseBody(response.getRequestId()));
 
-	                String responseBody = body.getBody();
+					String responseBody = body.getBody();
 
-	                String log = url + " | " + status + " | " + responseBody;
+					String log = url + " | " + status + " | " + responseBody;
 
-	                apiLogs.add(log);
+					apiLogs.add(log);
 
-	                System.out.println("➡️ " + url);
-	                System.out.println("⬅️ Status: " + status);
-	                System.out.println("📦 Body: " + responseBody);
+					System.out.println("➡️ " + url);
+					System.out.println("⬅️ Status: " + status);
+					System.out.println("📦 Body: " + responseBody);
 
-	                apiCalled.set(true);
+					apiCalled.set(true);
 
-	                // Capture failures dynamically
-	                if (status >= 400) {
-	                    failedApis.add(log);
-	                }
+					// Capture failures dynamically
+					if (status >= 400) {
+						failedApis.add(log);
+					}
 
-	            } catch (Exception e) {
-	                System.out.println("⚠️ Failed to read response body: " + url);
-	            }
-	        });
+				} catch (Exception e) {
+					System.out.println("⚠️ Failed to read response body: " + url);
+				}
+			});
 
-	        // Optional: expose logs globally
-	        this.apiLogs = apiLogs;
-	    }
-	}			
+			// Optional: expose logs globally
+			this.apiLogs = apiLogs;
+		}
+	}
 
 	// Handle result after each test
 	@AfterMethod
@@ -285,7 +285,7 @@ public class BaseTest {
 		}
 
 		if (driver != null) {
-			driver.quit();
+//			driver.quit();
 		}
 
 		// remove thread-local test
@@ -450,10 +450,19 @@ public class BaseTest {
 		}
 	}
 
-	protected String randomemailgenerator() {
-		// TODO Auto-generated method stub
-		String prefix = "user" + System.currentTimeMillis();
-		return prefix + "@mailinator.com";
+	protected String generateRandomEmail() {
+		String[] firstNames = { "john", "jane", "alex", "mike", "sara", "david", "emma" };
+		String[] lastNames = { "smith", "johnson", "brown", "williams", "jones", "davis" };
+
+		Random random = new Random();
+
+		String firstName = firstNames[random.nextInt(firstNames.length)];
+		String lastName = lastNames[random.nextInt(lastNames.length)];
+
+		long timestamp = System.currentTimeMillis();
+
+		String email = firstName + "." + lastName + timestamp + "@mailinator.com";
+		return email.toLowerCase();
 	}
 
 	public void validateApis() {
@@ -465,6 +474,9 @@ public class BaseTest {
 		if (!apiCalled.get()) {
 			throw new AssertionError("❌ No API was triggered!");
 		}
+	}
+	public void waitForCondition(Function<WebDriver, Boolean> condition) {
+	    new WebDriverWait(driver, Duration.ofSeconds(10)).until(condition);
 	}
 
 }

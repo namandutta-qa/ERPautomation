@@ -1,5 +1,6 @@
 package com.erp.pages;
 
+import java.io.IOException;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
@@ -42,6 +43,9 @@ public class IndividualSignUpPage extends BasePage {
 	private By Peraddress = By.xpath("//input[@placeholder='Enter proper starting address details']");
 	private By GovtID = By.xpath("//input[@type='file' and @aria-label='Upload Government ID']");
 	private By submitBtn = By.xpath("//button[normalize-space()='Submit for Verification']");
+	private By startVerificationBtn = By.xpath("//button[contains(text(),'Start Verification')]");
+	private By continueverificationBtn = By.xpath("//button[normalize-space()='Continue']");
+	private By acceptTerms = By.xpath("//button[@aria-label='Agree and continue']");
 
 
 	public String getFirstError() {
@@ -194,5 +198,25 @@ public class IndividualSignUpPage extends BasePage {
 	}
 	public void clickSubmit() {
 		click(submitBtn);
+	}
+	public void captureSelfie() throws IOException {
+
+		waitForClickability(startVerificationBtn).click();
+		driver.switchTo().frame(waitForVisible(By.cssSelector("iframe")));
+
+		waitForClickability(continueverificationBtn).click();
+		waitForClickability(acceptTerms).click();
+		// 👉 Stop automation here for manual verification
+		System.out.println("Complete Sumsub verification manually and press ENTER to continue...");
+		System.in.read();
+
+		// After manual verification, resume if needed
+
+		driver.switchTo().defaultContent();
+
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofMinutes(2));
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[normalize-space()='Verified']")));
+		System.out.println("Resuming Automation");
 	}
 }

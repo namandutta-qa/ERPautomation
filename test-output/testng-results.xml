@@ -2,16 +2,16 @@
 <testng-results ignored="0" total="1" passed="0" failed="0" skipped="1">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-03-16T14:25:59 IST" name="Default suite" finished-at="2026-03-16T14:26:03 IST" duration-ms="4199">
+  <suite started-at="2026-03-20T14:25:15 IST" name="Default suite" finished-at="2026-03-20T14:25:28 IST" duration-ms="13145">
     <groups>
     </groups>
-    <test started-at="2026-03-16T14:25:59 IST" name="Default test" finished-at="2026-03-16T14:26:03 IST" duration-ms="4199">
-      <class name="com.erp.Gendervalues">
-        <test-method is-config="true" signature="startReport()[pri:0, instance:com.erp.Gendervalues@ae13544]" started-at="2026-03-16T14:25:59 IST" name="startReport" finished-at="2026-03-16T14:25:59 IST" duration-ms="504" status="PASS">
+    <test started-at="2026-03-20T14:25:15 IST" name="Default test" finished-at="2026-03-20T14:25:28 IST" duration-ms="13145">
+      <class name="com.erp.AffiliateTest">
+        <test-method is-config="true" signature="startReport()[pri:0, instance:com.erp.AffiliateTest@2925bf5b]" started-at="2026-03-20T14:25:15 IST" name="startReport" finished-at="2026-03-20T14:25:15 IST" duration-ms="543" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- startReport -->
-        <test-method is-config="true" signature="setup(java.lang.String,java.lang.reflect.Method)[pri:0, instance:com.erp.Gendervalues@ae13544]" started-at="2026-03-16T14:25:59 IST" name="setup" finished-at="2026-03-16T14:26:02 IST" duration-ms="2980" status="PASS">
+        <test-method is-config="true" signature="setup(java.lang.String,java.lang.reflect.Method)[pri:0, instance:com.erp.AffiliateTest@2925bf5b]" started-at="2026-03-20T14:25:15 IST" name="setup" finished-at="2026-03-20T14:25:18 IST" duration-ms="2786" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -20,36 +20,36 @@
             </param>
             <param index="1">
               <value>
-                <![CDATA[public void com.erp.Gendervalues.printGenderDropdownValues()]]>
+                <![CDATA[public void com.erp.AffiliateTest.TC_011_verifySignupFormLoads()]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method is-config="true" signature="setupRole()[pri:0, instance:com.erp.Gendervalues@ae13544]" started-at="2026-03-16T14:26:02 IST" name="setupRole" finished-at="2026-03-16T14:26:03 IST" duration-ms="1039" status="FAIL">
-          <exception class="org.openqa.selenium.NoSuchElementException">
+        <test-method is-config="true" signature="setupRole()[pri:0, instance:com.erp.AffiliateTest@2925bf5b]" started-at="2026-03-20T14:25:18 IST" name="setupRole" finished-at="2026-03-20T14:25:28 IST" duration-ms="10241" status="FAIL">
+          <exception class="org.openqa.selenium.NoSuchSessionException">
             <message>
-              <![CDATA[no such element: Unable to locate element: {"method":"xpath","selector":"//button[.//h3[normalize-space()='Organization']]"}
+              <![CDATA[invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
   (Session info: chrome=143.0.7499.192)
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
 Build info: version: '4.39.0', revision: '126f156aee'
-System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.8.0-101-generic', java.version: '11.0.30'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.8.0-106-generic', java.version: '11.0.30'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [ae037dadfb75efc4cb5680a8cd288fa1, findElement {value=//button[.//h3[normalize-space()='Organization']], using=xpath}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:38607}, goog:processID: 37548, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:38607/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: ae037dadfb75efc4cb5680a8cd288fa1]]>
+Command: [f44976cd8f53cf46e74203892b5fa1c8, findElement {value=email, using=name}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:35757}, goog:processID: 34142, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:35757/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: f44976cd8f53cf46e74203892b5fa1c8]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//button[.//h3[normalize-space()='Organization']]"}
+              <![CDATA[org.openqa.selenium.NoSuchSessionException: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
   (Session info: chrome=143.0.7499.192)
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
 Build info: version: '4.39.0', revision: '126f156aee'
-System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.8.0-101-generic', java.version: '11.0.30'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.8.0-106-generic', java.version: '11.0.30'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [ae037dadfb75efc4cb5680a8cd288fa1, findElement {value=//button[.//h3[normalize-space()='Organization']], using=xpath}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:38607}, goog:processID: 37548, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:38607/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: ae037dadfb75efc4cb5680a8cd288fa1
+Command: [f44976cd8f53cf46e74203892b5fa1c8, findElement {value=email, using=name}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:35757}, goog:processID: 34142, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:35757/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: f44976cd8f53cf46e74203892b5fa1c8
 at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
 at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -65,7 +65,12 @@ at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(Elemen
 at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
 at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:384)
 at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:378)
-at com.erp.Gendervalues.setupRole(Gendervalues.java:24)
+at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:198)
+at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:194)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:203)
+at com.erp.base.BaseTest.login(BaseTest.java:328)
+at com.erp.base.BaseTest.loginAsRole(BaseTest.java:339)
+at com.erp.AffiliateTest.setupRole(AffiliateTest.java:18)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -100,33 +105,33 @@ at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
 ]]>
             </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.NoSuchElementException -->
+          </exception> <!-- org.openqa.selenium.NoSuchSessionException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setupRole -->
-        <test-method signature="printGenderDropdownValues()[pri:0, instance:com.erp.Gendervalues@ae13544]" started-at="2026-03-16T14:26:03 IST" name="printGenderDropdownValues" finished-at="2026-03-16T14:26:03 IST" duration-ms="0" status="SKIP">
-          <exception class="org.openqa.selenium.NoSuchElementException">
+        <test-method signature="TC_011_verifySignupFormLoads()[pri:0, instance:com.erp.AffiliateTest@2925bf5b]" started-at="2026-03-20T14:25:28 IST" name="TC_011_verifySignupFormLoads" finished-at="2026-03-20T14:25:28 IST" duration-ms="0" status="SKIP">
+          <exception class="org.openqa.selenium.NoSuchSessionException">
             <message>
-              <![CDATA[no such element: Unable to locate element: {"method":"xpath","selector":"//button[.//h3[normalize-space()='Organization']]"}
+              <![CDATA[invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
   (Session info: chrome=143.0.7499.192)
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
 Build info: version: '4.39.0', revision: '126f156aee'
-System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.8.0-101-generic', java.version: '11.0.30'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.8.0-106-generic', java.version: '11.0.30'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [ae037dadfb75efc4cb5680a8cd288fa1, findElement {value=//button[.//h3[normalize-space()='Organization']], using=xpath}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:38607}, goog:processID: 37548, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:38607/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: ae037dadfb75efc4cb5680a8cd288fa1]]>
+Command: [f44976cd8f53cf46e74203892b5fa1c8, findElement {value=email, using=name}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:35757}, goog:processID: 34142, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:35757/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: f44976cd8f53cf46e74203892b5fa1c8]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//button[.//h3[normalize-space()='Organization']]"}
+              <![CDATA[org.openqa.selenium.NoSuchSessionException: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
   (Session info: chrome=143.0.7499.192)
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
 Build info: version: '4.39.0', revision: '126f156aee'
-System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.8.0-101-generic', java.version: '11.0.30'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.8.0-106-generic', java.version: '11.0.30'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [ae037dadfb75efc4cb5680a8cd288fa1, findElement {value=//button[.//h3[normalize-space()='Organization']], using=xpath}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:38607}, goog:processID: 37548, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:38607/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: ae037dadfb75efc4cb5680a8cd288fa1
+Command: [f44976cd8f53cf46e74203892b5fa1c8, findElement {value=email, using=name}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: /tmp/.org.chromium.Chromium...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:35757}, goog:processID: 34142, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:35757/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: f44976cd8f53cf46e74203892b5fa1c8
 at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
 at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -142,7 +147,12 @@ at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(Elemen
 at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
 at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:384)
 at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:378)
-at com.erp.Gendervalues.setupRole(Gendervalues.java:24)
+at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:198)
+at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:194)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:203)
+at com.erp.base.BaseTest.login(BaseTest.java:328)
+at com.erp.base.BaseTest.loginAsRole(BaseTest.java:339)
+at com.erp.AffiliateTest.setupRole(AffiliateTest.java:18)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -177,19 +187,19 @@ at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
 ]]>
             </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.NoSuchElementException -->
+          </exception> <!-- org.openqa.selenium.NoSuchSessionException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- printGenderDropdownValues -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.erp.Gendervalues@ae13544]" started-at="2026-03-16T14:26:03 IST" name="tearDown" finished-at="2026-03-16T14:26:03 IST" duration-ms="0" status="SKIP">
+        </test-method> <!-- TC_011_verifySignupFormLoads -->
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.erp.AffiliateTest@2925bf5b]" started-at="2026-03-20T14:25:28 IST" name="tearDown" finished-at="2026-03-20T14:25:28 IST" duration-ms="0" status="SKIP">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="endReport()[pri:0, instance:com.erp.Gendervalues@ae13544]" started-at="2026-03-16T14:26:04 IST" name="endReport" finished-at="2026-03-16T14:26:04 IST" duration-ms="0" status="SKIP">
+        <test-method is-config="true" signature="endReport()[pri:0, instance:com.erp.AffiliateTest@2925bf5b]" started-at="2026-03-20T14:25:28 IST" name="endReport" finished-at="2026-03-20T14:25:28 IST" duration-ms="0" status="SKIP">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- endReport -->
-      </class> <!-- com.erp.Gendervalues -->
+      </class> <!-- com.erp.AffiliateTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

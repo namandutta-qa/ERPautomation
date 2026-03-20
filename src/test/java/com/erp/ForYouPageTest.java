@@ -20,11 +20,11 @@ public class ForYouPageTest extends BaseTest {
 
 	/* ========================= TC-153 For You Tab Access* ==========================*/
 	@Test
-	public void TC_153_verifyForYouTabAccessible() {
+	public void TC_153_verifyForYouTabAccessible() throws InterruptedException {
 
 		ExtentManager.getTest().info("TC_153: Verify For You tab accessible");
 
-		loginAsRole("homeowner");
+ 
 
 		forYouPage.openForYouTab();
 
@@ -38,7 +38,7 @@ public class ForYouPageTest extends BaseTest {
 
 		ExtentManager.getTest().info("TC_154: Verify posts from followed users appear");
 
-		loginAsRole("homeowner");
+		  
 		driver.get(FOR_YOU_URL);
 
 		Assert.assertTrue(forYouPage.getPostCount() > 0);
@@ -54,7 +54,7 @@ public class ForYouPageTest extends BaseTest {
 
 		ExtentManager.getTest().info("TC_155: Verify algorithm-based filtering");
 
-		loginAsRole("homeowner");
+		  
 		driver.get(FOR_YOU_URL);
 
 		forYouPage.getAllAuthors().forEach(author -> Assert.assertFalse(author.getText().isEmpty()));
@@ -70,7 +70,7 @@ public class ForYouPageTest extends BaseTest {
 
 		ExtentManager.getTest().info("TC_156: Verify feed refresh");
 
-		loginAsRole("homeowner");
+		  
 		driver.get(FOR_YOU_URL);
 
 		int before = forYouPage.getPostCount();
@@ -91,7 +91,7 @@ public class ForYouPageTest extends BaseTest {
 
 		ExtentManager.getTest().info("TC_157: Verify infinite scroll");
 
-		loginAsRole("homeowner");
+		  
 		driver.get(FOR_YOU_URL);
 
 		int before = forYouPage.getPostCount();
@@ -113,7 +113,7 @@ public class ForYouPageTest extends BaseTest {
 
 		ExtentManager.getTest().info("TC_158: Verify like in For You");
 
-		loginAsRole("homeowner");
+		  
 		driver.get(FOR_YOU_URL);
 
 		int before = forYouPage.getLikeCount();
@@ -135,7 +135,7 @@ public class ForYouPageTest extends BaseTest {
 
 		ExtentManager.getTest().info("TC_159: Verify comment in For You");
 
-		loginAsRole("homeowner");
+		  
 		driver.get(FOR_YOU_URL);
 
 		String comment = "ForYou Comment " + System.currentTimeMillis();
@@ -154,7 +154,7 @@ public class ForYouPageTest extends BaseTest {
 
 		ExtentManager.getTest().info("TC_160: Verify repost");
 
-		loginAsRole("homeowner");
+		  
 		driver.get(FOR_YOU_URL);
 
 		forYouPage.repostFirstPost();
@@ -170,7 +170,7 @@ public class ForYouPageTest extends BaseTest {
 
 		ExtentManager.getTest().info("TC_161: Verify bookmark");
 
-		loginAsRole("homeowner");
+		  
 		driver.get(FOR_YOU_URL);
 
 		forYouPage.bookmarkFirstPost();
@@ -183,7 +183,7 @@ public class ForYouPageTest extends BaseTest {
 
 	        ExtentManager.getTest().info("TC_162: Verify search bar visible");
 
-	        loginAsRole("homeowner");
+	          
 	        driver.get(FOR_YOU_URL);
 
 	        Assert.assertTrue(forYouPage.isSearchBarVisible());
@@ -198,7 +198,7 @@ public class ForYouPageTest extends BaseTest {
 
         ExtentManager.getTest().info("TC_163: Verify search by username");
 
-        loginAsRole("homeowner");
+          
         driver.get(FOR_YOU_URL);
 
         forYouPage.search("john_doe");
@@ -215,7 +215,7 @@ public class ForYouPageTest extends BaseTest {
 
         ExtentManager.getTest().info("TC_164: Verify search by hashtag");
 
-        loginAsRole("homeowner");
+          
         driver.get(FOR_YOU_URL);
 
         forYouPage.search("#automation");
@@ -232,7 +232,7 @@ public class ForYouPageTest extends BaseTest {
 
         ExtentManager.getTest().info("TC_165: Verify no results message");
 
-        loginAsRole("homeowner");
+          
         driver.get(FOR_YOU_URL);
 
         forYouPage.search("randominvalid123xyz");
@@ -249,7 +249,7 @@ public class ForYouPageTest extends BaseTest {
 
         ExtentManager.getTest().info("TC_166: Verify search result clickable");
 
-        loginAsRole("homeowner");
+          
         driver.get(FOR_YOU_URL);
 
         forYouPage.search("john_doe");
@@ -268,7 +268,7 @@ public class ForYouPageTest extends BaseTest {
 
         ExtentManager.getTest().info("TC_167: Verify trending section visible");
 
-        loginAsRole("homeowner");
+          
         driver.get(FOR_YOU_URL);
 
         Assert.assertTrue(forYouPage.isTrendingSectionVisible());
@@ -283,7 +283,7 @@ public class ForYouPageTest extends BaseTest {
 
         ExtentManager.getTest().info("TC_168: Verify trending hashtag clickable");
 
-        loginAsRole("homeowner");
+          
         driver.get(FOR_YOU_URL);
 
         forYouPage.clickFirstTrendingHashtag();
@@ -300,7 +300,7 @@ public class ForYouPageTest extends BaseTest {
 
         ExtentManager.getTest().info("TC_169: Verify trending list updates dynamically");
 
-        loginAsRole("homeowner");
+          
         driver.get(FOR_YOU_URL);
 
         int before = forYouPage.getTrendingCount();
@@ -321,7 +321,7 @@ public class ForYouPageTest extends BaseTest {
 
         ExtentManager.getTest().info("TC_170: Verify trending post count display");
 
-        loginAsRole("homeowner");
+          
         driver.get(FOR_YOU_URL);
 
         int count = forYouPage.getHashtagPostCount();

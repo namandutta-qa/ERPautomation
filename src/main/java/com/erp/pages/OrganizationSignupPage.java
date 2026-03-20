@@ -1,5 +1,6 @@
 package com.erp.pages;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class OrganizationSignupPage extends BasePage {
 	public OrganizationSignupPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-	    this.waitUtils = new WaitUtils(driver); // Create WaitUtils instance
+		this.waitUtils = new WaitUtils(driver); // Create WaitUtils instance
 
 	}
 
@@ -94,8 +95,9 @@ public class OrganizationSignupPage extends BasePage {
 			"//h3[text()='Articles of Incorporation']/ancestor::div[contains(@class,'glass-card')]//input[@type='file']");
 	private By IOD = By.xpath(
 			"//h3[text()='Insurance Documentation']/ancestor::div[contains(@class,'glass-card')]//input[@type='file']");
-	private By startCameraBtn = By.xpath("//button[contains(text(),'Start') or contains(text(),'Capture')]");
-	private By captureBtn = By.xpath("//button[contains(text(),'Capture') or contains(text(),'Take photo')]");
+	private By startVerificationBtn = By.xpath("//button[contains(text(),'Start Verification')]");
+	private By continueverificationBtn = By.xpath("//button[normalize-space()='Continue']");
+	private By acceptTerms = By.xpath("//button[@aria-label='Agree and continue']");
 	private By confirmBtn = By.xpath("//button[contains(text(),'Confirm') or contains(text(),'Continue')]");
 
 	// Navigationcd /home/lz-2/IdeaProjects/erp-automation && mvn
@@ -450,6 +452,7 @@ public class OrganizationSignupPage extends BasePage {
 
 		dayElement.click();
 	}
+
 	public void ownerenterDOB(String value) {
 
 		String[] parts = value.split(" ");
@@ -494,8 +497,9 @@ public class OrganizationSignupPage extends BasePage {
 
 		// Send the file path once visible
 		uploadElement.sendKeys(path);
-		return true; 
+		return true;
 	}
+
 	public void SelectAOI(String path1) {
 		driver.findElement(AOI).sendKeys(path1);
 	}
@@ -525,8 +529,8 @@ public class OrganizationSignupPage extends BasePage {
 	}
 
 	public void clickConfirm() {
-	    WebElement btn = waitUtils.waitForClickability(confirmBtn); // confirmBtnLocator = By locator of button
-	    btn.click();
+		WebElement btn = waitUtils.waitForClickability(confirmBtn); // confirmBtnLocator = By locator of button
+		btn.click();
 	}
 
 	public boolean isSubmitButtonDisabled() {
@@ -559,14 +563,24 @@ public class OrganizationSignupPage extends BasePage {
 		return errors.size() > 0;
 	}
 
-	public void captureSelfie() {
+	public void captureSelfie() throws IOException {
 
-		driver.switchTo().frame(driver.findElement(By.cssSelector("iframe")));
+		waitForClickability(startVerificationBtn).click();
+		driver.switchTo().frame(waitForVisible(By.cssSelector("iframe")));
 
-		wait.until(ExpectedConditions.elementToBeClickable(startCameraBtn)).click();
-		wait.until(ExpectedConditions.elementToBeClickable(captureBtn)).click();
-		wait.until(ExpectedConditions.elementToBeClickable(confirmBtn)).click();
+		waitForClickability(continueverificationBtn).click();
+		waitForClickability(acceptTerms).click();
+		// 👉 Stop automation here for manual verification
+		System.out.println("Complete Sumsub verification manually and press ENTER to continue...");
+		System.in.read();
+
+		// After manual verification, resume if needed
 
 		driver.switchTo().defaultContent();
+
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofMinutes(2));
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[normalize-space()='Verified']")));
+		System.out.println("Resuming Automation");
 	}
 }

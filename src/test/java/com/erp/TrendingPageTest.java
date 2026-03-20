@@ -12,7 +12,6 @@ public class TrendingPageTest extends BaseTest {
     @Test
     public void verifyTrendingTabAccessible() {
 
-        loginAsRole("homeowner");
         TrendingPage page = new TrendingPage(driver);
 
         ExtentManager.getTest().info("Opening Trending tab");
@@ -25,7 +24,6 @@ public class TrendingPageTest extends BaseTest {
     @Test 
     public void verifyTrendingInfiniteScroll() {
 
-        loginAsRole("homeowner");
         TrendingPage page = new TrendingPage(driver);
 
         page.openTrendingTab();

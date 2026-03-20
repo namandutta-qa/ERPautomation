@@ -1,5 +1,7 @@
 package com.erp;
 
+import java.io.IOException;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -16,7 +18,7 @@ public class IndividualSignupTest extends BaseTest {
 	@BeforeMethod
 
 	public void setupRole() {
-		testEmail = randomemailgenerator();
+		testEmail = generateRandomEmail();
 
 		rolePage = new RoleSelectionPage(driver);
 		signupPage = new IndividualSignUpPage(driver);
@@ -66,6 +68,15 @@ public class IndividualSignupTest extends BaseTest {
 			signupPage.SelectGovtID("/home/lz-2/Downloads/Joy of cleaning/Amazon Order PDF Test File.pdf");
 			signupPage.clickConfirm();
 		});
+		
+        step("Capture Selfie Verification", () -> {
+            try {
+				signupPage.captureSelfie();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}   // example method
+        });
 
 		// ---------- STEP 4: Review Page Verification ----------
 		step("Verify review page fields", () -> {
