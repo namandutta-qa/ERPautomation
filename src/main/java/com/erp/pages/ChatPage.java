@@ -43,108 +43,106 @@ public class ChatPage extends BasePage {
 
 	public boolean isChatEmpty() {
 
-	    waitForCondition(driver ->
-	        driver.findElements(chatItems).size() > 0 ||
-	        driver.findElements(emptyState).size() > 0
-	    );
+		waitForCondition(
+				driver -> driver.findElements(chatItems).size() > 0 || driver.findElements(emptyState).size() > 0);
 
-	    boolean isEmpty = driver.findElements(chatItems).isEmpty();
+		boolean isEmpty = driver.findElements(chatItems).isEmpty();
 
-	    ExtentManager.getTest().info("Chat empty status: " + isEmpty);
+		ExtentManager.getTest().info("Chat empty status: " + isEmpty);
 
-	    return isEmpty;
+		return isEmpty;
 	}
 
 	public void sendConnectionRequest(String userName) {
 
-	    // ✅ Step 1: Search / Navigate to user profile
-	    By userCard = By.xpath("/span[normalize-space()='" + userName + "']]");
+		// ✅ Step 1: Search / Navigate to user profile
+		By userCard = By.xpath("/span[normalize-space()='" + userName + "']]");
 
-	    waitForClickability(userCard).click();
+		waitForClickability(userCard).click();
 
-	    ExtentManager.getTest().info("Navigated to user profile: " + userName);
+		ExtentManager.getTest().info("Navigated to user profile: " + userName);
 
-	    // ✅ Step 2: Wait for profile page to load (important)
-	    waitForVisible(connectBtn);
+		// ✅ Step 2: Wait for profile page to load (important)
+		waitForVisible(connectBtn);
 
-	    // ✅ Step 3: Click Send Request
-	    waitForClickability(connectBtn).click();
+		// ✅ Step 3: Click Send Request
+		waitForClickability(connectBtn).click();
 
-	    ExtentManager.getTest().info("Clicked on Send Request button");
+		ExtentManager.getTest().info("Clicked on Send Request button");
 	}
-	
+
 	public void handleEmptyChatFlow() {
 
-	    if (isChatEmpty()) {
-	        ExtentManager.getTest().info("Chat is empty → triggering request flow");
-	        sendConnectionRequest("");
-	    } else {
-	        ExtentManager.getTest().info("Chat already exists → skipping request flow");
-	    }
+		if (isChatEmpty()) {
+			ExtentManager.getTest().info("Chat is empty → triggering request flow");
+			sendConnectionRequest("");
+		} else {
+			ExtentManager.getTest().info("Chat already exists → skipping request flow");
+		}
 	}
 
 	public void sendAndAcceptConnectionRequest(String userBEmail, String userBPassword) {
 
-	    // ✅ Step 1: Send request from User A
-	    sendConnectionRequest("");
-	    ExtentManager.getTest().info("User A sent connection request");
+		// ✅ Step 1: Send request from User A
+		sendConnectionRequest("");
+		ExtentManager.getTest().info("User A sent connection request");
 
-	    String parentWindow = driver.getWindowHandle();
+		String parentWindow = driver.getWindowHandle();
 
-	    // ✅ Step 2: Open new tab
-	    ((JavascriptExecutor) driver).executeScript("window.open()");
+		// ✅ Step 2: Open new tab
+		((JavascriptExecutor) driver).executeScript("window.open()");
 
-	    Set<String> allWindows = driver.getWindowHandles();
+		Set<String> allWindows = driver.getWindowHandles();
 
-	    for (String win : allWindows) {
-	        if (!win.equals(parentWindow)) {
-	            driver.switchTo().window(win);
-	            break;
-	        }
-	    }
+		for (String win : allWindows) {
+			if (!win.equals(parentWindow)) {
+				driver.switchTo().window(win);
+				break;
+			}
+		}
 
-	    ExtentManager.getTest().info("Switched to User B window");
+		ExtentManager.getTest().info("Switched to User B window");
 
-	    // ✅ Step 3: Navigate
-	    driver.get("YOUR_APP_URL");
+		// ✅ Step 3: Navigate
+		driver.get("YOUR_APP_URL");
 
-	    // ✅ Step 4: Login as User B
-	    login(userBEmail, userBPassword);
+		// ✅ Step 4: Login as User B
+		login(userBEmail, userBPassword);
 
-	    // ✅ Step 5: Navigate to Requests
-	    navigateToRequestsPage();
+		// ✅ Step 5: Navigate to Requests
+		navigateToRequestsPage();
 
-	    // ✅ Step 6: Accept Request (FIXED)
-	    By acceptBtn = By.xpath("//button[normalize-space()='Accept']");
-	    waitForClickability(acceptBtn).click();
+		// ✅ Step 6: Accept Request (FIXED)
+		By acceptBtn = By.xpath("//button[normalize-space()='Accept']");
+		waitForClickability(acceptBtn).click();
 
-	    ExtentManager.getTest().pass("User B accepted connection request");
+		ExtentManager.getTest().pass("User B accepted connection request");
 
-	    // ✅ Step 7: Switch back
-	    driver.switchTo().window(parentWindow);
+		// ✅ Step 7: Switch back
+		driver.switchTo().window(parentWindow);
 
-	    ExtentManager.getTest().info("Switched back to User A");
+		ExtentManager.getTest().info("Switched back to User A");
 	}
 
 	public void navigateToRequestsPage() {
 
-	    By requestsTab = By.xpath("//a[contains(text(),'Requests') or contains(text(),'Connections')]");
+		By requestsTab = By.xpath("//a[contains(text(),'Requests') or contains(text(),'Connections')]");
 
-	    waitForClickability(requestsTab).click();
+		waitForClickability(requestsTab).click();
 
-	    ExtentManager.getTest().info("Navigated to Requests page");
+		ExtentManager.getTest().info("Navigated to Requests page");
 	}
 
 	public void login(String email, String password) {
 
-	    waitForVisible(By.id("email")).sendKeys(email);
-	    waitForVisible(By.id("password")).sendKeys(password);
+		waitForVisible(By.id("email")).sendKeys(email);
+		waitForVisible(By.id("password")).sendKeys(password);
 
-	    waitForClickability(By.xpath("//button[normalize-space()='Login']")).click();
+		waitForClickability(By.xpath("//button[normalize-space()='Login']")).click();
 
-	    waitForCondition(driver -> driver.getCurrentUrl().contains("dashboard"));
+		waitForCondition(driver -> driver.getCurrentUrl().contains("dashboard"));
 
-	    ExtentManager.getTest().info("Login successful");
+		ExtentManager.getTest().info("Login successful");
 	}
 	// ===== One-to-One =====
 

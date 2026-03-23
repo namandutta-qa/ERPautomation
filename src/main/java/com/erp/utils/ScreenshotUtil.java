@@ -16,7 +16,7 @@ public class ScreenshotUtil {
             String userDir = System.getProperty("user.dir");
             String screenshotsDir = userDir + File.separator + "test-output" + File.separator + "screenshots";
             File dir = new File(screenshotsDir);
-            if (!dir.exists()) {
+            if (!dir.exists()) { 
                 dir.mkdirs();
             }
 

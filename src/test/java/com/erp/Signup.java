@@ -102,6 +102,86 @@ public class Signup extends BaseTest {
 				e.printStackTrace();
 			}
 			signupPage.clickConfirm();
+			Assert.assertTrue(driver.getCurrentUrl().contains("information"), "Back navigation failed");
+
+		});
+
+		step("Veify bussiness type", () -> {
+			signupPage.selectBusinessType("Contractor");
+			signupPage.backbtn();
+		});
+	}
+
+	@Test
+	public void TC_045_Back_navigation_from_businesstype() {
+
+		step("Enter user info", () -> {
+			signupPage.enterFirstName("John");
+			signupPage.enterMiddleName("");
+			signupPage.enterLastName("Doe");
+			signupPage.clickUsernameField();
+			signupPage.enterEmail(testEmail);
+			signupPage.enterPasswordl("Test@121");
+			signupPage.enterDOB("March 1, 2008");
+			signupPage.acceptTerms();
+			signupPage.acceptPrivacy();
+			signupPage.clickConfirm();
+
+		});
+		step("Enter organization info", () -> {
+			signupPage.enterLegalName("ABC Corporation");
+			signupPage.enterEIN(generateRandomEIN());
+			signupPage.selectIndustryDropdown("Technology");
+			signupPage.selectCountry("United States");
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			signupPage.selectState("Georgia");
+			signupPage.enterAddress("New York Street");
+
+		});
+		step("Enter owner info", () -> {
+			signupPage.enterownerFirstName("Mike");
+			signupPage.enterownerLastName("Francis");
+			signupPage.enteronweremail(testEmail);
+			signupPage.ownerenterDOB("March 3, 2008");
+			signupPage.selectgender("Male");
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			signupPage.enterowneraddress("New York Street");
+
+		});
+
+		step("Enter current address info", () -> {
+			signupPage.selectdesignation("Manager");
+			signupPage.enterPhone("9876543210");
+			signupPage.selectPerGender("Female");
+
+			try {
+				signupPage.enterPeraddress("ABC");
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			signupPage.clickConfirm();
+		});
+
+		step("Click bussiness type and click back navigation", () -> {
+			signupPage.selectBusinessType("Contractor");
+			signupPage.clickConfirm();
 		});
 
 		step("Upload GovtID document", () -> {
@@ -398,6 +478,10 @@ public class Signup extends BaseTest {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				signupPage.clickConfirm();
+			});
+			step("Click bussiness type and click back navigation", () -> {
+				signupPage.selectBusinessType("Contractor");
 				signupPage.clickConfirm();
 			});
 
@@ -708,6 +792,10 @@ public class Signup extends BaseTest {
 			signupPage.clickConfirm();
 		});
 
+		step("Click bussiness type and click back navigation", () -> {
+			signupPage.selectBusinessType("Contractor");
+			signupPage.clickConfirm();
+		});
 		step("Upload GovtID document", () -> {
 			signupPage.SelectGovtID("/home/lz-2/Downloads/Joy of cleaning/Amazon Order PDF Test File.pdf");
 		});
@@ -783,6 +871,11 @@ public class Signup extends BaseTest {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			signupPage.clickConfirm();
+		});
+
+		step("Click bussiness type and click back navigation", () -> {
+			signupPage.selectBusinessType("Contractor");
 			signupPage.clickConfirm();
 		});
 

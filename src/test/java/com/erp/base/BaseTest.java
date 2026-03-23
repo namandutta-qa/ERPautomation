@@ -9,13 +9,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Function;
-
 import org.openqa.selenium.devtools.v143.network.Network;
 import org.openqa.selenium.devtools.v143.network.model.Response;
 import org.openqa.selenium.By;
 import java.util.Optional;
 import java.util.Random;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -38,13 +36,13 @@ import com.erp.utils.ScreenshotUtil;
 import com.erp.utils.WaitUtils;
 import com.erp.utils.ExtentTestNGListener;
 
-// WebDriverManager import
+// WebDriverManager import 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 @Listeners(ExtentTestNGListener.class)
 public class BaseTest {
 
-	public WebDriver driver;
+	public WebDriver driver; 
 	protected static ExtentReports extent;
 	protected ExtentTest test;
 	String parentWindow;
@@ -117,7 +115,7 @@ public class BaseTest {
 
 		switch (br) {
 		case "firefox":
-			WebDriverManager.firefoxdriver().setup();
+			WebDriverManager.firefoxdriver().setup(); 
 			driver = new FirefoxDriver(firefoxOptions);
 			break;
 
@@ -285,7 +283,7 @@ public class BaseTest {
 		}
 
 		if (driver != null) {
-			driver.quit();
+//			driver.quit();
 		}
 
 		// remove thread-local test

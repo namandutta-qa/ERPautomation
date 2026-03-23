@@ -24,7 +24,7 @@ public class SocialMediaFeedPage extends BasePage {
 	By commentSubmit = By.id("commentSubmit");
 	By enteredComment = By.xpath("//textarea[@placeholder='Write a comment…']");
 	By repostButton = By.xpath("(//button[.//span[@class='text-xs']])[2]");
-	By saveButton = By.xpath("(//button[.//span[@class='text-xs']])[4]");
+	By saveButton = By.xpath("//button[@aria-label='Bookmarks — choose collections']");
 	By sendButton = By.xpath("//button[@type='submit']");
 
 	public void clickLike() {
@@ -83,8 +83,21 @@ public class SocialMediaFeedPage extends BasePage {
 		driver.findElement(repostButton).click();
 	}
 
-	public void clickSave() {
+	public void newcollection() {
+		
+		
 		driver.findElement(saveButton).click();
+		waitForClickability(By.xpath("//button[normalize-space()='Add new collection']")).click();
+		
+		waitForVisible(By.xpath("//input[@aria-label='Collection name']")).sendKeys("My Collection");
+		
+		waitForClickability(By.xpath("//button[normalize-space()='Create']")).click();
+		
+	}
+	
+	public void clickSave(String value) {
+		waitForVisible(saveButton).click();
+		waitForClickability(By.xpath("//button[.//span[normalize-space()='" + value + "']]")).click();
 	}
 
 	public void clickSend() {

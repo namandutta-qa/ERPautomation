@@ -111,6 +111,12 @@ public class OrganizationSignupPage extends BasePage {
 	private By confirmation = By.id("confirmationMsg");
 	private By requiredErrors = By.xpath("//p[text()='Required']");
 	private By uploadedFileName = By.xpath("//p[contains(text(),'.pdf')]");
+	private By backBtn = By.xpath("//button[normalize-space()='Back']");
+	
+	public void selectBusinessType(String type) {
+	    By option = By.xpath("//button[.//p[normalize-space()='" + type + "']]");
+	    waitForClickability(option).click();
+	}
 
 	public String getEmailDuplicateError() {
 		By toast = By.xpath("//section[@aria-label='Notifications alt+T']//*[@role='alert']");
@@ -510,6 +516,10 @@ public class OrganizationSignupPage extends BasePage {
 
 	public void clickNext() {
 		click(nextBtn);
+	}
+	
+	public void backbtn() {
+		click(backBtn);
 	}
 
 	public void clickTermsLink() {

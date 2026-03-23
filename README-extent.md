@@ -31,4 +31,7 @@ Run test for screenshot run this command 'cd /home/lz-2/IdeaProjects/erp-automat
 cd /home/lz-2/IdeaProjects/erp-automation && mvn -Dtest=com.erp.SocialMediaCreatePost test
 cd /home/lz-2/IdeaProjects/erp-automation && mvn -Dtest=com.erp.Signup test
 cd /home/lz-2/IdeaProjects/erp-automation && mvn -Dtest=com.erp.AffiliateTest test
+cd /home/lz-2/IdeaProjects/erp-automation && mvn -Dtest=com.erp.SocialMediaFeedPageTest test
+cd /home/lz-2/IdeaProjects/erp-automation && mvn -Dtest=com.erp.Bookmark test
+
 Github Token- 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

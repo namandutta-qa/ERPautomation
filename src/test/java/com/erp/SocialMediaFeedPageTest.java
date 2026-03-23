@@ -106,7 +106,8 @@ public class SocialMediaFeedPageTest extends BaseTest {
 
 		ExtentManager.getTest().info("TC_130: Verify save functionality");
 
-		feedPage.clickSave();
+		feedPage.newcollection();
+		feedPage.clickSave("TestCollection");
 		
 		ExtentManager.getTest().pass("Post saved successfully");
 	}
@@ -116,28 +117,29 @@ public class SocialMediaFeedPageTest extends BaseTest {
 	 */
 	@Test
 	public void TC_131_unsavePost() {
+		
+		feedPage.clickSave("TestCollection");
 
 		ExtentManager.getTest().info("TC_131: Verify unsave functionality");
 
-		feedPage.clickSave(); // Click again to unsave
 		ExtentManager.getTest().pass("Unsave working correctly");
 	}
 
 	/*
 	 * ========================= TC-140 Send Post ==========================
 	 */
-//	@Test
-//	public void TC_140_sendPost() {
-//
-//		ExtentManager.getTest().info("TC_140: Verify send functionality");
-//
-//		waitUtils.waitForClickability(By.xpath("(//button[@id='sendBtn'])[1]")).click();
-//
-//		WebElement toast = waitUtils.waitForVisibility(By.className("toast-message"));
-//
-//		Assert.assertTrue(toast.getText().toLowerCase().contains("sent"));
-//		ExtentManager.getTest().pass("Post sent successfully");
-//	}
+	@Test
+	public void TC_140_sendPost() {
+
+		ExtentManager.getTest().info("TC_140: Verify send functionality");
+
+		waitUtils.waitForClickability(By.xpath("(//button[@id='sendBtn'])[1]")).click();
+
+		WebElement toast = waitUtils.waitForVisibility(By.className("toast-message"));
+
+		Assert.assertTrue(toast.getText().toLowerCase().contains("copy"));
+		ExtentManager.getTest().pass("Post sent successfully");
+	}
 
 	/*
 	 * ========================= TC-150 Unauthorized Like Attempt*
