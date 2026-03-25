@@ -454,7 +454,7 @@ public class OrganizationSignupPage extends BasePage {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
 		WebElement dayElement = wait.until(
-				ExpectedConditions.elementToBeClickable(By.xpath("//button[@name='day' and text()='" + day + "']")));
+				ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='" + day + "']")));
 
 		dayElement.click();
 	}
@@ -478,10 +478,10 @@ public class OrganizationSignupPage extends BasePage {
 		driver.findElement(By.xpath("//button[text()='" + year + "']")).click();
 
 		// Wait until calendar is clickable
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); 
 
 		WebElement dayElement = wait.until(
-				ExpectedConditions.elementToBeClickable(By.xpath("//button[@name='day' and text()='" + day + "']")));
+				ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='" + day + "']")));
 
 		dayElement.click();
 	}

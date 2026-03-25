@@ -127,7 +127,7 @@ public class IndividualSignUpPage extends BasePage {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
 		WebElement dayElement = wait.until(
-				ExpectedConditions.elementToBeClickable(By.xpath("//button[@name='day' and text()='" + day + "']")));
+				ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='" + day + "']")));
 
 		dayElement.click();
 	}

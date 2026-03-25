@@ -21,6 +21,7 @@ public class ChatPage extends BasePage {
 
 	// ===== Common Locators =====
 	private By messageBtn = By.id("messageBtn");
+	private By userName = By.xpath("//span[@class='truncate text-sm font-semibold' and normalize-space()='%s']");
 	private By chatWindow = By.id("chatWindow");
 	private By messageInput = By.id("chatInput");
 	private By sendBtn = By.id("sendBtn");
@@ -151,11 +152,6 @@ public class ChatPage extends BasePage {
 		waitForVisible(chatWindow);
 	}
 
-	public void sendMessage(String text) {
-		waitForVisible(messageInput).sendKeys(text);
-		waitForClickability(sendBtn).click();
-	}
-
 	public boolean isMessageDisplayed(String text) {
 		List<WebElement> allMessages = driver.findElements(messages);
 		return allMessages.stream().anyMatch(e -> e.getText().contains(text));
@@ -188,5 +184,29 @@ public class ChatPage extends BasePage {
 
 	public boolean isGroupCreated(String groupName) {
 		return driver.getPageSource().contains(groupName);
+	}
+
+	// ✅ Open Chat User
+	public void openChatWithUser(String name) {
+
+		By user = By.xpath(String.format("//button[.//span[normalize-space()='%s']]", name));
+
+		waitForClickability(user).click();
+
+		ExtentManager.getTest().info("Opened chat with user: " + name);
+	}
+
+	// ✅ Send Message
+	public void sendMessage(String text) {
+		waitForVisible(messageInput).sendKeys(text);
+		waitForClickability(sendBtn).click();
+
+		ExtentManager.getTest().info("Sent message: " + text);
+	}
+
+	// ✅ Wait for Message
+	public boolean waitForMessage(String text) {
+		return new WebDriverWait(driver, Duration.ofSeconds(20))
+				.until(d -> driver.findElements(messages).stream().anyMatch(e -> e.getText().contains(text)));
 	}
 }

@@ -1,14 +1,9 @@
-<suite name="AutomationSuite" parallel="tests" thread-count="2">
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Chat Suite" parallel="tests" thread-count="2">
 
-    <test name="LoginTest">
+    <test name="Parallel Chat Test">
         <classes>
-            <class name="com.erp.LoginTest"/>
-        </classes>
-    </test>
-
-    <test name="SignupTest">
-        <classes>
-            <class name="com.erp.Signup"/>
+            <class name="com.erp.ChatTest"/>
         </classes>
     </test>
 

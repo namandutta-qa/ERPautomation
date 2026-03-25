@@ -16,8 +16,8 @@ public class LoginPage {
 	}
 
 	// Locators
-	By email = By.xpath("//input[@id='_R_ainebn9esndlb_-form-item']");
-	By password = By.xpath("//input[@id='_R_einebn9esndlb_-form-item']");
+	By email = By.name("email");
+	By password = By.name("password");
 	By loginBtn = By.xpath("//button[normalize-space()='Sign in']");
 	By emailerrorMsg = By.xpath("//p[@id='_R_ainebn9esndlb_-form-item-message']");
 	By passworderrorMsg = By.xpath("//p[@id='_R_einebn9esndlb_-form-item-message']");
