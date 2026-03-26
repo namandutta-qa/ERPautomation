@@ -32,7 +32,7 @@ public class OrganizationSignupPage extends BasePage {
 	private By legalnameError = By.xpath("//p[text()='EIN must be in format XX-XXXXXXX']");
 	private By ein = By.xpath("//input[@name='ein_tax_id']");
 	private By einError = By.xpath("//p[text()='EIN must be in format XX-XXXXXXX']");
-	private By address = By.xpath("//input[@placeholder='Enter proper starting address details'][1]");
+	private By address = By.xpath("//input[@placeholder='Search and select your address']");
 	private By addressError = By.xpath("//p[text()='EIN must be in format XX-XXXXXXX']");
 	private By postalCode = By.name("business_address_zip");
 	private By postalcodeError = By.xpath("//p[text()='EIN must be in format XX-XXXXXXX']");
@@ -52,7 +52,7 @@ public class OrganizationSignupPage extends BasePage {
 	private By username = By.xpath("//input[@placeholder='Enter first & last name above to generate']");
 	private By emailError = By.xpath("//p[text()='Please enter a valid email address']");
 	private By passwordError = By.xpath("//p[text()='Password must be at least 8 characters']");
-	private By phone = By.xpath("//input[@placeholder='Phone number']");
+	private By phone = By.xpath("//input[@placeholder='Phone']");
 	private By phoneError = By.xpath("//p[text()='Please enter a valid phone number']");
 	private By dob = By.xpath("//button[@name='dob']");
 	private By ownerdob = By.xpath("//button[@name='owner_dob']");
@@ -62,10 +62,10 @@ public class OrganizationSignupPage extends BasePage {
 
 	public By Country = By.xpath("(//select)[4]");
 	public By birthcountryDropdown = By.xpath("//button[@id='_r_n_-form-item']");
-	private By designation = By.xpath("(//select)[5]");
-	private By Gender = By.xpath("(//select)[6]");
+	private By designation = By.xpath("(//select)[4]");
+	private By Gender = By.xpath("(//select)[5]");
 //	private By PerCountry = By.xpath("(//select)[13]");
-	private By Peraddress = By.xpath("(//input[@placeholder='Enter proper starting address details'])[3]");
+	private By Peraddress = By.xpath("(//input[@placeholder='Enter proper starting address details'])[2]");
 	private By PeraddressCountry = By.xpath("(//select)[12]");
 	private By Perstate = By.xpath("(//select)[13]");
 	private By PerCity = By.name("city");
@@ -75,10 +75,10 @@ public class OrganizationSignupPage extends BasePage {
 	private By ownerfirstName = By.name("owner_firstname");
 	private By ownerlastName = By.name("owner_lastname");
 	private By owneremail = By.name("owner_email");
-	private By gender = By.xpath("(//select)[4]");
+	private By gender = By.xpath("(//select)[1]");
 	private By ownercountrybirth = By
 			.xpath("(//cd /home/lz-2/IdeaProjects/erp-automation && mvn -Dtest=com.erp.Signup testselect)[7]");
-	private By owneraddress = By.xpath("(//input[@placeholder='Enter proper starting address details'])[2]");
+	private By owneraddress = By.xpath("(//input[@placeholder='Enter proper starting address details'])");
 	private By ownercountry = By.xpath("(//select)[7]");
 	private By ownerstate = By.xpath("(//select)[8]");
 	private By ownercity = By.name("owner_city");
@@ -105,17 +105,17 @@ public class OrganizationSignupPage extends BasePage {
 	private By nextBtn = By.xpath("//button[normalize-space()='Create account']");
 
 	// Review
-	private By terms = By.xpath("//button[@role='checkbox']");
-	private By privacy = By.xpath("//button[@id='_r_9_-form-item']");
+	private By terms = By.xpath("(//button[@role='checkbox'])[1]");
+	private By privacy = By.xpath("(//button[@role='checkbox'])[2]");;
 	private By submitBtn = By.xpath("//button[normalize-space()='Submit for Verification']");
 	private By confirmation = By.id("confirmationMsg");
 	private By requiredErrors = By.xpath("//p[text()='Required']");
 	private By uploadedFileName = By.xpath("//p[contains(text(),'.pdf')]");
 	private By backBtn = By.xpath("//button[normalize-space()='Back']");
-	
+
 	public void selectBusinessType(String type) {
-	    By option = By.xpath("//button[.//p[normalize-space()='" + type + "']]");
-	    waitForClickability(option).click();
+		By option = By.xpath("//button[.//p[normalize-space()='" + type + "']]");
+		waitForClickability(option).click();
 	}
 
 	public String getEmailDuplicateError() {
@@ -240,6 +240,8 @@ public class OrganizationSignupPage extends BasePage {
 
 	public void selectdesignation(String value) {
 
+		click(designation);
+
 		selectDropdown(designation, value);
 	}
 
@@ -247,6 +249,16 @@ public class OrganizationSignupPage extends BasePage {
 
 		selectDropdown(Gender, value);
 
+	}
+
+	public void printGenderDropdownValues() {
+
+		Select select = new Select(driver.findElement(Gender));
+		List<WebElement> options = select.getOptions();
+
+		for (WebElement option : options) {
+			System.out.println(option.getText());
+		}
 	}
 
 //	public void selectPerCountry(String value) {
@@ -271,13 +283,18 @@ public class OrganizationSignupPage extends BasePage {
 
 	}
 
-	public void enterPeraddress(String value) throws InterruptedException {
+	public void enterPeraddress(String value) {
 //		type(Peraddress, value);
 		WebElement element = driver.findElement(Peraddress);
 		element.clear();
 
 		element.sendKeys(value);
-		Thread.sleep(2000);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		element.sendKeys(Keys.ARROW_DOWN);
 		element.sendKeys(Keys.ENTER);
 	}
@@ -453,8 +470,8 @@ public class OrganizationSignupPage extends BasePage {
 		// Wait until calendar is clickable
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-		WebElement dayElement = wait.until(
-				ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='" + day + "']")));
+		WebElement dayElement = wait
+				.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='" + day + "']")));
 
 		dayElement.click();
 	}
@@ -478,10 +495,10 @@ public class OrganizationSignupPage extends BasePage {
 		driver.findElement(By.xpath("//button[text()='" + year + "']")).click();
 
 		// Wait until calendar is clickable
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); 
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-		WebElement dayElement = wait.until(
-				ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='" + day + "']")));
+		WebElement dayElement = wait
+				.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='" + day + "']")));
 
 		dayElement.click();
 	}
@@ -517,7 +534,7 @@ public class OrganizationSignupPage extends BasePage {
 	public void clickNext() {
 		click(nextBtn);
 	}
-	
+
 	public void backbtn() {
 		click(backBtn);
 	}
@@ -555,7 +572,7 @@ public class OrganizationSignupPage extends BasePage {
 	}
 
 	public void acceptPrivacy() {
-		click(privacy);
+		waitForClickability(privacy).click();
 	}
 
 	public void clickSubmit() {
