@@ -240,9 +240,27 @@ public class OrganizationSignupPage extends BasePage {
 
 	public void selectdesignation(String value) {
 
-		click(designation);
+	    wait.until(ExpectedConditions.elementToBeClickable(designation));
 
-		selectDropdown(designation, value);
+	    // Click dropdown
+	    click(designation);
+
+	    Select dropdown = new Select(driver.findElement(designation));
+
+	    String currentValue = dropdown.getFirstSelectedOption().getText();
+
+	    // 🔥 Fix: if already selected (like "Owner")
+	    if (currentValue.equalsIgnoreCase(value)) {
+
+	        int size = dropdown.getOptions().size();
+
+	        if (size > 1) {
+	            dropdown.selectByIndex(1); // force change
+	        }
+	    }
+
+	    // ✅ Select required value
+	    dropdown.selectByVisibleText(value);
 	}
 
 	public void selectPerGender(String value) {
@@ -595,8 +613,6 @@ public class OrganizationSignupPage extends BasePage {
 		waitForClickability(startVerificationBtn).click();
 		driver.switchTo().frame(waitForVisible(By.cssSelector("iframe")));
 
-		waitForClickability(continueverificationBtn).click();
-		waitForClickability(acceptTerms).click();
 		// 👉 Stop automation here for manual verification
 		System.out.println("Complete Sumsub verification manually and press ENTER to continue...");
 		System.in.read();
@@ -605,7 +621,7 @@ public class OrganizationSignupPage extends BasePage {
 
 		driver.switchTo().defaultContent();
 
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofMinutes(2));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofMinutes(5));
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[normalize-space()='Verified']")));
 		System.out.println("Resuming Automation");
