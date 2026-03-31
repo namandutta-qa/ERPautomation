@@ -34,5 +34,3 @@ cd /home/lz-2/IdeaProjects/erp-automation && mvn -Dtest=com.erp.AffiliateTest te
 cd /home/lz-2/IdeaProjects/erp-automation && mvn -Dtest=com.erp.SocialMediaFeedPageTest test
 cd /home/lz-2/IdeaProjects/erp-automation && mvn -Dtest=com.erp.Bookmark test
 cd /home/lz-2/IdeaProjects/erp-automation && mvn -Dtest=com.erp.ChatTest test
-
-Github Token- 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
