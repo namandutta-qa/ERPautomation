@@ -1,2 +1,10 @@
-[227676:227676:0324/160738.729624:ERROR:chrome/browser/process_singleton_posix.cc:340] Failed to create /home/lz-2/ERPautomation/profiles/user1773813211554@mailinator.com/SingletonLock: File exists (17)
-[227676:227676:0324/160738.730133:ERROR:chrome/app/chrome_main_delegate.cc:514] Failed to create a ProcessSingleton for your profile directory. This means that running multiple instances would start multiple browser processes rather than opening a new window in the existing process. Aborting now to avoid profile corruption.
+[28031:28031:0331/130535.299693:WARNING:ui/ozone/platform/wayland/common/wayland_object.cc:119] Binding to zwp_pointer_gestures_v1 version 1 but version 3 is available.
+[28031:28031:0331/130535.299914:WARNING:ui/ozone/platform/wayland/common/wayland_object.cc:119] Binding to zwp_linux_dmabuf_v1 version 4 but version 5 is available.
+[28031:28031:0331/130535.482930:INFO:components/enterprise/browser/controller/chrome_browser_cloud_management_controller.cc:206] No machine level policy manager exists.
+[28031:28031:0331/130535.630667:WARNING:ui/ozone/platform/wayland/host/wayland_surface.cc:170] Server doesn't support zcr_alpha_compositing_v1.
+[28031:28031:0331/130535.630706:WARNING:ui/ozone/platform/wayland/host/wayland_surface.cc:185] Server doesn't support overlay_prioritizer.
+[28031:28031:0331/130535.630719:WARNING:ui/ozone/platform/wayland/host/wayland_surface.cc:200] Server doesn't support wp_content_type_v1
+[28031:28031:0331/130535.630731:WARNING:ui/ozone/platform/wayland/host/wayland_surface.cc:214] Server doesn't support wp_color_management_surface_v1.
+[28075:28075:0331/130535.689438:WARNING:sandbox/policy/linux/sandbox_linux.cc:404] InitializeSandbox() called with multiple threads in process gpu-process.
+[28031:28057:0331/130544.778804:ERROR:google_apis/gcm/engine/registration_request.cc:292] Registration response error message: DEPRECATED_ENDPOINT
+[28031:28057:0331/130606.277243:ERROR:google_apis/gcm/engine/registration_request.cc:292] Registration response error message: DEPRECATED_ENDPOINT

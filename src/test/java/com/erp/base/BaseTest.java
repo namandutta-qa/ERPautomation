@@ -42,12 +42,13 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 @Listeners(ExtentTestNGListener.class)
 public class BaseTest {
 
-	public WebDriver driver; 
+	public WebDriver driver;
 	protected static ExtentReports extent;
 	protected ExtentTest test;
 	String parentWindow;
 	// Centralized base URL; default can be overridden with -DbaseUrl=...
 	protected String baseUrl;
+	protected boolean isMultiUserTest = false;
 
 	// Toggle to enable/disable attaching step-level screenshots to Extent steps.
 	// Controlled via system property -DattachStepScreenshots=true|false (defaults
@@ -90,6 +91,9 @@ public class BaseTest {
 	@Parameters({ "browser" })
 	@BeforeMethod
 	public void setup(@org.testng.annotations.Optional("chrome") String browser, Method method) {
+		if (method.getName().equals("verifyParallelChat")) {
+			return;
+		}
 
 		String br = (browser == null) ? "chrome" : browser.toLowerCase();
 
@@ -115,7 +119,7 @@ public class BaseTest {
 
 		switch (br) {
 		case "firefox":
-			WebDriverManager.firefoxdriver().setup(); 
+			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver(firefoxOptions);
 			break;
 
@@ -336,7 +340,7 @@ public class BaseTest {
 		switch (role.toLowerCase()) {
 
 		case "homeowner":
-			login("jonsnow31@yopmail.com", "12345678");
+			login("tom@yopmail.com", "Test@121");
 			break;
 
 		case "contractor":
@@ -473,8 +477,9 @@ public class BaseTest {
 			throw new AssertionError("❌ No API was triggered!");
 		}
 	}
+
 	public void waitForCondition(Function<WebDriver, Boolean> condition) {
-	    new WebDriverWait(driver, Duration.ofSeconds(10)).until(condition);
+		new WebDriverWait(driver, Duration.ofSeconds(10)).until(condition);
 	}
 
 }

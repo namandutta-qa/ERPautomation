@@ -35,4 +35,4 @@ cd /home/lz-2/IdeaProjects/erp-automation && mvn -Dtest=com.erp.SocialMediaFeedP
 cd /home/lz-2/IdeaProjects/erp-automation && mvn -Dtest=com.erp.Bookmark test
 cd /home/lz-2/IdeaProjects/erp-automation && mvn -Dtest=com.erp.ChatTest test
 
-Github Token- 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
+Github Token- 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

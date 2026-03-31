@@ -36,12 +36,12 @@ public class Signup extends BaseTest {
 	}
 
 	@Test
-	public void TC_011_verifySignupFormLoads() {
+	public void TC_001_verifySignupFormLoads() {
 		Assert.assertFalse(driver.getPageSource().contains("Individual Signup"));
 	}
 
 	@Test
-	public void TC_016_to_TC_044_Valid_Data_EndtoEndflow() {
+	public void TC_002_Valid_Data_EndtoEndflow() {
 
 		step("Enter user info", () -> {
 			signupPage.enterFirstName("Mike");
@@ -162,7 +162,7 @@ signupPage.SelectGovtID(Govt);
 	}
 
 	@Test
-	public void TC_045_Back_navigation_from_businesstype() {
+	public void TC_003_Back_navigation_from_businesstype() {
 
 		step("Enter user info", () -> {
 			signupPage.enterFirstName("Mike");
@@ -248,7 +248,7 @@ signupPage.SelectGovtID(Govt);
 	}
 
 	@Test
-	public void TC_071_BackNavigationRedirectToDashboard() {
+	public void TC_004_BackNavigationRedirectToDashboard() {
 		step("Verify user is redirected to Dashboard on browser back during signup", () -> {
 
 			signupPage.enterFirstName("Mike");
@@ -345,7 +345,7 @@ signupPage.SelectGovtID(Govt);
 	}
 
 	@Test
-	public void TC_072_TermsAndPrivacyLinksValidation() {
+	public void TC_005_TermsAndPrivacyLinksValidation() {
 		step("Verify Terms of Service and Privacy Policy links do not redirect to 404", () -> {
 
 			// Click Terms of Service
@@ -385,7 +385,7 @@ signupPage.SelectGovtID(Govt);
 	}
 
 	@Test
-	public void TC_045_MandatoryFieldValidations() {
+	public void TC_006_MandatoryFieldValidations() {
 		step("Verify mandatory field validations", () -> {
 			signupPage.clickConfirm();
 			signupPage.getFirstError();
@@ -397,7 +397,7 @@ signupPage.SelectGovtID(Govt);
 	}
 
 	@Test
-	public void TC_046_InvalidEmailFormat() {
+	public void TC_007_InvalidEmailFormat() {
 		step("Enter invalid email", () -> {
 			signupPage.enterFirstName("John");
 			signupPage.enterMiddleName("");
@@ -415,7 +415,7 @@ signupPage.SelectGovtID(Govt);
 	}
 
 	@Test
-	public void TC_047_PasswordPolicyEnforcement() {
+	public void TC_008_PasswordPolicyEnforcement() {
 		step("Enter weak password", () -> {
 			signupPage.enterFirstName("John");
 			signupPage.enterMiddleName("");
@@ -433,7 +433,7 @@ signupPage.SelectGovtID(Govt);
 	}
 
 	@Test
-	public void TC_048_DOBAgeRestriction() {
+	public void TC_009_DOBAgeRestriction() {
 		step("Enter underage DOB", () -> {
 			signupPage.enterFirstName("John");
 			signupPage.enterMiddleName("");
@@ -449,7 +449,7 @@ signupPage.SelectGovtID(Govt);
 	}
 
 	@Test
-	public void TC_056_DuplicateEmailRegistration() {
+	public void TC_010_DuplicateEmailRegistration() {
 		step("Verify duplicate email is not allowed", () -> {
 			signupPage.enterFirstName("John");
 			signupPage.enterLastName("Doe");
@@ -464,20 +464,20 @@ signupPage.SelectGovtID(Govt);
 		});
 	}
 
+//	@Test
+//	public void TC_057_UsernameUniqueness() {
+//		step("Verify username uniqueness", () -> {
+//			signupPage.enterFirstName("John");
+//			signupPage.enterLastName("Doe");
+//			signupPage.clickUsernameField();
+//
+//			signupPage.clickConfirm();
+//			signupPage.enterusername("John");
+//		});
+//	}
+//
 	@Test
-	public void TC_057_UsernameUniqueness() {
-		step("Verify username uniqueness", () -> {
-			signupPage.enterFirstName("John");
-			signupPage.enterLastName("Doe");
-			signupPage.clickUsernameField();
-
-			signupPage.clickConfirm();
-			signupPage.enterusername("John");
-		});
-	}
-
-	@Test
-	public void TC_059_SpecialCharactersInName() {
+	public void TC_011_SpecialCharactersInName() {
 		step("Verify special characters in name fields", () -> {
 			signupPage.enterFirstName("@@@@");
 			signupPage.enterLastName("####");
@@ -487,7 +487,7 @@ signupPage.SelectGovtID(Govt);
 	}
 
 	@Test
-	public void TC_060_MaxLengthValidation() {
+	public void TC_012_MaxLengthValidation() {
 		step("Verify max length for fields", () -> {
 			signupPage.enterFirstName("A".repeat(256));
 			signupPage.enterLastName("B".repeat(256));
@@ -499,7 +499,7 @@ signupPage.SelectGovtID(Govt);
 	}
 
 	@Test
-	public void TC_063_MultipleSubmitClicks() {
+	public void TC_013_MultipleSubmitClicks() {
 		step("Verify multiple clicks do not create duplicate requests", () -> {
 			signupPage.enterFirstName("Mike");
 			signupPage.enterMiddleName("");
@@ -568,7 +568,7 @@ signupPage.SelectGovtID(Govt);
 		});
 
 		step("Upload GovtID document", () -> {
-signupPage.SelectGovtID("/home/lz-2/Downloads/Yodixa/ID Photo/download.jpg");
+			signupPage.SelectGovtID("/home/lz-2/Downloads/Yodixa/ID Photo/download.jpg");
 		});
 		step("Capture Selfie Verification", () -> {
 			try {
@@ -582,7 +582,7 @@ signupPage.SelectGovtID("/home/lz-2/Downloads/Yodixa/ID Photo/download.jpg");
 		step("Upload Article document", () -> {
 			signupPage.SelectAOI(Govt);
 		});
-		step("Upload GovtID document", () -> {
+		step("Upload Insurance document", () -> {
 			signupPage.SelectIOD(Govt);
 		});
 
@@ -612,7 +612,7 @@ signupPage.SelectGovtID("/home/lz-2/Downloads/Yodixa/ID Photo/download.jpg");
 	}
 
 	@Test
-	public void TC_064_NetworkFailureHandling() {
+	public void TC_014_NetworkFailureHandling() {
 
 		networkHelper networkHelper = new networkHelper((ChromeDriver) driver);
 
@@ -629,7 +629,7 @@ signupPage.SelectGovtID("/home/lz-2/Downloads/Yodixa/ID Photo/download.jpg");
 	}
 
 	@Test
-	public void TC_069_XSSInjection() {
+	public void TC_015_XSSInjection() {
 		step("Verify XSS is not executed", () -> {
 			signupPage.enterFirstName("<script>alert('XSS')</script>");
 			signupPage.clickConfirm();
@@ -638,7 +638,7 @@ signupPage.SelectGovtID("/home/lz-2/Downloads/Yodixa/ID Photo/download.jpg");
 	}
 
 	@Test
-	public void TC_070_SQLInjection() {
+	public void TC_016_SQLInjection() {
 		step("Verify SQL injection prevention", () -> {
 			signupPage.enterEmail("' OR '1'='1");
 			signupPage.clickConfirm();
@@ -647,7 +647,7 @@ signupPage.SelectGovtID("/home/lz-2/Downloads/Yodixa/ID Photo/download.jpg");
 	}
 
 	@Test
-	public void TC_049_InvalidEINFormat() {
+	public void TC_017_InvalidEINFormat() {
 		step("Enter invalid EIN", () -> {
 			testEmail = randomemailgenerator();
 
@@ -670,7 +670,7 @@ signupPage.SelectGovtID("/home/lz-2/Downloads/Yodixa/ID Photo/download.jpg");
 
 			step("Enter organization info", () -> {
 				signupPage.enterLegalName("ABC Corporation");
-				signupPage.enterEIN("213324344");
+				signupPage.enterEIN("2133241344");
 				signupPage.selectIndustryDropdown("Technology");
 				signupPage.selectCountry("United States");
 				try {
@@ -732,79 +732,10 @@ signupPage.SelectGovtID("/home/lz-2/Downloads/Yodixa/ID Photo/download.jpg");
 		});
 	}
 
-	@Test
-	public void TC_050_CountryStateDropdown() {
-		step("Verify country-state dependency", () -> {
-			testEmail = randomemailgenerator();
-
-			signupPage.enterFirstName("John");
-			signupPage.enterMiddleName("");
-			signupPage.enterLastName("Doe");
-			signupPage.clickUsernameField();
-			signupPage.enterEmail(testEmail);
-			signupPage.enterPasswordl("Test@121");
-			signupPage.enterDOB("March 1, 2008");
-			signupPage.acceptTerms();
-			signupPage.acceptPrivacy();
-			signupPage.clickConfirm();
-			signupPage.enterLegalName("ABC Corporation");
-			signupPage.enterEIN(generateRandomEIN());
-			signupPage.selectIndustryDropdown("Technology");
-			signupPage.selectCountry("United States");
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			signupPage.selectState("Georgia");
-			signupPage.enterAddress("New York Street");
-
-		});
-	}
 
 	@Test
-	public void TC_052_OwnerInformationValidations() {
-		step("Verify owner info validations", () -> {
-			testEmail = randomemailgenerator();
-
-			signupPage.enterFirstName("John");
-			signupPage.enterMiddleName("");
-			signupPage.enterLastName("Doe");
-			signupPage.clickUsernameField();
-			signupPage.enterEmail(testEmail);
-			signupPage.enterPasswordl("Test@121");
-			signupPage.enterDOB("March 1, 2008");
-			signupPage.acceptTerms();
-			signupPage.acceptPrivacy();
-			signupPage.clickConfirm();
-			signupPage.enterLegalName("ABC Corporation");
-			signupPage.enterEIN(generateRandomEIN());
-			signupPage.selectIndustryDropdown("Technology");
-			signupPage.selectCountry("United States");
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			signupPage.selectState("Georgia");
-			signupPage.enterAddress("New York Street");
-			signupPage.enterownerFirstName("");
-			signupPage.enterownerLastName("");
-			signupPage.enteronweremail("invalidEmail");
-			signupPage.clickConfirm();
-			signupPage.getFirstError();
-			signupPage.getLastError();
-			signupPage.getEmailError();
-		});
-	}
-
-	@Test
-	public void TC_053_PhoneNumberValidation() {
-		step("Verify phone number format", () -> {
-			testEmail = randomemailgenerator();
-
+	public void TC_018_OwnerInformationValidations() {
+		step("Enter user info", () -> {
 			signupPage.enterFirstName("Mike");
 			signupPage.enterMiddleName("");
 			signupPage.enterLastName("Francis");
@@ -823,7 +754,7 @@ signupPage.SelectGovtID("/home/lz-2/Downloads/Yodixa/ID Photo/download.jpg");
 
 		step("Enter organization info", () -> {
 			signupPage.enterLegalName("ABC Corporation");
-			signupPage.enterEIN("231234343");
+			signupPage.enterEIN(generateRandomEIN());
 			signupPage.selectIndustryDropdown("Technology");
 			signupPage.selectCountry("United States");
 			try {
@@ -834,69 +765,52 @@ signupPage.SelectGovtID("/home/lz-2/Downloads/Yodixa/ID Photo/download.jpg");
 			}
 			signupPage.selectState("Georgia");
 			signupPage.enterowneraddress("New York Street");
-
-			signupPage.selectdesignation(designation);
-			// System.out.println("Selected designation: " + designation);
+			this.designation = "Manager";
+			signupPage.selectdesignation("Manager");
 
 		});
 
-		if (!designation.trim().equalsIgnoreCase("Owner")) {
+		if (this.designation != null && !this.designation.trim().equalsIgnoreCase("Owner")) {
 			step("Enter owner info", () -> {
-				signupPage.enterownerFirstName("Mike");
-				signupPage.enterownerLastName("Francis");
+				signupPage.enterownerFirstName("");
+				signupPage.enterownerLastName("");
 				signupPage.enteronweremail(testEmail);
 				signupPage.ownerenterDOB("March 3, 2008");
 				signupPage.selectPerGender("Male");
 				signupPage.enterPhone("9876543210");
 				signupPage.enterPeraddress("New York Street");
+				signupPage.clickConfirm();
 
 			});
 		}
-
-		step("Click on Confirm", () -> {
-			signupPage.clickConfirm();
-		});
-
-//
-//		step("Enter current address info", () -> {
-//			signupPage.selectdesignation("Manager");
-//			signupPage.enterPhone("9876543210");
-//			signupPage.selectPerGender("Female");
-//
-//			try {
-//				signupPage.enterPeraddress("ABC");
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			try {
-//				Thread.sleep(2000);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			signupPage.clickConfirm();
-//			Assert.assertTrue(driver.getCurrentUrl().contains("information"), "Back navigation failed");
-//
-//		});
-//
-		step("Veify bussiness type", () -> {
-			signupPage.selectBusinessType("Contractor");
-			signupPage.clickConfirm();
-		});
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			signupPage.selectState("Georgia");
-			signupPage.enterAddress("New York Street");
-			signupPage.getPhoneError();
-		}
+	}
 
 	@Test
-	public void TC_054_GenderDropdownValidation() {
+	public void TC_019_PhoneNumberValidation() {
+		step("Verify phone number format", () -> {
+			testEmail = randomemailgenerator();
+
+			signupPage.enterFirstName("Mike");
+			signupPage.enterMiddleName("");
+			signupPage.enterLastName("Francis");
+			signupPage.clickUsernameField();
+			signupPage.enterEmail(testEmail);
+			signupPage.enterPasswordl("Test@121");
+			signupPage.enterPhone("98765432103");
+			signupPage.enterDOB("March 1, 2008");
+			signupPage.enterAddress("New York Street");
+			signupPage.acceptTerms();
+			signupPage.acceptPrivacy();
+			signupPage.selectgender("Male");
+			signupPage.clickConfirm();
+
+		});
+	}
+
+
+
+	@Test
+	public void TC_020_GenderDropdownValidation() {
 		step("Enter user info", () -> {
 			signupPage.enterFirstName("Mike");
 			signupPage.enterMiddleName("");
@@ -982,7 +896,7 @@ signupPage.SelectGovtID("/home/lz-2/Downloads/Yodixa/ID Photo/download.jpg");
 	}
 
 	@Test
-	public void TC_055_FileUploadValidation() {
+	public void TC_021_FileUploadValidation() {
 		step("Enter user info", () -> {
 			signupPage.enterFirstName("Mike");
 			signupPage.enterMiddleName("");
@@ -1064,10 +978,6 @@ signupPage.SelectGovtID("/home/lz-2/Downloads/Yodixa/ID Photo/download.jpg");
 			signupPage.clickConfirm();
 		});
 
-		step("Click bussiness type and click back navigation", () -> {
-			signupPage.selectBusinessType("Contractor");
-			signupPage.clickConfirm();
-		});
 		step("Upload GovtID document", () -> {
 			signupPage.SelectGovtID(Govt);
 		});
@@ -1085,56 +995,58 @@ signupPage.SelectGovtID("/home/lz-2/Downloads/Yodixa/ID Photo/download.jpg");
 	}
 
 	@Test
-	public void TC_056_MultipleDocumentUploads() {
+	public void TC_022_MultipleDocumentUploads() {
 		step("Enter user info", () -> {
+			
 			testEmail = randomemailgenerator();
-				signupPage.enterFirstName("Mike");
-				signupPage.enterMiddleName("");
-				signupPage.enterLastName("Francis");
-				signupPage.clickUsernameField();
-				signupPage.enterEmail(testEmail);
-				signupPage.enterPasswordl("Test@121");
-				signupPage.enterPhone("9876543210");
-				signupPage.enterDOB("March 1, 2008");
-				signupPage.enterAddress("New York Street");
-				signupPage.acceptTerms();
-				signupPage.acceptPrivacy();
-				signupPage.selectgender("Male");
-				signupPage.clickConfirm();
+			signupPage.enterFirstName("Mike");
+			signupPage.enterMiddleName("");
+			signupPage.enterLastName("Francis");
+			signupPage.clickUsernameField();
+			signupPage.enterEmail(testEmail);
+			signupPage.enterPasswordl("Test@121");
+			signupPage.enterPhone("9876543210");
+			signupPage.enterDOB("March 1, 2008");
+			signupPage.enterAddress("New York Street");
+			signupPage.acceptTerms();
+			signupPage.acceptPrivacy();
+			signupPage.selectgender("Male");
+			signupPage.selectgender("Female");
+			signupPage.clickConfirm();
 
-			});
+		});
 
-			step("Enter organization info", () -> {
-				signupPage.enterLegalName("ABC Corporation");
-				signupPage.enterEIN(generateRandomEIN());
-				signupPage.selectIndustryDropdown("Technology");
-				signupPage.selectCountry("United States");
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				signupPage.selectState("Georgia");
-				signupPage.enterowneraddress("New York Street");
-
-				signupPage.selectdesignation(designation);
-				// System.out.println("Selected designation: " + designation);
-
-			});
-
-			if (!designation.trim().equalsIgnoreCase("Owner")) {
-				step("Enter owner info", () -> {
-					signupPage.enterownerFirstName("Mike");
-					signupPage.enterownerLastName("Francis");
-					signupPage.enteronweremail(testEmail);
-					signupPage.ownerenterDOB("March 3, 2008");
-					signupPage.selectPerGender("Male");
-					signupPage.enterPhone("9876543210");
-					signupPage.enterPeraddress("New York Street");
-
-				});
+		step("Enter organization info", () -> {
+			signupPage.enterLegalName("ABC Corporation");
+			signupPage.enterEIN(generateRandomEIN());
+			signupPage.selectIndustryDropdown("Technology");
+			signupPage.selectCountry("United States");
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+			signupPage.selectState("Georgia");
+			signupPage.enterowneraddress("New York Street");
+
+			signupPage.selectdesignation(designation);
+			// System.out.println("Selected designation: " + designation);
+
+		});
+
+		if (!designation.trim().equalsIgnoreCase("Owner")) {
+			step("Enter owner info", () -> {
+				signupPage.enterownerFirstName("Mike");
+				signupPage.enterownerLastName("Francis");
+				signupPage.enteronweremail(testEmail);
+				signupPage.ownerenterDOB("March 3, 2008");
+				signupPage.selectPerGender("Male");
+				signupPage.enterPhone("9876543210");
+				signupPage.enterPeraddress("New York Street");
+
+			});
+		}
 
 			step("Click on Confirm", () -> {
 				signupPage.clickConfirm();

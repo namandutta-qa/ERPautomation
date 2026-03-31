@@ -10,14 +10,12 @@ public class DriverFactory {
 
 	    ChromeOptions options = new ChromeOptions();
 
-	    options.addArguments("--user-data-dir=profiles/" + userKey);
-
 	    // ✅ CRITICAL FIXES
 	    options.addArguments("--no-sandbox");
 	    options.addArguments("--disable-dev-shm-usage");
 	    options.addArguments("--disable-gpu");
 	    options.addArguments("--remote-allow-origins=*");
-
+	    options.addArguments("--disable-software-rasterizer");
 	    // Optional but helps stability
 	    options.addArguments("--disable-notifications");
 	    options.addArguments("--disable-infobars");

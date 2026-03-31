@@ -1,6 +1,7 @@
 package com.erp.pages;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.time.Duration;
@@ -23,13 +24,13 @@ public class ChatPage extends BasePage {
 	private By messageBtn = By.id("messageBtn");
 	private By userName = By.xpath("//span[@class='truncate text-sm font-semibold' and normalize-space()='%s']");
 	private By chatWindow = By.id("chatWindow");
-	private By messageInput = By.id("chatInput");
-	private By sendBtn = By.id("sendBtn");
-	private By messages = By.cssSelector(".chat-message");
-	private By deleteBtn = By.cssSelector(".delete-msg");
+	private By messageInput = By.xpath("//textarea[@placeholder='Type a message...']");
+	private By sendBtn = By.xpath("//button[@aria-label='Send message']");
+	private By messages = By.xpath("//span[starts-with(text(),'MSG_')]");
+	private By deleteBtn = By.xpath("//div[@role='menuitem' and normalize-space()='Delete']");
 	private By timestamp = By.cssSelector(".timestamp");
 	private By emojiBtn = By.id("emojiBtn");
-
+	private By threeDotMenu = By.id("radix-_r_1t_");
 	// ===== Group Locators =====
 	private By createGroupBtn = By.id("createGroupBtn");
 	private By groupNameInput = By.id("groupName");
@@ -185,13 +186,29 @@ public class ChatPage extends BasePage {
 	public boolean isGroupCreated(String groupName) {
 		return driver.getPageSource().contains(groupName);
 	}
+	public void waitForChatInput() {
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
-	// ✅ Open Chat User
+	    wait.until(ExpectedConditions.visibilityOfElementLocated(
+	        By.xpath("//textarea[@placeholder='Type a message...']")
+	    ));
+	}
+
 	public void openChatWithUser(String name) {
 
-		By user = By.xpath(String.format("//button[.//span[normalize-space()='%s']]", name));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
-		waitForClickability(user).click();
+		// 🔥 Flexible locator (handles spacing/case issues)
+		By userLocator = By.xpath("//button[.//span[contains(normalize-space(),'" + name + "')]]");
+
+		// ✅ Wait for presence first
+		WebElement user = wait.until(ExpectedConditions.presenceOfElementLocated(userLocator));
+
+		// ✅ Scroll into view (important for long lists)
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", user);
+
+		// ✅ Wait until clickable
+		wait.until(ExpectedConditions.elementToBeClickable(user)).click();
 
 		ExtentManager.getTest().info("Opened chat with user: " + name);
 	}
@@ -203,7 +220,57 @@ public class ChatPage extends BasePage {
 
 		ExtentManager.getTest().info("Sent message: " + text);
 	}
+	
+	public boolean clickThreeDotForMessage(String msg) {
 
+	    try {
+	        // 1. Pick LAST occurrence of message (IMPORTANT FIX)
+	        List<WebElement> messages = driver.findElements(
+	            By.xpath("//div[contains(@class,'group/bubble')][.//span[normalize-space()='" + msg + "']]")
+	        );
+
+	        if (messages.isEmpty()) {
+	            ExtentManager.getTest().info("Message not found: " + msg);
+	            return false;
+	        }
+
+	        WebElement message = messages.get(messages.size() - 1); // ✅ LAST MESSAGE
+
+	        // 2. Scroll into view
+	        ((JavascriptExecutor) driver).executeScript(
+	            "arguments[0].scrollIntoView({block:'center'});", message);
+
+	        // 3. Hover EXACTLY on message
+	        Actions actions = new Actions(driver);
+	        actions.moveToElement(message).pause(Duration.ofMillis(500)).perform();
+
+	        // 4. Get ALL dots
+	        List<WebElement> dots = driver.findElements(
+	            By.xpath("//button[@aria-label='Message actions']")
+	        );
+
+	        if (dots.isEmpty()) {
+	            ExtentManager.getTest().info("No 3-dot buttons found");
+	            return false;
+	        }
+
+	        // 5. Click LAST visible dot (closest to hovered message)
+	        WebElement target = dots.get(dots.size() - 1);
+
+	        try {
+	            target.click();
+	        } catch (Exception e) {
+	            // fallback
+	            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", target);
+	        }
+
+	        return true;
+
+	    } catch (Exception e) {
+	        ExtentManager.getTest().warning("Error: " + e.getMessage());
+	        return false;
+	    }
+	}
 	// ✅ Wait for Message
 	public boolean waitForMessage(String text) {
 		return new WebDriverWait(driver, Duration.ofSeconds(20))

@@ -1,127 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="0" failed="0" skipped="1">
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-03-24T15:45:31 IST" name="Chat Suite" finished-at="2026-03-24T15:46:15 IST" duration-ms="43803">
+  <suite started-at="2026-03-31T15:34:11 IST" name="Default suite" finished-at="2026-03-31T15:34:29 IST" duration-ms="18132">
     <groups>
     </groups>
-    <test started-at="2026-03-24T15:45:31 IST" name="Parallel Chat Test" finished-at="2026-03-24T15:46:15 IST" duration-ms="43803">
+    <test started-at="2026-03-31T15:34:11 IST" name="Default test" finished-at="2026-03-31T15:34:29 IST" duration-ms="18132">
       <class name="com.erp.ChatTest">
-        <test-method is-config="true" signature="startReport()[pri:0, instance:com.erp.ChatTest@5dda768f]" started-at="2026-03-24T15:45:30 IST" name="startReport" finished-at="2026-03-24T15:45:31 IST" duration-ms="436" status="PASS">
+        <test-method is-config="true" signature="startReport()[pri:0, instance:com.erp.ChatTest@1ce24091]" started-at="2026-03-31T15:34:11 IST" name="startReport" finished-at="2026-03-31T15:34:11 IST" duration-ms="416" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- startReport -->
-        <test-method is-config="true" signature="setupUsers()[pri:0, instance:com.erp.ChatTest@5dda768f]" started-at="2026-03-24T15:45:31 IST" name="setupUsers" finished-at="2026-03-24T15:46:15 IST" duration-ms="43681" status="FAIL">
-          <exception class="org.openqa.selenium.TimeoutException">
-            <message>
-              <![CDATA[Expected condition failed: waiting for visibility of element located by By.name: email (tried for 15 second(s) with 500 milliseconds interval)
-Build info: version: '4.39.0', revision: '126f156aee'
-System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.8.0-106-generic', java.version: '11.0.30'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: profiles/alex.brown17739924...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:40085}, goog:processID: 225393, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:40085/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 2653b8df3c57e5e0bc02b3ab76effd56]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.name: email (tried for 15 second(s) with 500 milliseconds interval)
-Build info: version: '4.39.0', revision: '126f156aee'
-System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.8.0-106-generic', java.version: '11.0.30'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: profiles/alex.brown17739924...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:40085}, goog:processID: 225393, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:40085/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 2653b8df3c57e5e0bc02b3ab76effd56
-at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
-at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
-at com.erp.ChatTest.login(ChatTest.java:229)
-at com.erp.ChatTest.setupUsers(ChatTest.java:175)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
-at org.testng.internal.invokers.TestMethodWorker.invokeBeforeClassMethods(TestMethodWorker.java:188)
-at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
-at org.testng.TestRunner.privateRun(TestRunner.java:741)
-at org.testng.TestRunner.run(TestRunner.java:616)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
-at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
-at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-at java.base/java.lang.Thread.run(Thread.java:829)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.TimeoutException -->
+        <test-method is-config="true" signature="setupUsers()[pri:0, instance:com.erp.ChatTest@1ce24091]" started-at="2026-03-31T15:34:11 IST" name="setupUsers" finished-at="2026-03-31T15:34:22 IST" duration-ms="10361" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setupUsers -->
-        <test-method is-config="true" signature="setup(java.lang.String,java.lang.reflect.Method)[pri:0, instance:com.erp.ChatTest@5dda768f]" started-at="2026-03-24T15:46:15 IST" name="setup" finished-at="2026-03-24T15:46:15 IST" duration-ms="0" status="SKIP">
+        <test-method is-config="true" signature="setup(java.lang.String,java.lang.reflect.Method)[pri:0, instance:com.erp.ChatTest@1ce24091]" started-at="2026-03-31T15:34:22 IST" name="setup" finished-at="2026-03-31T15:34:24 IST" duration-ms="2195" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[public void com.erp.ChatTest.verifyParallelChat()]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="verifyParallelChat()[pri:0, instance:com.erp.ChatTest@5dda768f]" started-at="2026-03-24T15:46:15 IST" name="verifyParallelChat" finished-at="2026-03-24T15:46:15 IST" duration-ms="0" status="SKIP">
-          <exception class="org.openqa.selenium.TimeoutException">
-            <message>
-              <![CDATA[Expected condition failed: waiting for visibility of element located by By.name: email (tried for 15 second(s) with 500 milliseconds interval)
-Build info: version: '4.39.0', revision: '126f156aee'
-System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.8.0-106-generic', java.version: '11.0.30'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: profiles/alex.brown17739924...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:40085}, goog:processID: 225393, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:40085/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 2653b8df3c57e5e0bc02b3ab76effd56]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.name: email (tried for 15 second(s) with 500 milliseconds interval)
-Build info: version: '4.39.0', revision: '126f156aee'
-System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.8.0-106-generic', java.version: '11.0.30'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.192, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: profiles/alex.brown17739924...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:40085}, goog:processID: 225393, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: linux, proxy: Proxy(), se:cdp: ws://localhost:40085/devtoo..., se:cdpVersion: 143.0.7499.192, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 2653b8df3c57e5e0bc02b3ab76effd56
-at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
-at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
-at com.erp.ChatTest.login(ChatTest.java:229)
-at com.erp.ChatTest.setupUsers(ChatTest.java:175)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:71)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:400)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:333)
-at org.testng.internal.invokers.TestMethodWorker.invokeBeforeClassMethods(TestMethodWorker.java:188)
-at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
-at org.testng.TestRunner.privateRun(TestRunner.java:741)
-at org.testng.TestRunner.run(TestRunner.java:616)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
-at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
-at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-at java.base/java.lang.Thread.run(Thread.java:829)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.TimeoutException -->
+        <test-method signature="verifyParallelChat()[pri:0, instance:com.erp.ChatTest@1ce24091]" started-at="2026-03-31T15:34:24 IST" name="verifyParallelChat" finished-at="2026-03-31T15:34:29 IST" duration-ms="5329" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- verifyParallelChat -->
-        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.erp.ChatTest@5dda768f]" started-at="2026-03-24T15:46:15 IST" name="tearDown" finished-at="2026-03-24T15:46:15 IST" duration-ms="0" status="SKIP">
+        <test-method is-config="true" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.erp.ChatTest@1ce24091]" started-at="2026-03-31T15:34:29 IST" name="tearDown" finished-at="2026-03-31T15:34:29 IST" duration-ms="162" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=verifyParallelChat status=SUCCESS method=ChatTest.verifyParallelChat()[pri:0, instance:com.erp.ChatTest@1ce24091] output={null}]]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.erp.ChatTest@5dda768f]" started-at="2026-03-24T15:46:15 IST" name="tearDown" finished-at="2026-03-24T15:46:15 IST" duration-ms="0" status="SKIP">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="endReport()[pri:0, instance:com.erp.ChatTest@5dda768f]" started-at="2026-03-24T15:46:15 IST" name="endReport" finished-at="2026-03-24T15:46:15 IST" duration-ms="0" status="SKIP">
+        <test-method is-config="true" signature="endReport()[pri:0, instance:com.erp.ChatTest@1ce24091]" started-at="2026-03-31T15:34:29 IST" name="endReport" finished-at="2026-03-31T15:34:30 IST" duration-ms="881" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- endReport -->
       </class> <!-- com.erp.ChatTest -->
-    </test> <!-- Parallel Chat Test -->
-  </suite> <!-- Chat Suite -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
 </testng-results>

@@ -1,33 +1,11 @@
-[226280:226280:0324/154843.600332:WARNING:ui/ozone/platform/wayland/common/wayland_object.cc:119] Binding to zwp_pointer_gestures_v1 version 1 but version 3 is available.
-[226280:226280:0324/154843.600565:WARNING:ui/ozone/platform/wayland/common/wayland_object.cc:119] Binding to zwp_linux_dmabuf_v1 version 4 but version 5 is available.
-[226280:226280:0324/154843.874802:INFO:components/enterprise/browser/controller/chrome_browser_cloud_management_controller.cc:206] No machine level policy manager exists.
-[226280:226280:0324/154844.073177:WARNING:ui/ozone/platform/wayland/host/wayland_surface.cc:170] Server doesn't support zcr_alpha_compositing_v1.
-[226280:226280:0324/154844.073234:WARNING:ui/ozone/platform/wayland/host/wayland_surface.cc:185] Server doesn't support overlay_prioritizer.
-[226280:226280:0324/154844.073251:WARNING:ui/ozone/platform/wayland/host/wayland_surface.cc:200] Server doesn't support wp_content_type_v1
-[226280:226280:0324/154844.073265:WARNING:ui/ozone/platform/wayland/host/wayland_surface.cc:214] Server doesn't support wp_color_management_surface_v1.
-[226323:226323:0324/154844.130412:WARNING:sandbox/policy/linux/sandbox_linux.cc:404] InitializeSandbox() called with multiple threads in process gpu-process.
-[226280:226280:0324/154846.162260:INFO:CONSOLE:1] "Pusher :  : ["The disableStats option is deprecated in favor of enableStats"]", source: https://yodixa.lusites.xyz/_next/static/chunks/e3b49795274b77b5.js?dpl=dpl_ATAnCToCi2TTQ5ahtd2u9CXAbczm (1)
-[226280:226280:0324/154846.170296:INFO:CONSOLE:1] "Pusher :  : ["State changed","initialized -> connecting"]", source: https://yodixa.lusites.xyz/_next/static/chunks/e3b49795274b77b5.js?dpl=dpl_ATAnCToCi2TTQ5ahtd2u9CXAbczm (1)
-[226280:226280:0324/154846.178932:INFO:CONSOLE:1] "Pusher :  : ["Connecting",{"transport":"ws","url":"wss://yodixa-dev.lusites.xyz:6001/app/7de17331be0146e8a264535c21b177fc?protocol=7&client=js&version=8.4.0&flash=false"}]", source: https://yodixa.lusites.xyz/_next/static/chunks/e3b49795274b77b5.js?dpl=dpl_ATAnCToCi2TTQ5ahtd2u9CXAbczm (1)
-[226280:226280:0324/154846.343576:INFO:CONSOLE:1] "Pusher :  : ["State changed","connecting -> connected with new socket ID 8605822539.254800310"]", source: https://yodixa.lusites.xyz/_next/static/chunks/e3b49795274b77b5.js?dpl=dpl_ATAnCToCi2TTQ5ahtd2u9CXAbczm (1)
-[226280:226280:0324/154846.575842:INFO:CONSOLE:1] "Pusher :  : ["Event sent",{"event":"pusher:subscribe","data":{"auth":"7de17331be0146e8a264535c21b177fc:efe304e65e05585ce56d77c9b2a0a2fd06b1ad3669b7e528d0cb972f37b90f79","channel":"private-user-aec0cc2f-f9f6-4b0a-8330-0aa9dc01d3d5"}}]", source: https://yodixa.lusites.xyz/_next/static/chunks/e3b49795274b77b5.js?dpl=dpl_ATAnCToCi2TTQ5ahtd2u9CXAbczm (1)
-[226280:226280:0324/154846.737878:INFO:CONSOLE:1] "Pusher :  : ["Event recd",{"event":"pusher_internal:subscription_succeeded","channel":"private-user-aec0cc2f-f9f6-4b0a-8330-0aa9dc01d3d5"}]", source: https://yodixa.lusites.xyz/_next/static/chunks/e3b49795274b77b5.js?dpl=dpl_ATAnCToCi2TTQ5ahtd2u9CXAbczm (1)
-[226280:226280:0324/154846.739237:INFO:CONSOLE:1] "Pusher :  : ["No callbacks on private-user-aec0cc2f-f9f6-4b0a-8330-0aa9dc01d3d5 for pusher:subscription_succeeded"]", source: https://yodixa.lusites.xyz/_next/static/chunks/e3b49795274b77b5.js?dpl=dpl_ATAnCToCi2TTQ5ahtd2u9CXAbczm (1)
-[226280:226305:0324/154850.006487:ERROR:google_apis/gcm/engine/registration_request.cc:292] Registration response error message: DEPRECATED_ENDPOINT
-[226280:226305:0324/154915.804401:ERROR:google_apis/gcm/engine/registration_request.cc:292] Registration response error message: DEPRECATED_ENDPOINT
-[226280:226280:0324/154916.740809:INFO:CONSOLE:1] "Pusher :  : ["Event sent",{"event":"pusher:ping","data":{}}]", source: https://yodixa.lusites.xyz/_next/static/chunks/e3b49795274b77b5.js?dpl=dpl_ATAnCToCi2TTQ5ahtd2u9CXAbczm (1)
-[226280:226280:0324/154916.774270:INFO:CONSOLE:1] "Pusher :  : ["Event recd",{"event":"pusher:pong","data":{}}]", source: https://yodixa.lusites.xyz/_next/static/chunks/e3b49795274b77b5.js?dpl=dpl_ATAnCToCi2TTQ5ahtd2u9CXAbczm (1)
-[226280:226280:0324/154946.774710:INFO:CONSOLE:1] "Pusher :  : ["Event sent",{"event":"pusher:ping","data":{}}]", source: https://yodixa.lusites.xyz/_next/static/chunks/e3b49795274b77b5.js?dpl=dpl_ATAnCToCi2TTQ5ahtd2u9CXAbczm (1)
-[226280:226280:0324/154946.828237:INFO:CONSOLE:1] "Pusher :  : ["Event recd",{"event":"pusher:pong","data":{}}]", source: https://yodixa.lusites.xyz/_next/static/chunks/e3b49795274b77b5.js?dpl=dpl_ATAnCToCi2TTQ5ahtd2u9CXAbczm (1)
-[226280:226305:0324/155010.063079:ERROR:google_apis/gcm/engine/registration_request.cc:292] Registration response error message: DEPRECATED_ENDPOINT
-[226280:226280:0324/155016.829879:INFO:CONSOLE:1] "Pusher :  : ["Event sent",{"event":"pusher:ping","data":{}}]", source: https://yodixa.lusites.xyz/_next/static/chunks/e3b49795274b77b5.js?dpl=dpl_ATAnCToCi2TTQ5ahtd2u9CXAbczm (1)
-[226280:226280:0324/155016.863589:INFO:CONSOLE:1] "Pusher :  : ["Event recd",{"event":"pusher:pong","data":{}}]", source: https://yodixa.lusites.xyz/_next/static/chunks/e3b49795274b77b5.js?dpl=dpl_ATAnCToCi2TTQ5ahtd2u9CXAbczm (1)
-[226280:226280:0324/155021.528590:INFO:CONSOLE:1] "Pusher :  : ["The disableStats option is deprecated in favor of enableStats"]", source: https://yodixa.lusites.xyz/_next/static/chunks/e3b49795274b77b5.js?dpl=dpl_ATAnCToCi2TTQ5ahtd2u9CXAbczm (1)
-[226280:226280:0324/155021.530253:INFO:CONSOLE:1] "Pusher :  : ["State changed","initialized -> connecting"]", source: https://yodixa.lusites.xyz/_next/static/chunks/e3b49795274b77b5.js?dpl=dpl_ATAnCToCi2TTQ5ahtd2u9CXAbczm (1)
-[226280:226280:0324/155021.534469:INFO:CONSOLE:1] "Pusher :  : ["Connecting",{"transport":"ws","url":"wss://yodixa-dev.lusites.xyz:6001/app/7de17331be0146e8a264535c21b177fc?protocol=7&client=js&version=8.4.0&flash=false"}]", source: https://yodixa.lusites.xyz/_next/static/chunks/e3b49795274b77b5.js?dpl=dpl_ATAnCToCi2TTQ5ahtd2u9CXAbczm (1)
-[226280:226280:0324/155021.693029:INFO:CONSOLE:1] "Uncaught TypeError: e_.map is not a function", source: https://yodixa.lusites.xyz/_next/static/chunks/a3d0de102194d0b9.js?dpl=dpl_ATAnCToCi2TTQ5ahtd2u9CXAbczm (1)
-[226280:226280:0324/155021.695911:INFO:CONSOLE:1] "Pusher :  : ["State changed","connecting -> disconnected"]", source: https://yodixa.lusites.xyz/_next/static/chunks/e3b49795274b77b5.js?dpl=dpl_ATAnCToCi2TTQ5ahtd2u9CXAbczm (1)
-[226280:226280:0324/155144.017906:ERROR:services/on_device_model/public/cpp/service_client.cc:36] Unexpected on_device_model service disconnect: Error loading backend.
-[226280:226305:0324/155155.178217:ERROR:google_apis/gcm/engine/registration_request.cc:292] Registration response error message: DEPRECATED_ENDPOINT
-[226280:226305:0324/155514.819981:ERROR:google_apis/gcm/engine/registration_request.cc:292] Registration response error message: DEPRECATED_ENDPOINT
-[226280:226305:0324/160114.151361:ERROR:google_apis/gcm/engine/registration_request.cc:292] Registration response error message: DEPRECATED_ENDPOINT
+[28374:28374:0331/130545.359353:WARNING:ui/ozone/platform/wayland/common/wayland_object.cc:119] Binding to zwp_pointer_gestures_v1 version 1 but version 3 is available.
+[28374:28374:0331/130545.359564:WARNING:ui/ozone/platform/wayland/common/wayland_object.cc:119] Binding to zwp_linux_dmabuf_v1 version 4 but version 5 is available.
+[28374:28374:0331/130545.620071:INFO:components/enterprise/browser/controller/chrome_browser_cloud_management_controller.cc:206] No machine level policy manager exists.
+[28374:28374:0331/130545.756839:WARNING:ui/ozone/platform/wayland/host/wayland_surface.cc:170] Server doesn't support zcr_alpha_compositing_v1.
+[28374:28374:0331/130545.756892:WARNING:ui/ozone/platform/wayland/host/wayland_surface.cc:185] Server doesn't support overlay_prioritizer.
+[28374:28374:0331/130545.756910:WARNING:ui/ozone/platform/wayland/host/wayland_surface.cc:200] Server doesn't support wp_content_type_v1
+[28374:28374:0331/130545.756924:WARNING:ui/ozone/platform/wayland/host/wayland_surface.cc:214] Server doesn't support wp_color_management_surface_v1.
+[28417:28417:0331/130545.846450:WARNING:sandbox/policy/linux/sandbox_linux.cc:404] InitializeSandbox() called with multiple threads in process gpu-process.
+[28374:28399:0331/130552.693741:ERROR:google_apis/gcm/engine/registration_request.cc:292] Registration response error message: DEPRECATED_ENDPOINT
+[28419:28439:0331/130607.911767:WARNING:net/extras/sqlite/sqlite_persistent_store_backend_base.cc:176] Failed to post task from FlushAndNotifyInBackground@net/extras/sqlite/sqlite_persistent_store_backend_base.cc:226 to client_task_runner_.
+[28419:28439:0331/130607.912074:WARNING:net/extras/sqlite/sqlite_persistent_store_backend_base.cc:176] Failed to post task from FlushAndNotifyInBackground@net/extras/sqlite/sqlite_persistent_store_backend_base.cc:226 to client_task_runner_.
