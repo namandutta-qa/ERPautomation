@@ -23,12 +23,14 @@ public class ChatPage extends BasePage {
 	// ===== Common Locators =====
 	private By messageBtn = By.id("messageBtn");
 	private By userName = By.xpath("//span[@class='truncate text-sm font-semibold' and normalize-space()='%s']");
-	private By chatWindow = By.id("chatWindow");
+	private By chatWindow = By.xpath("//div[contains(@class,'overflow-y-auto') and contains(@class,'flex-1')]");
 	private By messageInput = By.xpath("//textarea[@placeholder='Type a message...']");
 	private By sendBtn = By.xpath("//button[@aria-label='Send message']");
-	private By messages = By.xpath("//span[starts-with(text(),'MSG_')]");
-	private By deleteBtn = By.xpath("//div[@role='menuitem' and normalize-space()='Delete']");
-	private By timestamp = By.cssSelector(".timestamp");
+	private By getMessages(String text) {
+	    return By.xpath("//div[contains(@class,'relative')][.//span[normalize-space()='" + text + "']]");
+	}
+//	private By deleteBtn = By.xpath("//div[@role='menuitem' and normalize-space()='Delete']");
+	private By timestamp = By.xpath("//span[normalize-space()='MSG_1775108997000_01']/ancestor::div[contains(@class,'relative')]//time");
 	private By emojiBtn = By.id("emojiBtn");
 	private By threeDotMenu = By.id("radix-_r_1t_");
 	// ===== Group Locators =====
@@ -154,17 +156,27 @@ public class ChatPage extends BasePage {
 	}
 
 	public boolean isMessageDisplayed(String text) {
-		List<WebElement> allMessages = driver.findElements(messages);
-		return allMessages.stream().anyMatch(e -> e.getText().contains(text));
+	    try {
+	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+	        WebElement message = wait.until(ExpectedConditions.visibilityOfElementLocated(
+	            By.xpath("//div[contains(@class,'relative')][.//span[normalize-space()='" + text + "']]")
+	        ));
+
+	        return message.isDisplayed();
+
+	    } catch (Exception e) {
+	        return false;
+	    }
 	}
 
 	public boolean isTimestampDisplayed() {
 		return driver.findElements(timestamp).size() > 0;
 	}
 
-	public void deleteOwnMessage() {
-		waitForClickability(deleteBtn).click();
-	}
+//	public void deleteOwnMessage() {
+//		waitForClickability(deleteBtn).click();
+//	}
 
 	public boolean isChatWindowVisible() {
 		return driver.findElements(chatWindow).size() > 0;
@@ -186,12 +198,12 @@ public class ChatPage extends BasePage {
 	public boolean isGroupCreated(String groupName) {
 		return driver.getPageSource().contains(groupName);
 	}
-	public void waitForChatInput() {
-	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
-	    wait.until(ExpectedConditions.visibilityOfElementLocated(
-	        By.xpath("//textarea[@placeholder='Type a message...']")
-	    ));
+	public void waitForChatInput() {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+		wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath("//textarea[@placeholder='Type a message...']")));
 	}
 
 	public void openChatWithUser(String name) {
@@ -220,60 +232,54 @@ public class ChatPage extends BasePage {
 
 		ExtentManager.getTest().info("Sent message: " + text);
 	}
-	
-	public boolean clickThreeDotForMessage(String msg) {
 
+	public boolean deleteOwnMessage(String msg) {
 	    try {
-	        // 1. Pick LAST occurrence of message (IMPORTANT FIX)
-	        List<WebElement> messages = driver.findElements(
-	            By.xpath("//div[contains(@class,'group/bubble')][.//span[normalize-space()='" + msg + "']]")
+	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+	        // 1. Locate message container (parent div)
+	        WebElement messageContainer = wait.until(ExpectedConditions.visibilityOfElementLocated(
+	                By.xpath("//span[normalize-space()='" + msg + "']/ancestor::div[contains(@class,'relative')]")
+	        ));
+
+	        // 2. Hover on message (to reveal 3 dots)
+	        new Actions(driver).moveToElement(messageContainer).perform();
+
+	        // 3. Find 3-dot button INSIDE that message only
+	        WebElement threeDots = messageContainer.findElement(
+	                By.xpath(".//button[@aria-label='Message actions']")
 	        );
 
-	        if (messages.isEmpty()) {
-	            ExtentManager.getTest().info("Message not found: " + msg);
-	            return false;
-	        }
+	        // 4. Click 3 dots
+	        threeDots.click();
 
-	        WebElement message = messages.get(messages.size() - 1); // ✅ LAST MESSAGE
+	        // 5. Click Delete option
+	        WebElement deleteBtn = wait.until(ExpectedConditions.elementToBeClickable(
+	                By.xpath("//div[@role='menuitem' and normalize-space()='Delete']")
+	        ));
 
-	        // 2. Scroll into view
-	        ((JavascriptExecutor) driver).executeScript(
-	            "arguments[0].scrollIntoView({block:'center'});", message);
+	        deleteBtn.click();
 
-	        // 3. Hover EXACTLY on message
-	        Actions actions = new Actions(driver);
-	        actions.moveToElement(message).pause(Duration.ofMillis(500)).perform();
-
-	        // 4. Get ALL dots
-	        List<WebElement> dots = driver.findElements(
-	            By.xpath("//button[@aria-label='Message actions']")
-	        );
-
-	        if (dots.isEmpty()) {
-	            ExtentManager.getTest().info("No 3-dot buttons found");
-	            return false;
-	        }
-
-	        // 5. Click LAST visible dot (closest to hovered message)
-	        WebElement target = dots.get(dots.size() - 1);
-
-	        try {
-	            target.click();
-	        } catch (Exception e) {
-	            // fallback
-	            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", target);
-	        }
-
+	        System.out.println("Message deleted: " + msg);
 	        return true;
 
 	    } catch (Exception e) {
-	        ExtentManager.getTest().warning("Error: " + e.getMessage());
+	        System.out.println("Error deleting message: " + e.getMessage());
 	        return false;
 	    }
 	}
-	// ✅ Wait for Message
-	public boolean waitForMessage(String text) {
-		return new WebDriverWait(driver, Duration.ofSeconds(20))
-				.until(d -> driver.findElements(messages).stream().anyMatch(e -> e.getText().contains(text)));
+
+	public boolean waitForMessageVisible(String msg) {
+	    try {
+	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+	        wait.until(ExpectedConditions.visibilityOfElementLocated(
+	                By.xpath("//span[normalize-space()='" + msg + "']")
+	        ));
+
+	        return true;
+	    } catch (Exception e) {
+	        return false;
+	    }
 	}
 }
