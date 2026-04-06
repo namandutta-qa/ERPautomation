@@ -2,9 +2,8 @@ package com.erp;
 
 import java.lang.reflect.Method;
 import java.time.Duration;
-import java.util.HashMap;
 import java.util.Map;
-
+import java.util.concurrent.ConcurrentHashMap;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,6 +12,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import com.erp.base.BaseTest;
 import com.erp.pages.ChatPage;
+import com.erp.pages.LoginPage;
 import com.erp.utils.DriverFactory;
 import com.erp.utils.ExtentManager;
 
@@ -24,7 +24,7 @@ public class ChatTest extends BaseTest {
 	@BeforeMethod
 	public void setupRole(Method method) throws InterruptedException {
 
-		// 🚫 Skip normal setup for multi-user test
+		// Skip normal setup for multi-user test
 		if (method.getName().equals("verifyParallelChat"))
 			return;
 
@@ -39,85 +39,55 @@ public class ChatTest extends BaseTest {
 
 	@Test
 	public void TC_207_OpenOneToOneChat() {
-		ExtentManager.getTest().info("TC_207: Open one-to-one chat");
-		chat.openChatWithUser("Sara kligton");
-		Assert.assertTrue(chat.isChatWindowVisible());
-
-		ExtentManager.getTest().pass("Chat window opened and visible");
+		step("TC_207: Open one-to-one chat", () -> {
+			chat.openChatWithUser("Sara kligton");
+			Assert.assertTrue(chat.isChatWindowVisible());
+		});
 	}
 
 	@Test
 	public void TC_208_SendTextMessage() {
-		
-		chat.openChatWithUser("Sara kligton");
-		ExtentManager.getTest().info("TC_208: Send text message");
+		step("TC_208: Send text message", () -> {
+			chat.openChatWithUser("Sara kligton");
 
-		String msg = "Hello Automation";
-		chat.sendMessage(msg);
+			String msg = "Hello Automation";
+			chat.sendMessage(msg);
 
-		Assert.assertTrue(chat.isMessageDisplayed(msg));
-		ExtentManager.getTest().pass("Message sent and displayed");
+			Assert.assertTrue(chat.isMessageDisplayed(msg));
+		});
 	}
 
 	@Test
 	public void TC_210_VerifyTimestamp() {
-		ExtentManager.getTest().info("TC_210: Verify timestamp");
-
-		Assert.assertTrue(chat.isTimestampDisplayed());
-		ExtentManager.getTest().pass("Timestamp verified");
+		step("TC_210: Verify timestamp", () -> {
+			chat.openChatWithUser("Sara kligton");
+			Assert.assertTrue(chat.isTimestampDisplayed());
+		});
 	}
+
 	@Test
 	public void TC_211_MessagePersistenceAfterRefresh() {
-		ExtentManager.getTest().info("TC_211: Message persistence");
-		chat.openChatWithUser("Sara kligton");
-		String msg = "Persistent Message";
-		chat.sendMessage(msg);
+		step("TC_211: Message persistence after refresh", () -> {
+			chat.openChatWithUser("Sara kligton");
+			String msg = "Persistent Message";
+			chat.sendMessage(msg);
 
-		driver.navigate().refresh();
+			driver.navigate().refresh();
 
-		Assert.assertTrue(chat.isMessageDisplayed(msg));
-		ExtentManager.getTest().pass("Message persisted");
+			Assert.assertTrue(chat.isMessageDisplayed(msg));
+		});
 	}
 
 	@Test
 	public void TC_214_DeleteOwnMessage() {
-		ExtentManager.getTest().info("TC_214: Delete message");
-
-		chat.openChatWithUser("Sara kligton");
-		chat.deleteOwnMessage("MSG_1775108997000_01");
-		ExtentManager.getTest().pass("Message deleted");
+		step("TC_214: Delete own message", () -> {
+			chat.openChatWithUser("Sara kligton");
+			chat.deleteOwnMessage("MSG_1775108997000_01");
+			// deleteOwnMessage already returns boolean; assert if desired
+			// Assert.assertTrue(chat.deleteOwnMessage("MSG_1775108997000_01"));
+		});
 	}
-////
-////	@Test
-////	public void TC_216_CreateGroup() {
-////		ExtentManager.getTest().info("TC_216: Create group");
-////
-////		String groupName = "AutomationGroup";
-////		chat.createGroup(groupName, "testUser2");
-////
-////		Assert.assertTrue(chat.isGroupCreated(groupName));
-////		ExtentManager.getTest().pass("Group created");
-////	}
-////
-////	@Test
-////	public void TC_217_SendGroupMessage() {
-////		ExtentManager.getTest().info("TC_217: Send group message");
-////
-////		String msg = "Hello Group";
-////		chat.sendMessage(msg);
-////
-////		Assert.assertTrue(chat.isMessageDisplayed(msg));
-////		ExtentManager.getTest().pass("Group message sent");
-////	}
-////
-////	@Test
-////	public void TC_224_RemoveMember() {
-////		ExtentManager.getTest().info("TC_224: Remove member");
-////
-////		chat.removeMember();
-////		ExtentManager.getTest().pass("Member removed");
-////	}
-//
+
 	// ================= MULTI USER SETUP =================
 
 	private static final Map<String, String> userPasswordMap = Map.of("tom@yopmail.com", "Test@121", "sara@yopmail.com",
@@ -128,24 +98,50 @@ public class ChatTest extends BaseTest {
 
 	private static final String[] users = { "tom@yopmail.com", "sara@yopmail.com" };
 
-	private static Map<String, ChatPage> chatMap = new HashMap<>();
-	private static Map<String, WebDriver> driverMap = new HashMap<>();
+	// Use concurrent maps to avoid race issues if tests are run in parallel
+	private static Map<String, ChatPage> chatMap = new ConcurrentHashMap<>();
+	private static Map<String, WebDriver> driverMap = new ConcurrentHashMap<>();
 
-	@BeforeMethod
+	// Ensure this runs for the parallel chat setup when needed
+	@BeforeMethod(alwaysRun = true)
 	public void setupMultiUser(Method method) {
 
 		if (!method.getName().equals("verifyParallelChat"))
 			return;
 
-		for (String user : users) {
+		// Ensure partial resources are cleaned if an exception happens during setup
+		try {
+			for (String user : users) {
 
-			WebDriver driver = DriverFactory.createDriver(user);
-			driverMap.put(user, driver);
+				WebDriver driver = DriverFactory.createDriver(user);
+				driverMap.put(user, driver);
 
-			login(driver, user, userPasswordMap.get(user));
-			driver.get("https://yodixa.lusites.xyz/app/messages");
+				// Use LoginPage to perform login to keep login logic centralized
+				driver.get(getBaseUrl());
+				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("email")));
 
-			chatMap.put(user, new ChatPage(driver));
+				LoginPage loginPage = new LoginPage(driver);
+				loginPage.enterEmail(user);
+				loginPage.enterPassword(userPasswordMap.get(user));
+				loginPage.clickLogin();
+
+				// Navigate to messages after successful login
+				driver.get(getBaseUrl() + "/messages");
+
+				chatMap.put(user, new ChatPage(driver));
+			}
+		} catch (Exception e) {
+			// Quit any drivers that were created before failing to avoid leaks
+			driverMap.values().forEach(d -> {
+				try {
+					d.quit();
+				} catch (Exception ignored) {
+				}
+			});
+			driverMap.clear();
+			chatMap.clear();
+			throw e instanceof RuntimeException ? (RuntimeException) e : new RuntimeException(e);
 		}
 	}
 
@@ -188,30 +184,20 @@ public class ChatTest extends BaseTest {
 
 	// ================= CLEANUP =================
 
-	@AfterMethod
+	@AfterMethod(alwaysRun = true)
 	public void cleanMultiUser(Method method) {
 
 		if (!method.getName().equals("verifyParallelChat"))
 			return;
 
-		driverMap.values().forEach(WebDriver::quit);
+		// quit drivers defensively
+		driverMap.values().forEach(d -> {
+			try {
+				d.quit();
+			} catch (Exception ignored) {
+			}
+		});
 		driverMap.clear();
 		chatMap.clear();
-	}
-
-	// ================= LOGIN HELPER =================
-
-	private void login(WebDriver driver, String email, String password) {
-
-		driver.get("https://yodixa.lusites.xyz/app");
-
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("email"))).sendKeys(email);
-		driver.findElement(By.name("password")).sendKeys(password);
-
-		driver.findElement(By.xpath("//button[normalize-space()='Sign in']")).click();
-
-		wait.until(ExpectedConditions.urlContains("/app"));
 	}
 }

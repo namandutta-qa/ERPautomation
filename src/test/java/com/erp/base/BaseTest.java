@@ -38,6 +38,7 @@ import com.erp.utils.ExtentTestNGListener;
 
 // WebDriverManager import 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.JavascriptExecutor;
 
 @Listeners(ExtentTestNGListener.class)
 public class BaseTest {
@@ -146,7 +147,10 @@ public class BaseTest {
 		}
 
 		// 🔥 DevTools Setup
-		if (driver instanceof ChromeDriver) {
+		// Enable DevTools logging only when explicitly requested to avoid noisy infinite
+		// network logs (default: disabled)
+		boolean enableDevTools = Boolean.parseBoolean(System.getProperty("enableDevTools", "false"));
+		if (enableDevTools && driver instanceof ChromeDriver) {
 
 			devTools = ((ChromeDriver) driver).getDevTools();
 			devTools.createSession();
@@ -160,6 +164,56 @@ public class BaseTest {
 
 			// Store all API logs dynamically
 			List<String> apiLogs = new ArrayList<>();
+
+			// Map to correlate requestId -> request payload (postData)
+			final Map<String, String> requestPayloads = new HashMap<>();
+
+			// Map to correlate requestId -> action id (from page header)
+			final Map<String, String> requestActionIds = new HashMap<>();
+
+			// Listener for request -> capture payload (if any)
+			devTools.addListener(Network.requestWillBeSent(), request -> {
+				try {
+					String reqId = request.getRequestId().toString();
+					String url = request.getRequest().getUrl();
+					String httpMethod = request.getRequest().getMethod();
+					String postData = "";
+					if (request.getRequest().getPostData().isPresent()) {
+						postData = request.getRequest().getPostData().get();
+					}
+
+					// capture test action id from headers if present
+					String actionId = "";
+					try {
+						Map<String, Object> headers = request.getRequest().getHeaders();
+						if (headers != null && headers.containsKey("X-Test-Action-Id")) {
+							actionId = String.valueOf(headers.get("X-Test-Action-Id"));
+						}
+					} catch (Exception ignore) {
+					}
+
+					// store for correlation with response
+					requestPayloads.put(reqId, postData);
+					requestActionIds.put(reqId, actionId);
+
+					// Print concise request info
+					if (postData == null || postData.isEmpty()) {
+						if (actionId == null || actionId.isEmpty()) {
+							System.out.println("[API REQUEST] " + httpMethod + " " + url + " (no payload)");
+						} else {
+							System.out.println("[API REQUEST] " + httpMethod + " " + url + " (no payload) [actionId=" + actionId + "]");
+						}
+					} else {
+						if (actionId == null || actionId.isEmpty()) {
+							System.out.println("[API REQUEST] " + httpMethod + " " + url + " PAYLOAD: " + postData);
+						} else {
+							System.out.println("[API REQUEST] " + httpMethod + " " + url + " PAYLOAD: " + postData + " [actionId=" + actionId + "]");
+						}
+					}
+				} catch (Exception e) {
+					System.err.println("[DevTools] Error in requestWillBeSent listener: " + e.getMessage());
+				}
+			});
 
 			devTools.addListener(Network.responseReceived(), response -> {
 
@@ -176,9 +230,38 @@ public class BaseTest {
 
 					apiLogs.add(log);
 
-					System.out.println("➡️ " + url);
-					System.out.println("⬅️ Status: " + status);
-					System.out.println("📦 Body: " + responseBody);
+					// Retrieve request payload if captured
+					String reqId = response.getRequestId().toString();
+					String requestPayload = requestPayloads.getOrDefault(reqId, "");
+					String actionId = requestActionIds.getOrDefault(reqId, "");
+
+					// Print request + response details
+					if (status >= 400) {
+						if (actionId == null || actionId.isEmpty()) {
+							System.out.println("[API RESPONSE] " + url + " | Status: " + status);
+						} else {
+							System.out.println("[API RESPONSE] " + url + " | Status: " + status + " [actionId=" + actionId + "]");
+						}
+						if (!requestPayload.isEmpty()) {
+							System.out.println("  -> Request payload: " + requestPayload);
+						}
+						System.out.println("  -> Response body: " + responseBody);
+					} else {
+						// For non-error responses print concise line + payload if present
+						if (requestPayload.isEmpty()) {
+							if (actionId == null || actionId.isEmpty()) {
+								System.out.println("[API] " + url + " | Status: " + status + " (no payload)");
+							} else {
+								System.out.println("[API] " + url + " | Status: " + status + " (no payload) [actionId=" + actionId + "]");
+							}
+						} else {
+							if (actionId == null || actionId.isEmpty()) {
+								System.out.println("[API] " + url + " | Status: " + status + " | Payload: " + requestPayload);
+							} else {
+								System.out.println("[API] " + url + " | Status: " + status + " | Payload: " + requestPayload + " [actionId=" + actionId + "]");
+							}
+						}
+					}
 
 					apiCalled.set(true);
 
@@ -187,8 +270,12 @@ public class BaseTest {
 						failedApis.add(log);
 					}
 
+					// cleanup correlated payload
+					requestPayloads.remove(reqId);
+					requestActionIds.remove(reqId);
+
 				} catch (Exception e) {
-					System.out.println("⚠️ Failed to read response body: " + url);
+					System.out.println("[DevTools] ⚠️ Failed to read response body: " + url + " -> " + e.getMessage());
 				}
 			});
 
@@ -268,7 +355,7 @@ public class BaseTest {
 					} else if (screenshotPath != null) {
 						try {
 							ExtentManager.getTest().pass("Test Passed",
-									MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+								MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
 							ExtentManager.getTest().info("Screenshot saved to: " + screenshotPath);
 						} catch (Exception e) {
 							ExtentManager.getTest().pass("Test Passed");
@@ -317,6 +404,16 @@ public class BaseTest {
 			ExtentManager.getTest().info("Navigated to: " + url);
 		} catch (Exception e) {
 			// If extent test not ready, ignore logging to avoid breaking navigation
+		}
+
+		// If DevTools is enabled attempt to inject a small script that tags clicks with
+		// an action id and patches fetch/XHR to add header X-Test-Action-Id so we can
+		// correlate UI actions with network calls.
+		try {
+			if (devTools != null && driver instanceof JavascriptExecutor) {
+				injectActionCorrelationScript();
+			}
+		} catch (Exception ignore) {
 		}
 	}
 
@@ -480,6 +577,32 @@ public class BaseTest {
 
 	public void waitForCondition(Function<WebDriver, Boolean> condition) {
 		new WebDriverWait(driver, Duration.ofSeconds(10)).until(condition);
+	}
+
+	/**
+	 * Injects a small script into the current page that tags click actions with a
+	 * generated action id and patches fetch + XMLHttpRequest to append a header
+	 * 'X-Test-Action-Id'. This header is then captured by DevTools listeners so
+	 * we can correlate UI actions with network requests.
+	 */
+	private void injectActionCorrelationScript() {
+		try {
+			String script = "(function(){"
+				+ "if(window.__testActionTrackerInstalled) return;"
+				+ "window.__testActionTrackerInstalled=true;"
+				+ "window.__testActionIdCounter=0;"
+				+ "window.__nextActionId=function(){return Date.now()+'-'+(++window.__testActionIdCounter);};"
+				+ "window.__currentActionId='';"
+				+ "document.addEventListener('click', function(e){try{window.__currentActionId = window.__nextActionId();}catch(e){}}, true);"
+				+ "if(window.fetch){const _fetch = window.fetch.bind(window);window.fetch = function(input, init){try{var action = window.__currentActionId || ''; if(!init) init = {}; if(!init.headers) init.headers = {}; init.headers['X-Test-Action-Id']=action;}catch(e){}; return _fetch(input, init);} }"
+				+ "(function(){ var origOpen = XMLHttpRequest.prototype.open; var origSend = XMLHttpRequest.prototype.send; XMLHttpRequest.prototype.open = function(method, url, async, user, password){ this.__url = url; return origOpen.apply(this, arguments); }; XMLHttpRequest.prototype.send = function(body){ try{ var action = window.__currentActionId || ''; this.setRequestHeader && this.setRequestHeader('X-Test-Action-Id', action);}catch(e){} return origSend.apply(this, arguments); }; })();"
+				+ "})();";
+
+			((JavascriptExecutor) driver).executeScript(script);
+		} catch (Exception e) {
+			// don't fail navigation if injection fails
+			System.err.println("[DevTools] Failed to inject action-correlation script: " + e.getMessage());
+		}
 	}
 
 }

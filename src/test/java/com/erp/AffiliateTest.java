@@ -13,6 +13,8 @@ import org.testng.annotations.Test;
 import com.erp.base.BaseTest;
 import com.erp.pages.AffiliatePage;
 import com.erp.pages.IndividualSignUpPage;
+import com.erp.utils.NetworkLogger;
+import org.openqa.selenium.devtools.DevTools;
 
 public class AffiliateTest extends BaseTest {
 
@@ -50,9 +52,23 @@ public class AffiliateTest extends BaseTest {
 
 		String referralLink = affiliate.handleTermsAndGetLink();
 
-	    // ✅ Create new browser session
+	    // ✅ Create new browser session using raw ChromeDriver but attach DevTools logger
 	    WebDriver newDriver = new ChromeDriver(); // or use your driver factory
 	    newDriver.manage().window().maximize();
+
+	    // Attach DevTools & NetworkLogger to newDriver so button clicks are correlated to network
+	    NetworkLogger logger = null;
+	    try {
+	        DevTools devTools = ((ChromeDriver) newDriver).getDevTools();
+	        logger = new NetworkLogger(devTools);
+	        // inject action correlation script
+	        try {
+	            ((JavascriptExecutor) newDriver).executeScript(NetworkLogger.getActionCorrelationScript());
+	        } catch (Exception ignore) {
+	        }
+	    } catch (Exception e) {
+	        System.err.println("[TC_003] Failed to attach NetworkLogger to newDriver: " + e.getMessage());
+	    }
 
 	    newDriver.get(referralLink);
 
@@ -109,6 +125,19 @@ public class AffiliateTest extends BaseTest {
 //			signup.verifyReviewPageField("Email", generateRandomEmail());
 			signup.clickSubmit();
 		});
+
+		// After submit, if we have a logger attached verify at least one API was called
+		if (logger != null) {
+			// wait briefly for network events to be captured
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException ignore) {
+			}
+
+			int calls = logger.getApiLogs().size();
+			System.out.println("[TC_003] Network calls captured by logger: " + calls);
+			Assert.assertTrue(calls > 0, "Expected at least one API call after submit");
+		}
 	}
 
 //	// ✅ TC_003 - Link Persistence

@@ -30,7 +30,7 @@ public class ChatPage extends BasePage {
 	    return By.xpath("//div[contains(@class,'relative')][.//span[normalize-space()='" + text + "']]");
 	}
 //	private By deleteBtn = By.xpath("//div[@role='menuitem' and normalize-space()='Delete']");
-	private By timestamp = By.xpath("//span[normalize-space()='MSG_1775108997000_01']/ancestor::div[contains(@class,'relative')]//time");
+	private By timestamp = By.xpath("//div[contains(@class,'relative')]//time");
 	private By emojiBtn = By.id("emojiBtn");
 	private By threeDotMenu = By.id("radix-_r_1t_");
 	// ===== Group Locators =====
@@ -171,7 +171,13 @@ public class ChatPage extends BasePage {
 	}
 
 	public boolean isTimestampDisplayed() {
-		return driver.findElements(timestamp).size() > 0;
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			wait.until(ExpectedConditions.presenceOfElementLocated(timestamp));
+			return driver.findElements(timestamp).size() > 0;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 //	public void deleteOwnMessage() {

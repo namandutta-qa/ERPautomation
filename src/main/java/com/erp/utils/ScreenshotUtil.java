@@ -30,6 +30,13 @@ public class ScreenshotUtil {
             System.out.println("[ScreenshotUtil] Saved screenshot: " + path);
             return path;
         } catch (Exception e) {
+            // Handle NoSuchSessionException concisely (common when driver already quit)
+            if (e instanceof org.openqa.selenium.NoSuchSessionException ||
+                (e.getCause() != null && e.getCause() instanceof org.openqa.selenium.NoSuchSessionException)) {
+                System.err.println("[ScreenshotUtil] Skipping screenshot: WebDriver session not available.");
+                return null;
+            }
+
             // Log the error to stderr so it is visible in build output
             System.err.println("[ScreenshotUtil] Failed to capture screenshot by file: " + e.getMessage());
             e.printStackTrace();
@@ -41,6 +48,12 @@ public class ScreenshotUtil {
                     return "data:image/png;base64," + base64;
                 }
             } catch (Exception ex) {
+                // handle NoSuchSessionException during base64 fallback quietly
+                if (ex instanceof org.openqa.selenium.NoSuchSessionException ||
+                    (ex.getCause() != null && ex.getCause() instanceof org.openqa.selenium.NoSuchSessionException)) {
+                    System.err.println("[ScreenshotUtil] Skipping base64 screenshot: WebDriver session not available.");
+                    return null;
+                }
                 System.err.println("[ScreenshotUtil] Base64 fallback also failed: " + ex.getMessage());
             }
             return null;
@@ -53,6 +66,11 @@ public class ScreenshotUtil {
             String base64 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
             return base64;
         } catch (Exception e) {
+            if (e instanceof org.openqa.selenium.NoSuchSessionException ||
+                (e.getCause() != null && e.getCause() instanceof org.openqa.selenium.NoSuchSessionException)) {
+                System.err.println("[ScreenshotUtil] Skipping base64 screenshot: WebDriver session not available.");
+                return null;
+            }
             System.err.println("[ScreenshotUtil] Failed to capture screenshot as base64: " + e.getMessage());
             e.printStackTrace();
             return null;
