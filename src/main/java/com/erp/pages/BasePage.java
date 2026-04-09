@@ -34,7 +34,8 @@ public class BasePage {
     public BasePage(WebDriver driver) {
         this.driver = driver;
         // default timeout 10s - fine tune per project
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        // increase default explicit wait to 20s to reduce flaky timeouts
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         // init repository/resolver (cheap to construct)
         this.locatorResolver = new LocatorResolver(new LocatorRepository());
     }
@@ -69,8 +70,8 @@ public class BasePage {
     protected void type(By locator, String text) {
         WebElement el = waitForVisible(locator);
         el.click();
-        el.sendKeys(Keys.CONTROL + "a");
-        el.sendKeys(Keys.DELETE);// select all existing text);
+//        el.sendKeys(Keys.CONTROL + "a");
+//        el.sendKeys(Keys.DELETE);// select all existing text);
         el.sendKeys(text);
     }
     public void clickdropdown(By locator, String text) {

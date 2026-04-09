@@ -71,22 +71,64 @@ public class BaseTest {
 	}
 
 	protected void captureParentWindow() {
-		parentWindow = driver.getWindowHandle();
-	}
-
-	protected void switchToNewTab() {
-		Set<String> allWindows = driver.getWindowHandles();
-
-		for (String window : allWindows) {
-			if (!window.equals(parentWindow)) {
-				driver.switchTo().window(window);
-				break;
+		try {
+			parentWindow = driver.getWindowHandle();
+		} catch (Exception e) {
+			System.err.println("[BaseTest] Warning: failed to capture parent window handle: " + e.getMessage());
+			// fallback: if there are any windows, pick the first
+			try {
+				Set<String> handles = driver.getWindowHandles();
+				if (handles != null && !handles.isEmpty()) {
+					parentWindow = handles.iterator().next();
+				} else {
+					parentWindow = null;
+				}
+			} catch (Exception ex) {
+				parentWindow = null;
 			}
 		}
 	}
 
+	protected void switchToNewTab() {
+		try {
+			Set<String> allWindows = driver.getWindowHandles();
+			for (String window : allWindows) {
+				if (parentWindow == null || !window.equals(parentWindow)) {
+					try {
+						driver.switchTo().window(window);
+						return;
+					} catch (Exception e) {
+						// try next
+					}
+				}
+			}
+			// fallback: switch to the last window if possible
+			if (allWindows != null && !allWindows.isEmpty()) {
+				String last = null;
+				for (String w : allWindows) last = w;
+				if (last != null) {
+					try { driver.switchTo().window(last); } catch (Exception ignore) {}
+				}
+			}
+		} catch (Exception e) {
+			System.err.println("[BaseTest] Warning: switchToNewTab failed: " + e.getMessage());
+		}
+	}
+
 	protected void switchToMainTab() {
-		driver.switchTo().window(parentWindow);
+		try {
+			if (parentWindow != null) {
+				driver.switchTo().window(parentWindow);
+			} else {
+				// if we don't have a parent saved, switch to the first available window
+				Set<String> handles = driver.getWindowHandles();
+				if (handles != null && !handles.isEmpty()) {
+					driver.switchTo().window(handles.iterator().next());
+				}
+			}
+		} catch (Exception e) {
+			System.err.println("[BaseTest] Warning: switchToMainTab failed: " + e.getMessage());
+		}
 	}
 
 	@Parameters({ "browser" })
